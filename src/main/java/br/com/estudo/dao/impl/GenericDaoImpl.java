@@ -11,14 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.estudo.dao.DaoSupport;
 import br.com.estudo.dao.GenericDao;
 
+@SuppressWarnings("unchecked")
 @Transactional(propagation = Propagation.REQUIRED)
-public abstract class GenericDaoImpl<T, Ident extends Serializable> extends DaoSupport implements GenericDao<T, Ident> {
+public abstract class GenericDaoImpl<T, IDENT extends Serializable> extends DaoSupport implements GenericDao<T, IDENT> {
 
     private static final long serialVersionUID = 1L;
 
     private Class<T> typeClass;
     
-    @SuppressWarnings("unchecked")
     public GenericDaoImpl() {
         if (getClass().getGenericSuperclass() instanceof ParameterizedType) {
             this.typeClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
@@ -42,20 +42,17 @@ public abstract class GenericDaoImpl<T, Ident extends Serializable> extends DaoS
         getSession().delete(obj);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public T findById(Ident id) {
+    public T findById(IDENT id) {
         return (T) getSession().get(typeClass, id);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public List<T> findAll() {
         Query query = getSession().createQuery("FROM " + typeClass.getName() + " ORDER BY id");
         return query.list();
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public List<T> findByNamedQuery(String namedQuery) {
         return getSession().getNamedQuery(namedQuery).list();
