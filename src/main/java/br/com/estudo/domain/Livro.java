@@ -102,8 +102,9 @@ public class Livro implements Serializable {
     @Override
     public int hashCode() {
         final int prime = 31;
+        final int value = 32;
         int result = 1;
-        result = prime * result + (int) (id ^ (id >>> 32));
+        result = prime * result + (int) (id ^ (id >>> value));
         result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
         result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
         return result;
