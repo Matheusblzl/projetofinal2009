@@ -13,7 +13,7 @@ import javax.persistence.NamedQuery;
 @NamedQueries({ @NamedQuery(name = "livro.all", query = "FROM Livro l ORDER BY l.titulo") })
 public class Livro implements Serializable {
 
-    private static final long serialVersionUID = 1L
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
