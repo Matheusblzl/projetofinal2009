@@ -13,7 +13,7 @@ import br.com.estudo.dao.GenericDao;
 
 @SuppressWarnings("unchecked")
 @Transactional(propagation = Propagation.REQUIRED)
-public abstract class GenericDaoImpl<T, IDENT extends Serializable> extends DaoSupport implements GenericDao<T, IDENT> {
+public abstract class GenericDaoImpl<T, S extends Serializable> extends DaoSupport implements GenericDao<T, S> {
 
     private static final long serialVersionUID = 1L;
 
@@ -43,7 +43,7 @@ public abstract class GenericDaoImpl<T, IDENT extends Serializable> extends DaoS
     }
 
     @Override
-    public T findById(IDENT id) {
+    public T findById(S id) {
         return (T) getSession().get(typeClass, id);
     }
 
