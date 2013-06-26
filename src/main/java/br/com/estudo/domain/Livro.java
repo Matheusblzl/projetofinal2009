@@ -10,7 +10,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQueries({@NamedQuery(name = "livro.all", query = "FROM Livro l ORDER BY l.titulo")})
+@NamedQueries({ @NamedQuery(name = "livro.all", query = "FROM Livro l ORDER BY l.titulo") })
 public class Livro implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -102,10 +102,8 @@ public class Livro implements Serializable {
     @Override
     public int hashCode() {
         final int prime = 31;
-        final int value = 32;
         int result = 1;
-        result = prime * result + (int) (id ^ (id >>> value));
-        result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
         return result;
     }
@@ -122,14 +120,11 @@ public class Livro implements Serializable {
             return false;
         }
         Livro other = (Livro) obj;
-        if (id != other.id) {
-            return false;
-        }
-        if (isbn == null) {
-            if (other.isbn != null) {
+        if (id == null) {
+            if (other.id != null) {
                 return false;
             }
-        } else if (!isbn.equals(other.isbn)) {
+        } else if (!id.equals(other.id)) {
             return false;
         }
         if (titulo == null) {
