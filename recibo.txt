@@ -1,0 +1,4 @@
+-- Recibo --
+Empresa: Treinamento
+Cliente: Daniel Oliveira
+Valor: 1000.0
