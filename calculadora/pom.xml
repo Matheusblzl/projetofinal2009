@@ -28,7 +28,7 @@
 
 		<!-- TESTE -->
 		<testng.version>6.8.5</testng.version>
-		
+
 		<jboss-ejb-api.version>1.0.2.Final</jboss-ejb-api.version>
 	</properties>
 

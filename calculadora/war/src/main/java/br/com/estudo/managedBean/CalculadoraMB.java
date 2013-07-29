@@ -1,11 +1,11 @@
-package br.com.estudo;
+package br.com.estudo.managedBean;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
 import br.com.estudo.beans.Calculadora;
 
-@ManagedBean
+@ManagedBean(name = "calculadoraMB")
 public class CalculadoraMB {
 
     @EJB

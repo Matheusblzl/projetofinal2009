@@ -4,21 +4,17 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 	
 	<h:head>
-		<title>Calculadora</title>
+		<title>Menu</title>
 	</h:head>
 	<h:body>
 
 		<h:form>
-			<h:outputLabel value="Valor A : " />
-			<h:inputText value="#{calculadoraMB.a}" />
-
-			<h:outputLabel value="Valor B : " />
-			<h:inputText value="#{calculadoraMB.b}" />
-
-			<h:commandButton action="#{calculadoraMB.soma}" value="soma " />
-
-			<h:outputLabel value="Resultado : " />
-			<h:outputText value="#{calculadoraMB.resultado}" />
+			<h:commandLink value="Calculadora" action="/pages/calculadora.xhtml" />
+			
+			<br/>
+			<br/>
+			
+			<h:commandLink value="Dados" action="/pages/dados.xhtml" />
 		</h:form>
 
 	</h:body>
