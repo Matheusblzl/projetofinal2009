@@ -1,0 +1,101 @@
+@CHARSET "UTF-8";
+
+/* ================================================
+				DEFINIÇÕES GERAIS DE ESTILOS 
+   ================================================ */
+body { /*background-color: #4E5869;*/
+	margin: 0;
+	padding: 0;
+	color: #000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+/* ~~ Seletores de elementos/tag ~~ */
+ul,ol,dl {
+	/* Devido a variações entre navegadores, é recomendado zerar o padding e a margem nas listas. 
+É possível especificar as quantidades aqui ou nos itens da lista (LI, DT, DD) que eles contêm.
+*/
+	padding: 0;
+	margin: 0;
+}
+
+h1,h2,h3,h4,h5,h6,p {
+	margin-top: 0;
+	/* ao remover a margem superior, as margens podem escapar das suas containing div. A margem inferior restante vai mantê-la afastada de qualquer elemento que se segue. */
+	padding-right: 15px;
+	padding-left: 15px;
+	/* adicionando o padding para os lados dos elementos dentro dos divs, ao invés dos próprios divs o livra de qualquer combinação de modelo de caixa. 
+Um div aninhado com padding lateral também pode ser usado como método alternativo. */
+}
+
+a img {
+	/* esse seletor remove a borda azul padrão exibida em alguns navegadores ao redor de uma imagem circundada por um link. */
+	border: none;
+}
+
+/* ~~ A estilização dos links do seu site deve permanecer nesta ordem – incluindo o grupo de seletores que criam o efeito hover. ~~ */
+a:link {
+	color: #414958;
+	text-decoration: underline;
+	/* a não ser que você estilize seus links para que pareçam extremamente únicos, é melhor utilizar links sublinhados para uma identificação visual mais rápida. */
+}
+
+a:visited {
+	color: #4E5869;
+	text-decoration: underline;
+}
+
+a:hover,a:active,a:focus {
+	/* esse grupo de seletores dará ao navegador que estiver usando um teclado a mesma experiência de hover do que uma pessoa usando um mouse. */
+	text-decoration: none;
+}
+
+ul.nav {
+	list-style: none; /* isso remove o marcador de lista */
+	border-top: 1px solid #666;
+	/* isso cria a borda da parte superior para os links – todos os outros são colocados usando uma borda na parte inferior no LI */
+	margin-bottom: 15px;
+	/* isso cria o espaço entre a navegação no conteúdo abaixo */
+}
+
+ul.nav li {
+	border-bottom: 1px solid #666; /* isso cria a separação do botão */
+}
+
+ul.nav a,ul.nav a:visited {
+	/* ao agrupar estes seletores, seus links mantêm a aparência de botão mesmo após terem sido visitados. */
+	padding: 5px 5px 5px 15px;
+	display: block;
+	/* isso fornece as propriedades do bloco de links causando o preenchimento de todo o LI. Isso fará com que a área inteira responda ao clique do mouse. */
+	text-decoration: none;
+	background-color: #8090AB;
+	color: #000;
+}
+
+ul.nav a:hover,ul.nav a:active,ul.nav a:focus {
+	/* isso altera o fundo e a cor do texto para navegação com o mouse ou teclado. */
+	background-color: #6F7D94;
+	color: #FFF;
+}
+
+/* ~~ flutuações diversas/limpeza de classes ~~ */
+.fltrt {
+	/* essa classe pode ser usada para flutuar um elemento à direita da página. O elemento flutuado deve preceder o elemento e ser o próximo da página. */
+	float: right;
+	margin-left: 8px;
+}
+
+.fltlft {
+	/* essa classe pode ser usada para flutuar um elemento à esquerda da página. O elemento flutuado deve preceder o elemento e ser o próximo da página. */
+	float: left;
+	margin-right: 8px;
+}
+
+.clearfloat {
+	/* essa classe pode ser colocada em um <br /> ou em um div vazio como o elemento final que segue o último div flutuado (no #contêiner) caso o rodapé seja removido ou retirado do contêiner. */
+	clear: both;
+	height: 0;
+	font-size: 1px;
+	line-height: 0px;
+}
