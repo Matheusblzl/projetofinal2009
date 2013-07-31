@@ -5,7 +5,7 @@ import javax.faces.bean.ManagedBean;
 
 import br.com.estudo.beans.LancadorDeDadoBean;
 
-@ManagedBean(name = "dadoMB")
+@ManagedBean
 public class DadoMB {
     
     @EJB

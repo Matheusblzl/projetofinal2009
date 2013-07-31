@@ -5,7 +5,7 @@ import javax.faces.bean.ManagedBean;
 
 import br.com.estudo.beans.Calculadora;
 
-@ManagedBean(name = "calculadoraMB")
+@ManagedBean
 public class CalculadoraMB {
 
     @EJB
