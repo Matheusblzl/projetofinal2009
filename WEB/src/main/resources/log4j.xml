@@ -9,18 +9,18 @@
         </layout>
     </appender>
 
-    <appender name="FILELOG" class="org.apache.log4j.RollingFileAppender">
+   <!--  <appender name="FILELOG" class="org.apache.log4j.RollingFileAppender">
         <param name="File" value="${catalina.base}/logs/log4j/logger.log" />
         <param name="MaxFileSize" value="1024KB" />
         <param name="MaxBackupIndex" value="5" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{ISO8601} %5p [%t] (%F:%L) - %m%n"/>
         </layout>
-    </appender>
+    </appender> -->
 
     <root>
         <level value="INFO"/>
-        <appender-ref ref="FILELOG"/>
+        <!-- <appender-ref ref="FILELOG"/> -->
         <appender-ref ref="CONSOLE"/>
     </root>
     

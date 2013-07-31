@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Carrinho de Compras</title>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<h:outputStylesheet library="css" name="reset.css" />
+	<h:outputStylesheet library="css" name="estilo.css" />
+</h:head>
+
+<h:body>
+	<h:form>
+	    <h:panelGrid columns="3" cellspacing="5px">
+			<p:outputLabel value="Produto:" />
+			<p:inputText value="#{carrinhoMB.produto}" />
+			<p:commandButton action="#{carrinhoMB.adiciona}"
+				value="Adiciona no carrinho" update="@form">
+			</p:commandButton>
+	    </h:panelGrid>
+
+		<hr />
+
+		<h:outputLabel value="Produtos no carrinho:" />
+		<p:dataTable id="tabelaProduto" value="#{carrinhoMB.produtos}" var="p">
+			<p:column headerText="Produto">
+				<h:outputText value="#{p}" />
+			</p:column>
+			<p:column headerText="Opção">
+				<p:commandLink action="#{carrinhoMB.remove(p)}" value="remove" update="tabelaProduto"/>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

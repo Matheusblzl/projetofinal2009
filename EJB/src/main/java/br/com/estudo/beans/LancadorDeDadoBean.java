@@ -8,7 +8,7 @@ import javax.ejb.Stateless;
 
 import br.com.estudo.ejb.LancadorDeDado;
 
-@Stateless
+@Stateless(mappedName = "lancadorDeDadoBean")
 public class LancadorDeDadoBean implements LancadorDeDado {
 
     private Random gerador = new Random();
