@@ -39,12 +39,6 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>calculadoraClient</artifactId>
-			<type>ejb</type>
-		</dependency>
-
-		<dependency>
-			<groupId>${project.groupId}</groupId>
 			<artifactId>calculadoraEJB</artifactId>
 			<type>ejb</type>
 		</dependency>
@@ -96,10 +90,6 @@
 				<version>${ear.plugin.version}</version>
 				<configuration>
 					<modules>
-						<ejbModule>
-							<groupId>${project.groupId}</groupId>
-							<artifactId>calculadoraClient</artifactId>
-						</ejbModule>
 						<ejbModule>
 							<groupId>${project.groupId}</groupId>
 							<artifactId>calculadoraEJB</artifactId>

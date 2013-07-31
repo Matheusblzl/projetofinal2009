@@ -42,8 +42,7 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>calculadoraClient</artifactId>
-			<type>ejb</type>
-			<version>${project.version}</version>
+			<type>jar</type>
 		</dependency>
 
 		<!-- <dependency>

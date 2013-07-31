@@ -56,7 +56,7 @@
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>calculadoraClient</artifactId>
-				<type>ejb</type>
+				<type>jar</type>
 				<version>${project.version}</version>
 			</dependency>
 
