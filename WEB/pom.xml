@@ -51,64 +51,14 @@
 		<jsp-api.version>2.1</jsp-api.version>
 		<jstl.version>1.2</jstl.version>
 		<taglibs.version>1.1.2</taglibs.version>
+
+		<cdi-api.version>1.1</cdi-api.version>
+		
+		<hibernate-jpa-2.0.version>1.0.1.Final</hibernate-jpa-2.0.version>
+		
+		<hibernate-validator.version>5.0.1.Final</hibernate-validator.version>
 	</properties>
 
-
-	<!-- ======================== REPOSITÓRIOS ======================== -->
-	<repositories>
-		<repository>
-			<id>jvnet-nexus-releases</id>
-			<name>jvnet-nexus-releases</name>
-			<url>https://maven.java.net/content/repositories/releases/</url>
-		</repository>
-
-		<repository>
-			<id>prime-repo</id>
-			<name>Prime Repo</name>
-			<url>http://repository.primefaces.org</url>
-		</repository>
-
-		<repository>
-			<id>repository.jboss.org</id>
-			<name>JBoss Repository</name>
-			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
-		</repository>
-
-		<repository>
-			<id>org.springframework.maven.release</id>
-			<name>Spring Maven Release Repository</name>
-			<url>http://repo.springsource.org/libs-release-local</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-
-		<!-- For testing against latest Spring snapshots -->
-		<repository>
-			<id>org.springframework.maven.snapshot</id>
-			<name>Spring Maven Snapshot Repository</name>
-			<url>http://repo.springsource.org/libs-snapshot-local</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-
-		<!-- For developing against latest Spring milestones -->
-		<repository>
-			<id>org.springframework.maven.milestone</id>
-			<name>Spring Maven Milestone Repository</name>
-			<url>http://repo.springsource.org/libs-milestone-local</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
 
 
 
@@ -119,6 +69,7 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>estudoEjbMavenEJB</artifactId>
 			<type>ejb</type>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -127,6 +78,14 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- Import the CDI API, we use provided scope as the API is included in 
+			JBoss AS 7 -->
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<version>${cdi-api.version}</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<!-- Esta dependência do el-api foi incluída apenas para remover uma mensagem 
 			de warning no faces-config.xml -->
@@ -228,10 +187,30 @@
 			<version>${commons_io.version}</version>
 		</dependency>
 
-		<!-- BANCO PARA TESTES (CRIADO EM MEMÓRIA) -->
+
+		<!-- Import the JPA API, we use provided scope as the API is included in 
+			JBoss AS 7 -->
 		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>${hibernate-jpa-2.0.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- JSR-303 (Bean Validation) Implementation -->
+		<!-- Provides portable constraints such as @Email -->
+		<!-- Hibernate Validator is shipped in JBoss AS 7 -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator.version}</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- LOGGING -->
@@ -312,6 +291,64 @@
 			</plugin>
 		</plugins>
 	</build>
+
+
+
+	<!-- ======================== REPOSITÓRIOS ======================== -->
+	<repositories>
+		<repository>
+			<id>jvnet-nexus-releases</id>
+			<name>jvnet-nexus-releases</name>
+			<url>https://maven.java.net/content/repositories/releases/</url>
+		</repository>
+
+		<repository>
+			<id>prime-repo</id>
+			<name>Prime Repo</name>
+			<url>http://repository.primefaces.org</url>
+		</repository>
+
+		<repository>
+			<id>repository.jboss.org</id>
+			<name>JBoss Repository</name>
+			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+		</repository>
+
+		<repository>
+			<id>org.springframework.maven.release</id>
+			<name>Spring Maven Release Repository</name>
+			<url>http://repo.springsource.org/libs-release-local</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+		<!-- For testing against latest Spring snapshots -->
+		<repository>
+			<id>org.springframework.maven.snapshot</id>
+			<name>Spring Maven Snapshot Repository</name>
+			<url>http://repo.springsource.org/libs-snapshot-local</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+
+		<!-- For developing against latest Spring milestones -->
+		<repository>
+			<id>org.springframework.maven.milestone</id>
+			<name>Spring Maven Milestone Repository</name>
+			<url>http://repo.springsource.org/libs-milestone-local</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
 
 </project>

@@ -7,6 +7,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 import br.com.estudo.carrinho.ejb.Carrinho;
 
@@ -17,6 +19,9 @@ public class CarrinhoMB {
     @EJB
     private Carrinho carrinho;
 
+    @Inject
+    private FacesContext facesContext;
+    
     private String produto;
 
     @PostConstruct

@@ -90,10 +90,13 @@
 
 		<plugins>
 			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-ear-plugin</artifactId>
 				<version>${ear.plugin.version}</version>
 				<configuration>
-					<modules>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<fileNameMapping>no-version</fileNameMapping>
+					<!-- <modules>
 						<ejbModule>
 							<groupId>${project.groupId}</groupId>
 							<artifactId>estudoEjbMavenEJB</artifactId>
@@ -102,13 +105,21 @@
 							<groupId>${project.groupId}</groupId>
 							<artifactId>estudoEjbMavenWEB</artifactId>
 						</webModule>
-					</modules>
+					</modules> -->
 					<jboss>
 						<jboss>7</jboss>
 						<loader-repository>${project.groupId}:archive=${project.artifactId}.ear</loader-repository>
 					</jboss>
 				</configuration>
 			</plugin>
+			<plugin>
+                <groupId>org.jboss.as.plugins</groupId>
+                <artifactId>jboss-as-maven-plugin</artifactId>
+                <configuration>
+                    <filename>${project.artifactId}.ear</filename>
+                    <skip>false</skip>
+                </configuration>
+            </plugin>
 			<!-- Utilizar IDE Eclipse -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

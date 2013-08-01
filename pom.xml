@@ -34,8 +34,10 @@
 		<testng.version>6.8.5</testng.version>
 
 		<jboss-ejb-api.version>1.0.2.Final</jboss-ejb-api.version>
-		
+
 		<persistence.api.version>1.0</persistence.api.version>
+		
+		<version.jboss.maven.plugin>7.3.Final</version.jboss.maven.plugin>
 	</properties>
 
 
@@ -57,6 +59,7 @@
 				<artifactId>estudoEjbMavenWEB</artifactId>
 				<type>war</type>
 				<version>${project.version}</version>
+				<scope>compile</scope>
 			</dependency>
 
 
@@ -164,6 +167,15 @@
 					<version>${maven.javadoc.version}</version>
 				</plugin>
 			</plugins>
+			<plugin>
+				<groupId>org.jboss.as.plugins</groupId>
+				<artifactId>jboss-as-maven-plugin</artifactId>
+				<version>${version.jboss.maven.plugin}</version>
+				<inherited>true</inherited>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
 		</pluginManagement>
 	</build>
 
