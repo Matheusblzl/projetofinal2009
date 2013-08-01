@@ -14,26 +14,32 @@
 </h:head>
 
 <h:body>
+<div class="divMsg">
 	<h:form>
 	    <h:panelGrid columns="3" cellspacing="5px">
-			<p:outputLabel value="Produto:" />
-			<p:inputText value="#{carrinhoMB.produto}" />
+			<p:outputLabel value="Produto:" styleClass="label"></p:outputLabel>
+			<p:inputText id="campoProduto" value="#{carrinhoMB.produto}" />
 			<p:commandButton action="#{carrinhoMB.adiciona}"
-				value="Adiciona no carrinho" update="@form">
+				value="Adiciona no carrinho" update="tabelaProduto,campoProduto">
 			</p:commandButton>
 	    </h:panelGrid>
 
 		<hr />
 
-		<h:outputLabel value="Produtos no carrinho:" />
-		<p:dataTable id="tabelaProduto" value="#{carrinhoMB.produtos}" var="p">
-			<p:column headerText="Produto">
+		<p:outputLabel value="Produtos no carrinho:" styleClass="label"></p:outputLabel>
+		<br/>
+		<br/>
+		
+		<p:dataTable id="tabelaProduto" value="#{carrinhoMB.produtos}" var="p" styleClass="tableStyle"
+		             emptyMessage="Não há produtos no carrinho">
+			<p:column headerText="Produto" width="80%" styleClass="columnLeft">
 				<h:outputText value="#{p}" />
 			</p:column>
-			<p:column headerText="Opção">
-				<p:commandLink action="#{carrinhoMB.remove(p)}" value="remove" update="tabelaProduto"/>
+			<p:column headerText="Opção" styleClass="columnOptions">
+				<p:commandLink action="#{carrinhoMB.remove(p)}" value="Remover" update="tabelaProduto"/>
 			</p:column>
 		</p:dataTable>
 	</h:form>
+</div>
 </h:body>
 </html>

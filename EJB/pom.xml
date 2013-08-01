@@ -48,6 +48,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.jboss</groupId>
+			<artifactId>jboss-remote-naming</artifactId>
+			<version>1.0.6.Final</version>
+		</dependency>
+
+		<dependency>
 			<groupId>jboss</groupId>
 			<artifactId>jnp-client</artifactId>
 			<version>4.0.2</version>

@@ -3,6 +3,7 @@ package br.com.estudo.carrinho.managedBean;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -15,8 +16,13 @@ public class CarrinhoMB {
 
     @EJB
     private Carrinho carrinho;
-    
+
     private String produto;
+
+    @PostConstruct
+    public void inicializando() {
+        System.out.println("Iniciando mais um carrinho...");
+    }
 
     public List<String> getProdutos() {
         return new ArrayList<String>(this.carrinho.getProdutos());
@@ -24,6 +30,7 @@ public class CarrinhoMB {
 
     public void adiciona() {
         this.carrinho.adiciona(this.produto);
+        this.produto = "";
     }
 
     public void remove(String produto) {
@@ -37,5 +44,4 @@ public class CarrinhoMB {
     public String getProduto() {
         return produto;
     }
-
 }

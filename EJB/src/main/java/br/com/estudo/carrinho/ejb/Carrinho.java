@@ -12,5 +12,7 @@ public interface Carrinho {
     void remove(String produto);
 
     Set<String> getProdutos();
+    
+    void finalizaCompra();
 
 }

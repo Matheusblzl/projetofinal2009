@@ -1,26 +1,39 @@
 <f:view id="ajaxEcho" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
-	
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
 	<h:head>
 		<title>Menu</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<h:outputStylesheet library="css" name="reset.css" />
+		<h:outputStylesheet library="css" name="estilo.css" />
 	</h:head>
 	<h:body>
 
-		<h:form>
-			<h:commandLink value="Calculadora" action="/pages/calculadora.xhtml" />
-			
-			<br/>
-			<br/>
-			
-			<h:commandLink value="Dados" action="/pages/dados.xhtml" />
-			
-			<br/>
-			<br/>
-			
-			<h:commandLink value="Carrinho de Compras" action="/carrinho/produtos.xhtml" />
-		</h:form>
+		<div class="divMsg">
+			<h:form>
+				<p:commandLink value="Calculadora" action="/pages/calculadora.xhtml" />
+
+				<br />
+				<br />
+
+				<p:commandLink value="Dados" action="/pages/dados.xhtml" />
+
+				<br />
+				<br />
+
+				<p:commandLink value="Carrinho de Compras"
+					action="/carrinho/produtos.xhtml" />
+
+				<br />
+				<br />
+
+				<p:commandLink value="Chat" action="/chat/chat.xhtml" />
+			</h:form>
+		</div>
 
 	</h:body>
 </f:view>
