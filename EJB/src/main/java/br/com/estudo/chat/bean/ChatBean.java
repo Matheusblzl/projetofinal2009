@@ -8,12 +8,10 @@ import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.Singleton;
-import javax.ejb.Startup;
 
 import br.com.estudo.chat.ejb.Chat;
 
 @Singleton
-@Startup
 public class ChatBean implements Chat {
 
     private Set<String> salas = new HashSet<String>();
