@@ -8,7 +8,7 @@ body { /*background-color: #4E5869;*/
 	padding: 0;
 	color: #000;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 11px;
+	font-size: 10px;
 }
 
 /* ~~ Seletores de elementos/tag ~~ */
@@ -104,7 +104,6 @@ ul.nav a:hover,ul.nav a:active,ul.nav a:focus {
 	width: 50%;
 	margin: 10em auto;
 	padding: 30px;
-	background-color: #fff;
 	border-radius: 1em;
 	box-shadow: 4px 6px 9px #888888;
 	background-color: #F5F5F5;
@@ -118,15 +117,41 @@ ul.nav a:hover,ul.nav a:active,ul.nav a:focus {
 .tableStyle {
 	table-layout: fixed;
 	width: 80%;
-	margin-left:auto; 
-    margin-right:auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .columnOptions {
 	text-align: center;
-	width: 20%;s
+	width: 20%;
 }
 
 .columnLeft {
 	text-align: left;
 }
+
+.columnRight {
+	text-align: right;
+}
+
+.divButton {
+	padding: 10px;
+	background-color: #F5F5F5;
+}
+
+.buttonBack {
+	float: right;
+	position: fixed;
+}
+
+.ui-outputlabel-rfi {
+	color: RED;
+}
+
+.divError {
+	position: absolute;
+	top: 10px;
+	margin-left: 23%;
+}
+
+/* MODIFICAÇÃO PRIMEFACES */

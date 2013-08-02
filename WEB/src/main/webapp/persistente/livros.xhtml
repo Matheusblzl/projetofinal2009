@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Livros</title>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<h:outputStylesheet library="css" name="reset.css" />
+	<h:outputStylesheet library="css" name="estilo.css" />
+</h:head>
+
+<h:body>
+    <div class="divError">
+		<p:messages id="messages" />
+	</div>
+		
+	<div class="divMsg">
+		
+		<p:fieldset legend="Cadastro de Livro">
+			<h:form id="formCad">
+				<h:panelGrid columns="2" cellspacing="5px" cellpadding="10px">
+					<p:outputLabel value="Nome:" for="campoNome" styleClass="label"></p:outputLabel>
+					<p:inputText id="campoNome" value="#{livroMB.livro.nome}" required="true"></p:inputText>
+					
+					<p:outputLabel value="Preços:" for="campoPreco" styleClass="label"></p:outputLabel>
+					<p:inputText id="campoPreco" value="#{livroMB.livro.preco}" required="true"></p:inputText>
+					
+					<p:commandButton id="btSalvar" action="#{livroMB.adiciona}" value="Salvar" ajax="true" update="@form,:messages,:formTable" />
+				</h:panelGrid>
+			</h:form>
+		</p:fieldset>
+		
+		<br/>
+		<br/>
+		
+		<h:form id="formTable">
+			<p:dataTable id="tableLivros" value="#{livroMB.livros}" var="livro" rendered="#{!livroMB.livros.isEmpty()}">
+				<p:column headerText="Título" width="70%">
+					<h:outputText value="#{livro.nome}" />
+				</p:column>
+				<p:column headerText="Preço" width="20%" styleClass="columnRight">
+					<h:outputText value="#{livro.preco}">
+						<f:convertNumber type="currency" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Opção" width="10%" style="text-align: center;">
+						<p:commandButton id="btRemover" action="#{livroMB.removarLivro(livro)}" onclick="dlgDelete.show()" icon="ui-icon-close" title="Remover" ajax="true" />
+				</p:column>
+			</p:dataTable>
+			<p:dialog header="Confirmar Deletar Livro" widgetVar="dlgDelete" resizable="false" modal="true">
+			    <br/>
+
+			    <h:outputText value="Remover Livro?" />
+			    
+			    <br/>
+			    <br/>
+			    <br/>
+			    
+				<p:commandButton action="#{livroMB.remover()}" id="submitButton" value="Sim" update=":formTable,:messages"
+					oncomplete="dlgDelete.hide();" ajax="true" />
+				<p:commandButton id="CancelButton" value="Não" update=":formTable,:messages"
+					oncomplete="dlgDelete.hide();" ajax="true" />
+			</p:dialog>
+		</h:form>
+		
+		
+		<br/>
+		<br/>
+		
+		<div class="divButton">
+            <p:commandButton value="Voltar" immediate="true" action="/home.xhtml" styleClass="buttonBack" />
+		</div>
+	</div>
+</h:body>
+</html>

@@ -11,7 +11,7 @@
 
     <context-param>  
         <param-name>primefaces.THEME</param-name>  
-        <param-value>black-tie</param-value>  
+        <param-value>smoothness</param-value>  
     </context-param>  
 	<context-param>
 		<param-name>javax.portlet.faces.RENDER_POLICY</param-name>
