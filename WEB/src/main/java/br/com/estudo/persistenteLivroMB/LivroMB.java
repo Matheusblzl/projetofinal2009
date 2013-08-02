@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 import br.com.estudo.models.Livro;
 import br.com.estudo.sessionBenas.LivroRepositorio;
 
 @ManagedBean
+@ViewScoped
 public class LivroMB {
 
     @EJB
@@ -16,26 +18,23 @@ public class LivroMB {
     
     private Livro livro = new Livro();
     
-    private Long codigoRemoverLivro = new Long(0);
-    
     private List<Livro> livrosCache;
 
-    public void removarLivro(Livro livro) {
-        codigoRemoverLivro = livro.getId();
-    }
-    
     public void remover() {
-        this.repositorio.remover(new Livro(codigoRemoverLivro));
-        codigoRemoverLivro = null;
-        this.livrosCache = null;
+        this.repositorio.remover(livro);
+        limparDados();
     }
     
     public void adiciona() {
         this.repositorio.adiciona(this.livro);
+        limparDados();
+    }
+
+    private void limparDados() {
         this.livro = new Livro();
         this.livrosCache = null;
     }
-
+    
     public List<Livro> getLivros() {
         if (this.livrosCache == null) {
             this.livrosCache = this.repositorio.getLivros();

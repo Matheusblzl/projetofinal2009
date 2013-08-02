@@ -12,6 +12,7 @@
 		
 		<class>br.com.estudo.models.Livro</class>
 		<class>br.com.estudo.models.Autor</class>
+		<class>br.com.estudo.models.Produto</class>
 		
 		<properties>
 			<!-- Properties for Hibernate -->

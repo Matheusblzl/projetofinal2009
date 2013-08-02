@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Livros</title>
+	<title>Cadastro de Produtos</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<h:outputStylesheet library="css" name="reset.css" />
@@ -20,16 +20,16 @@
 		
 	<div class="divMsg">
 		
-		<p:fieldset legend="Cadastro de Livro">
+		<p:fieldset legend="Cadastro de Produto">
 			<h:form id="formCad">
 				<h:panelGrid columns="2" cellspacing="5px" cellpadding="10px">
 					<p:outputLabel value="Nome:" for="campoNome" styleClass="label"></p:outputLabel>
-					<p:inputText id="campoNome" value="#{livroMB.livro.nome}" required="true"></p:inputText>
+					<p:inputText id="campoNome" value="#{produtoMB.produto.nome}" required="true"></p:inputText>
 					
 					<p:outputLabel value="Preços:" for="campoPreco" styleClass="label"></p:outputLabel>
-					<p:inputText id="campoPreco" value="#{livroMB.livro.preco}" required="true"></p:inputText>
+					<p:inputText id="campoPreco" value="#{produtoMB.produto.preco}" required="true"></p:inputText>
 					
-					<p:commandButton id="btSalvar" action="#{livroMB.adiciona}" value="Salvar" ajax="true" update="@form,:messages,:formTable" />
+					<p:commandButton id="btSalvar" action="#{produtoMB.adiciona}" value="Salvar" ajax="true" update="@form,:messages,:formTable" />
 				</h:panelGrid>
 			</h:form>
 		</p:fieldset>
@@ -38,37 +38,37 @@
 		<br/>
 		
 		<h:form id="formTable">
-			<p:dataTable id="tableLivros" value="#{livroMB.livros}" var="livro" rendered="#{!livroMB.livros.isEmpty()}">
-				<p:column headerText="Título" width="70%">
-					<h:outputText value="#{livro.nome}" />
+			<p:dataTable id="tableLivros" value="#{produtoMB.produtos}" var="prod" rendered="#{!produtoMB.produtos.isEmpty()}">
+				<p:column headerText="Nome" width="70%">
+					<h:outputText value="#{prod.nome}" />
 				</p:column>
 				<p:column headerText="Preço" width="20%" styleClass="columnRight">
-					<h:outputText value="#{livro.preco}">
+					<h:outputText value="#{prod.preco}">
 						<f:convertNumber type="currency" />
 					</h:outputText>
 				</p:column>
 				<p:column headerText="Opção" width="10%" style="text-align: center;">
 						<p:commandButton id="btRemover" oncomplete="dlgDelete.show()" icon="ui-icon-close" title="Remover"
 						                 update=":formTable:panelConfirmDelet" immediate="true">
-							<f:setPropertyActionListener target="#{livroMB.livro}" value="#{livro}"></f:setPropertyActionListener>
+							<f:setPropertyActionListener target="#{produtoMB.produto}" value="#{prod}"></f:setPropertyActionListener>
 						</p:commandButton>
 				</p:column>
 			</p:dataTable>
 			
 			
-			<p:dialog header="Confirmar Deletar Livro" widgetVar="dlgDelete" resizable="false" modal="true"
+			<p:dialog header="Confirmar Deletar Produto" widgetVar="dlgDelete" resizable="false" modal="true"
 			          showEffect="fade" hideEffect="fade">
 			    
 			    <p:outputPanel id="panelConfirmDelet">
 				    <br/>
 	
-				    <h:outputText value="Remover Livro?" />
+				    <h:outputText value="Deseja remover este Produto?" />
 				    
 				    <br/>
 				    <br/>
 				    <br/>
 				    
-					<p:commandButton action="#{livroMB.remover()}" id="submitButton" value="Sim" update=":formTable:tableLivros,:messages"
+					<p:commandButton action="#{produtoMB.remover()}" id="submitButton" value="Sim" update=":formTable:tableLivros,:messages"
 						oncomplete="dlgDelete.hide();" ajax="true" immediate="true" />
 					
 					<p:spacer width="10px"/>
