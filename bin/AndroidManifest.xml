@@ -35,8 +35,14 @@
             android:name="com.projetoboaviagem.GastoActivity"
             android:label="@string/title_activity_gasto" >
         </activity>
-        <activity android:name="com.projetoboaviagem.list.ViagemListActivity"></activity>
-        <activity android:name="com.projetoboaviagem.list.GastoListActivity"></activity>
+        <activity android:name="com.projetoboaviagem.list.ViagemListActivity" >
+        </activity>
+        <activity android:name="com.projetoboaviagem.list.GastoListActivity" >
+        </activity>
+        <activity
+            android:name="com.projetoboaviagem.ConfiguracoesActivity"
+            android:label="@string/title_activity_configuracoes" >
+        </activity>
     </application>
 
 </manifest>

@@ -19,6 +19,12 @@ public class GastoActivity extends Activity {
 	private int ano, mes, dia;
 	private Button dataGasto;
 	private Spinner categoria;
+	
+	private int mYear;
+    private int mMonth;
+    private int mDay;
+    private int mHour;
+    private int mMinute;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,13 @@ public class GastoActivity extends Activity {
 		
 		dataGasto.setText(dia + "/" + (mes + 1) + "/" + ano);
 
+		dataGasto.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showDialog(v.getId());
+			}
+		});
+		
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.categoria_gasto,
 				android.R.layout.simple_spinner_item);
 		
@@ -45,10 +58,6 @@ public class GastoActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.gasto, menu);
 		return true;
-	}
-
-	public void selecionarData(View view) {
-		showDialog(view.getId());
 	}
 
 	@Override

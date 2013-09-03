@@ -35,6 +35,21 @@
     <string name="labelButtonGastei">Gastei</string>
     <string name="labelCategoria">Categoria</string>
     <string name="lblMenuContextGastoRemover">Remover</string>
+    <string name="alert_editar">Editar</string>
+    <string name="alert_NovoGasto">Novo Gasto</string>
+    <string name="alert_gastos_realizados">Gastos Realizados</string>
+    <string name="alert_remover">Remover</string>
+    <string name="alert_opcoes">Opções</string>
+    <string name="confirmacao_exclusao_viagem">Confirmação de exclusão de viagem?</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="preferencias">Preferências</string>
+    <string name="modo_viagem_sumario">Modo Viagem Sumário</string>
+    <string name="informe_valor_limite">Informe Valor Limite</string>
+    <string name="modo_viagem">Modo Viagem</string>
+    <string name="valor_limite_sumario">Valor Limite Sumário</string>
+    <string name="valor_limite">Valor Limite</string>
+    <string name="manter_conectado">Manter Conectado</string>
 
     <string-array name="categoria_gasto">
         <item>Alimentação</item>
@@ -43,8 +58,10 @@
         <item>Hospedagem</item>
         <item>Outros</item>
     </string-array>
+
     <string name="lbl_sair">Sair</string>
     <string name="lbl_menu_novo_gasto">Novo Gasto</string>
     <string name="lbl_remover_viagem">Remover Viagem</string>
+    <string name="title_activity_configuracoes">Configurações Activity</string>
 
 </resources>
