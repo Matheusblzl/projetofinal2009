@@ -1,0 +1,13 @@
+<resources>
+
+    <style name="AppBaseTheme" parent="android:Theme.Light"></style>
+
+    <style name="AppTheme" parent="AppBaseTheme"></style>
+
+    <color name="titulo">#015488</color>
+    <color name="categoria_alimentacao">#9FC5F8</color>
+    <color name="categoria_hospedagem">#6FA8DC</color>
+    <color name="categoria_transporte">#0099CC</color>
+    <color name="categoria_outros">#ACBFD5</color>
+
+</resources>
