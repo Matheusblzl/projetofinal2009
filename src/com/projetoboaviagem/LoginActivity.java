@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +15,6 @@ import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 
-	private static final String MANTER_CONECTADO = "manter_conectado";
 	private EditText usuario;
 	private EditText senha;
 	private CheckBox manterConectado;
@@ -28,19 +28,19 @@ public class LoginActivity extends Activity {
 		senha = (EditText) findViewById(R.id.inputSenha);
 		manterConectado = (CheckBox) findViewById(R.id.manterConectado);
 
-		SharedPreferences preferencias = getPreferences(MODE_PRIVATE);
+		SharedPreferences preferencias = PreferenceManager.getDefaultSharedPreferences(this);
 
-		boolean conectado = preferencias.getBoolean(MANTER_CONECTADO, false);
+		boolean conectado = preferencias.getBoolean(ConfiguracoesActivity.MANTER_CONECTADO, false);
 
 		if (conectado) {
 			startActivity(new Intent(this, DashboardActivity.class));
+			finish();
 		}
 	}
 
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		finish();
-		System.exit(0);
 		return true;
 	}
 
@@ -63,7 +63,7 @@ public class LoginActivity extends Activity {
 			SharedPreferences preferencias = getPreferences(MODE_PRIVATE);
 			
 			Editor editor = preferencias.edit();
-			editor.putBoolean(MANTER_CONECTADO, manterConectado.isChecked());
+			editor.putBoolean(ConfiguracoesActivity.MANTER_CONECTADO, manterConectado.isChecked());
 			editor.commit();
 
 			startActivity(new Intent(this, DashboardActivity.class));

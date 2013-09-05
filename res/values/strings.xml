@@ -43,6 +43,7 @@
     <string name="confirmacao_exclusao_viagem">Confirmação de exclusão de viagem?</string>
     <string name="sim">Sim</string>
     <string name="nao">Não</string>
+    
     <string name="preferencias">Preferências</string>
     <string name="modo_viagem_sumario">Modo Viagem Sumário</string>
     <string name="informe_valor_limite">Informe Valor Limite</string>
@@ -50,6 +51,10 @@
     <string name="valor_limite_sumario">Valor Limite Sumário</string>
     <string name="valor_limite">Valor Limite</string>
     <string name="manter_conectado">Manter Conectado</string>
+    
+    <string name="preferenciasLogin">Preferências de Login</string>
+    <string name="manter_conectado_preference">Manter Conectado</string>
+    <string name="manter_conectado_suma">Manter aplicação sempre conectada</string>
 
     <string-array name="categoria_gasto">
         <item>Alimentação</item>
