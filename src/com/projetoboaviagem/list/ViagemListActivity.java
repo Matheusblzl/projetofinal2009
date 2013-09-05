@@ -57,7 +57,7 @@ public class ViagemListActivity extends ListActivity implements OnItemClickListe
 
 		Map<String, Object> item = new HashMap<String, Object>();
 		item.put("imagem", R.drawable.unemployedicon48x48);
-		item.put("destino", "São Paulo");
+		item.put("destino", "SÃ£o Paulo");
 		item.put("data", "02/02/2012 a 04/02/2012");
 		item.put("total", "Gasto total R$ 314,98");
 		item.put("barraProgresso", new Double[]{ 500.0, 450.0, 314.98 });
@@ -65,7 +65,7 @@ public class ViagemListActivity extends ListActivity implements OnItemClickListe
 
 		item = new HashMap<String, Object>();
 		item.put("imagem", R.drawable.beachchairicon);
-		item.put("destino", "Maceió");
+		item.put("destino", "MaceiÃ³");
 		item.put("data", "14/05/2012 a 22/05/2012");
 		item.put("total", "Gasto total R$ 234,67");
 		item.put("barraProgresso", new Double[]{ 500.0, 300.0, 234.67 });

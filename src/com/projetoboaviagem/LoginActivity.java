@@ -33,8 +33,7 @@ public class LoginActivity extends Activity {
 		boolean conectado = preferencias.getBoolean(ConfiguracoesActivity.MANTER_CONECTADO, false);
 
 		if (conectado) {
-			startActivity(new Intent(this, DashboardActivity.class));
-			finish();
+		    activityDashboard();
 		}
 	}
 
@@ -54,23 +53,28 @@ public class LoginActivity extends Activity {
 		String usuarioInfo = usuario.getText().toString().toLowerCase().trim();
 		String senhaInfo = senha.getText().toString().trim();
 
+		SharedPreferences preferencias = PreferenceManager.getDefaultSharedPreferences(this);
+		
+		Editor editor = preferencias.edit();
+        editor.putBoolean(ConfiguracoesActivity.MANTER_CONECTADO, manterConectado.isChecked());
+        editor.commit();
+		
 		if ("".equals(usuarioInfo) && "".equals(senhaInfo)) {
-			startActivity(new Intent(this, DashboardActivity.class));
+		    activityDashboard();
 		}
 
 		if ("daniel".equals(usuarioInfo) && "123".equals(senhaInfo)) {
-			
-			SharedPreferences preferencias = getPreferences(MODE_PRIVATE);
-			
-			Editor editor = preferencias.edit();
-			editor.putBoolean(ConfiguracoesActivity.MANTER_CONECTADO, manterConectado.isChecked());
-			editor.commit();
-
-			startActivity(new Intent(this, DashboardActivity.class));
+			activityDashboard();
 		} else {
 			String mensagemErro = getString(R.string.erro_autenticacao);
 			Toast toast = Toast.makeText(this, mensagemErro, Toast.LENGTH_SHORT);
 			toast.show();
 		}
+	}
+	
+	private void activityDashboard() {
+	    startActivity(new Intent(this, DashboardActivity.class));
+        overridePendingTransition(R.anim.right_in, R.anim.left_out);
+        finish();
 	}
 }

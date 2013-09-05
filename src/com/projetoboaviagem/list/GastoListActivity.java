@@ -55,21 +55,21 @@ public class GastoListActivity extends ListActivity implements OnItemClickListen
 
 		Map<String, Object> item = new HashMap<String, Object>();
 		item.put("data", "04/02/2012");
-		item.put("descricao", "Di·ria Hotel");
+		item.put("descricao", "Di√°ria Hotel");
 		item.put("valor", "R$ 260,00");
 		item.put("categoria", R.color.categoria_hospedagem);
 		gastos.add(item);
 
 		item = new HashMap<String, Object>();
 		item.put("data", "12/06/2012");
-		item.put("descricao", "AlmoÁo");
+		item.put("descricao", "Almo√ßo");
 		item.put("valor", "R$ 70,00");
 		item.put("categoria", R.color.categoria_alimentacao);
 		gastos.add(item);
 
 		item = new HashMap<String, Object>();
 		item.put("data", "14/06/2012");
-		item.put("descricao", "taxi atÈ aeroporto");
+		item.put("descricao", "taxi at√© aeroporto");
 		item.put("valor", "R$ 40,00");
 		item.put("categoria", R.color.categoria_transporte);
 		gastos.add(item);
