@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_dashboard_port"
+    style="@style/layout_dashboard_port"
+    android:orientation="vertical"
+    tools:context=".DashboardActivity" >
+
+    <TextView
+        android:id="@+id/dashboardTitle"
+        style="@style/title_menu_dashboard" />
+
+    <RelativeLayout style="@style/background_dashboard" >
+
+        <TextView
+            android:id="@+id/novo_gasto"
+            style="@style/button_imagem_dashboard"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="60dp"
+            android:drawableTop="@drawable/creditcardicon128px"
+            android:text="@string/labelNovoGasto" />
+
+        <TextView
+            android:id="@+id/nova_viagem"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/novo_gasto"
+            android:layout_marginRight="45dp"
+            android:drawableTop="@drawable/trackingrouteicon128px"
+            android:text="@string/labelNovaViagem"
+            style="@style/button_imagem_dashboard" />
+
+        <TextView
+            android:id="@+id/minhas_viagens"
+            android:layout_alignLeft="@id/novo_gasto"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="120dp"
+            android:drawableTop="@drawable/folderdownloadicon128px"
+            android:text="@string/labelMinhasViagens"
+            style="@style/button_imagem_dashboard" />
+
+        <TextView
+            android:id="@+id/configuracoes"
+            android:layout_alignBottom="@id/minhas_viagens"
+            android:layout_alignRight="@id/nova_viagem"
+            android:drawableTop="@drawable/settingsblueicon128px"
+            android:text="@string/labelConfiguracoes"
+            style="@style/button_imagem_dashboard" />
+    </RelativeLayout>
+
+</LinearLayout>

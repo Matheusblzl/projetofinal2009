@@ -1,5 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_gasto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".GastoActivity" >
@@ -32,79 +33,84 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/labelCategoria" />
+        <LinearLayout
+            style="@style/layout_margin_10"
+            android:orientation="vertical">
 
-        <Spinner
-            android:id="@+id/categoria"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:prompt="@string/labelCategoria" >
-        </Spinner>
+            <TextView
+                style="@style/lbl_form_cad"
+                android:text="@string/labelCategoria" />
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="0,1" >
+            <Spinner
+                android:id="@+id/categoria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:prompt="@string/labelCategoria" />
 
-            <TableRow>
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="0,1" >
 
-                <TextView android:text="@string/labelValor" />
+                <TableRow>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/labelDataGstao" />
-            </TableRow>
+                    <TextView
+                        style="@style/lbl_form_cad"
+                        android:text="@string/labelValor" />
 
-            <TableRow>
+                    <TextView
+                        style="@style/lbl_form_cad"
+                        android:text="@string/labelDataGstao" />
+                </TableRow>
 
-                <EditText
-                    android:id="@+id/valor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
+                <TableRow>
 
-                <Button
-                    android:id="@+id/data"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/labelSelecione" />
-            </TableRow>
-        </TableLayout>
+                    <EditText
+                        android:id="@+id/valor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/labelDescicao" />
+                        <requestFocus />
+                    </EditText>
 
-        <EditText
-            android:id="@+id/descricao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text" />
+                    <Button
+                        android:id="@+id/data"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/labelSelecione" />
+                </TableRow>
+            </TableLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/labelLocal" />
+            <TextView
+                style="@style/lbl_form_cad"
+                android:text="@string/labelDescicao" />
 
-        <EditText
-            android:id="@+id/local"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text" />
+            <EditText
+                android:id="@+id/descricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:onClick="registrarGasto"
-            android:text="@string/labelButtonGastei" />
+            <TextView
+                style="@style/lbl_form_cad"
+                android:text="@string/labelLocal" />
+
+            <EditText
+                android:id="@+id/local"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text" />
+
+            <Button
+                style="@style/button_login"
+                android:layout_marginTop="30dp"
+                android:onClick="registrarGasto"
+                android:text="@string/labelButtonGastei" />
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

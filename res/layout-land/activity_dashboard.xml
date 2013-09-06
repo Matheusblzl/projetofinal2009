@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_dashboard_land"
+    style="@style/layout_dashboard_port"
+    android:orientation="vertical"
+    tools:context=".DashboardActivity" >
+
+    <TextView
+        android:id="@+id/dashboardTitle"
+        style="@style/title_menu_dashboard" />
+
+    <RelativeLayout style="@style/background_dashboard" >
+
+        <TextView
+            android:id="@+id/minhas_viagens"
+            style="@style/button_imagem_dashboard"
+            android:layout_alignBaseline="@+id/configuracoes"
+            android:layout_alignBottom="@+id/configuracoes"
+            android:layout_marginRight="31dp"
+            android:layout_toLeftOf="@+id/configuracoes"
+            android:drawableTop="@drawable/folderdownloadicon128px"
+            android:text="@string/labelMinhasViagens" />
+
+        <TextView
+            android:id="@+id/configuracoes"
+            style="@style/button_imagem_dashboard"
+            android:layout_alignBaseline="@+id/nova_viagem"
+            android:layout_alignBottom="@+id/nova_viagem"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="35dp"
+            android:drawableTop="@drawable/settingsblueicon128px"
+            android:text="@string/labelConfiguracoes" />
+
+        <TextView
+            android:id="@+id/novo_gasto"
+            style="@style/button_imagem_dashboard"
+            android:layout_alignBaseline="@+id/nova_viagem"
+            android:layout_alignBottom="@+id/nova_viagem"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="35dp"
+            android:drawableTop="@drawable/creditcardicon128px"
+            android:text="@string/labelNovoGasto" />
+
+        <TextView
+            android:id="@+id/nova_viagem"
+            style="@style/button_imagem_dashboard"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="61dp"
+            android:layout_toRightOf="@+id/novo_gasto"
+            android:drawableTop="@drawable/trackingrouteicon128px"
+            android:text="@string/labelNovaViagem" />
+
+    </RelativeLayout>
+
+</LinearLayout>

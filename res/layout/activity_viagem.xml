@@ -5,13 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".ViagemActivity" >
 
-    <TableLayout
+    <LinearLayout
+        android:id="@+id/layoutbase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stretchColumns="0,1,2" >
+        android:orientation="vertical" >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="5dp"
@@ -21,75 +22,92 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textStyle="bold" />
 
-        <TextView android:text="@string/labelDestino" />
-
-        <EditText
-            android:id="@+id/destino"
-            android:inputType="text" >
-        </EditText>
-
-        <TextView android:text="@string/labelTipoViagem" />
-
-        <RadioGroup
-            android:id="@+id/tipoViagem"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/lazer"
-                android:checked="true"
-                android:text="@string/labelLazer" />
-
-            <RadioButton
-                android:id="@+id/negocios"
-                android:layout_marginLeft="30dp"
-                android:text="@string/labelNegocios" />
-        </RadioGroup>
-
-        <TableRow>
+        <TableLayout
+            style="@style/layout_margin_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="0,1,2" >
 
             <TextView
-                android:layout_gravity="center"
-                android:text="@string/labelDataChegada" />
-
-            <TextView
-                android:layout_gravity="center"
-                android:text="@string/labelDataSaida" />
-        </TableRow>
-
-        <TableRow>
-
-            <Button
-                android:id="@+id/dataChegada"
-                android:onClick="selecionarData"
-                android:text="@string/labelSelecione" />
-
-            <Button
-                android:id="@+id/dataSaida"
-                android:onClick="selecionarData"
-                android:text="@string/labelSelecione" />
-        </TableRow>
-
-        <TextView android:text="@string/labelOrcamento" />
-
-        <EditText
-            android:id="@+id/orcamento"
-            android:inputType="numberDecimal" />
-
-        <TableRow>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:text="@string/labelQuantidadePessoa" />
+                style="@style/lbl_form_cad"
+                android:text="@string/labelDestino" />
 
             <EditText
-                android:id="@+id/quantidadePessoas"
-                android:inputType="number" />
-        </TableRow>
+                android:id="@+id/destino"
+                android:inputType="text" >
+            </EditText>
+
+            <TextView
+                style="@style/lbl_form_cad"
+                android:text="@string/labelTipoViagem" />
+
+            <RadioGroup
+                android:id="@+id/tipoViagem"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/lazer"
+                    android:checked="true"
+                    android:text="@string/labelLazer" />
+
+                <RadioButton
+                    android:id="@+id/negocios"
+                    android:layout_marginLeft="30dp"
+                    android:text="@string/labelNegocios" />
+            </RadioGroup>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/lbl_form_cad"
+                    android:layout_gravity="center"
+                    android:text="@string/labelDataChegada" />
+
+                <TextView
+                    style="@style/lbl_form_cad"
+                    android:layout_gravity="center"
+                    android:text="@string/labelDataSaida" />
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/dataChegada"
+                    android:onClick="selecionarData"
+                    android:text="@string/labelSelecione" />
+
+                <Button
+                    android:id="@+id/dataSaida"
+                    android:onClick="selecionarData"
+                    android:text="@string/labelSelecione" />
+            </TableRow>
+
+            <TextView
+                style="@style/lbl_form_cad"
+                android:text="@string/labelOrcamento" />
+
+            <EditText
+                android:id="@+id/orcamento"
+                android:inputType="numberDecimal" />
+
+            <TableRow>
+
+                <TextView
+                    style="@style/lbl_form_cad"
+                    android:layout_width="wrap_content"
+                    android:text="@string/labelQuantidadePessoa" />
+
+                <EditText
+                    android:id="@+id/quantidadePessoas"
+                    android:inputType="number" />
+            </TableRow>
+        </TableLayout>
 
         <Button
+            style="@style/button_login"
             android:layout_marginTop="20dp"
             android:onClick="salvarViagem"
             android:text="@string/labelNovaViagemButtonSave" />
-    </TableLayout>
+    </LinearLayout>
 
 </ScrollView>
