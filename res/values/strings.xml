@@ -69,4 +69,6 @@
     <string name="lbl_remover_viagem">Remover Viagem</string>
     <string name="title_activity_configuracoes">Configurações Activity</string>
 
+    <string name="registro_salvo">Registro salvo com sucesso</string>
+    <string name="erro_salvar">Erro ao salvar registro</string>
 </resources>
