@@ -26,7 +26,7 @@
             style="@style/layout_margin_10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stretchColumns="0,1,2" >
+            android:stretchColumns="*" >
 
             <TextView
                 style="@style/lbl_form_cad"
@@ -57,7 +57,6 @@
             </RadioGroup>
 
             <TableRow>
-
                 <TextView
                     style="@style/lbl_form_cad"
                     android:layout_gravity="center"
@@ -70,7 +69,6 @@
             </TableRow>
 
             <TableRow>
-
                 <Button
                     android:id="@+id/dataChegada"
                     android:onClick="selecionarData"
@@ -105,7 +103,7 @@
 
         <Button
             style="@style/button_login"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:onClick="salvarViagem"
             android:text="@string/labelNovaViagemButtonSave" />
     </LinearLayout>

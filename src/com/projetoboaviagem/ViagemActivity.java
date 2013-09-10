@@ -1,9 +1,11 @@
 package com.projetoboaviagem;
 
 import java.text.ParseException;
+import java.util.Date;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -18,6 +20,8 @@ import android.widget.Toast;
 import com.projetoboaviagem.components.DatePickerFragment;
 import com.projetoboaviagem.dao.DatabaseHelper;
 import com.projetoboaviagem.enumeradores.TipoViagem;
+import com.projetoboaviagem.list.ViagemListActivity;
+import com.projetoboaviagem.util.Constantes;
 import com.projetoboaviagem.util.GlobalUtil;
 
 public class ViagemActivity extends FragmentActivity {
@@ -30,11 +34,13 @@ public class ViagemActivity extends FragmentActivity {
     private EditText orcamento;
     private EditText quantidadePessoas;
 
+    private String id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viagem);
-        
+
         buttonDataChegada = (Button) findViewById(R.id.dataChegada);
         buttonDataChegada.setText(R.string.labelSelecione);
 
@@ -50,6 +56,34 @@ public class ViagemActivity extends FragmentActivity {
         tipoViagem = (RadioGroup) findViewById(R.id.tipoViagem);
 
         helper = new DatabaseHelper(this);
+
+        id = getIntent().getStringExtra(Constantes.VIAGEM_ID);
+
+        if (id != null) {
+            prepararEdicao();
+        }
+
+    }
+
+    private void prepararEdicao() {
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT tipo_viagem, destino, data_chegada, data_saida, quantidade_pessoas, orcamento FROM viagem WHERE _id = ?",
+                new String[]{ id });
+        cursor.moveToFirst();
+
+        if (cursor.getInt(0) == TipoViagem.VIAGEM_LAZER.ordinal()) {
+            tipoViagem.check(R.id.lazer);
+        } else {
+            tipoViagem.check(R.id.negocios);
+        }
+
+        destino.setText(cursor.getString(1));
+        buttonDataChegada.setText(GlobalUtil.getInstance().formatarDataMedio(new Date(cursor.getLong(2))));
+        buttonDataSaida.setText(GlobalUtil.getInstance().formatarDataMedio(new Date(cursor.getLong(3))));
+        quantidadePessoas.setText(cursor.getString(4));
+        orcamento.setText(cursor.getString(5));
+
+        cursor.close();
     }
 
     @Override
@@ -88,22 +122,31 @@ public class ViagemActivity extends FragmentActivity {
         values.put("data_saida", GlobalUtil.getInstance().parseStringInDateMedio(buttonDataSaida.getText().toString()).toString());
         values.put("orcamento", orcamento.getText().toString());
         values.put("quantidade_pessoas", quantidadePessoas.getText().toString());
-        
+
         int tipo = tipoViagem.getCheckedRadioButtonId();
-        
+
         if (tipo == R.id.lazer) {
             values.put("tipo_viagem", TipoViagem.VIAGEM_LAZER.ordinal());
         } else {
             values.put("tipo_viagem", TipoViagem.VIAGEM_NEGOCIOS.ordinal());
         }
 
-        long resultado = db.insert("viagem", null, values);
+        long resultado = -1L;
         
+        if (id == null) {
+            resultado = db.insert("viagem", null, values);
+        } else {
+            resultado = db.update("viagem", values, "_id = ?", new String[]{ id });
+        }
+
         if (resultado != -1) {
             Toast.makeText(this, getString(R.string.registro_salvo), Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, getString(R.string.erro_salvar), Toast.LENGTH_SHORT).show();
         }
+
+        startActivity(new Intent(this, ViagemListActivity.class));
+        finish();
     }
 
     @Override
