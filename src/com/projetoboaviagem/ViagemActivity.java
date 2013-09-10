@@ -1,33 +1,28 @@
 package com.projetoboaviagem;
 
 import java.text.ParseException;
-import java.util.Calendar;
 
-import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.DatePickerDialog.OnDateSetListener;
-import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.projetoboaviagem.components.DatePickerFragment;
 import com.projetoboaviagem.dao.DatabaseHelper;
-import com.projetoboaviagem.util.Constantes;
+import com.projetoboaviagem.enumeradores.TipoViagem;
 import com.projetoboaviagem.util.GlobalUtil;
 
-public class ViagemActivity extends Activity {
+public class ViagemActivity extends FragmentActivity {
 
     private DatabaseHelper helper;
-    private int ano, mes, dia;
     private Button buttonDataChegada;
     private Button buttonDataSaida;
     private EditText destino;
@@ -39,14 +34,12 @@ public class ViagemActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viagem);
-
-        Calendar calendar = Calendar.getInstance();
-
+        
         buttonDataChegada = (Button) findViewById(R.id.dataChegada);
-        buttonDataChegada.setText(GlobalUtil.getInstance().formatarDataMedio(calendar.getTime()));
+        buttonDataChegada.setText(R.string.labelSelecione);
 
         buttonDataSaida = (Button) findViewById(R.id.dataSaida);
-        buttonDataSaida.setText(GlobalUtil.getInstance().formatarDataMedio(calendar.getTime()));
+        buttonDataSaida.setText(R.string.labelSelecione);
 
         destino = (EditText) findViewById(R.id.destino);
 
@@ -79,27 +72,10 @@ public class ViagemActivity extends Activity {
     }
 
     public void selecionarData(View view) {
-        showDialog(view.getId());
+        DatePickerFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+        newFragment.setComponentId(view.getId());
     }
-
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        if (R.id.dataChegada == id) {
-            return new DatePickerDialog(this, listener, ano, mes, dia);
-        }
-        if (R.id.dataSaida == id) {
-            return new DatePickerDialog(this, listener, ano, mes, dia);
-        }
-        return null;
-    }
-
-    private OnDateSetListener listener = new OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            Calendar calendar = GlobalUtil.getInstance().converterEmCalendar(dayOfMonth, monthOfYear, year);
-            buttonDataChegada.setText(GlobalUtil.getInstance().formatarDataMedio(calendar.getTime()));
-        }
-    };
 
     // BANCO DE DADOS
     public void salvarViagem(View view) throws ParseException {
@@ -112,14 +88,17 @@ public class ViagemActivity extends Activity {
         values.put("data_saida", GlobalUtil.getInstance().parseStringInDateMedio(buttonDataSaida.getText().toString()).toString());
         values.put("orcamento", orcamento.getText().toString());
         values.put("quantidade_pessoas", quantidadePessoas.getText().toString());
+        
         int tipo = tipoViagem.getCheckedRadioButtonId();
+        
         if (tipo == R.id.lazer) {
-            values.put("tipo_viagem", Constantes.VIAGEM_LAZER);
+            values.put("tipo_viagem", TipoViagem.VIAGEM_LAZER.ordinal());
         } else {
-            values.put("tipo_viagem", Constantes.VIAGEM_NEGOCIOS);
+            values.put("tipo_viagem", TipoViagem.VIAGEM_NEGOCIOS.ordinal());
         }
 
         long resultado = db.insert("viagem", null, values);
+        
         if (resultado != -1) {
             Toast.makeText(this, getString(R.string.registro_salvo), Toast.LENGTH_SHORT).show();
         } else {
