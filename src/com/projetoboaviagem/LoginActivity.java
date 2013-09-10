@@ -74,7 +74,6 @@ public class LoginActivity extends Activity {
 	
 	private void activityDashboard() {
 	    startActivity(new Intent(this, DashboardActivity.class));
-        overridePendingTransition(R.anim.right_in, R.anim.left_out);
         finish();
 	}
 }
