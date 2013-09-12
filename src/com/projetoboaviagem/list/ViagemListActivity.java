@@ -26,6 +26,7 @@ import android.widget.SimpleAdapter.ViewBinder;
 import com.projetoboaviagem.GastoActivity;
 import com.projetoboaviagem.R;
 import com.projetoboaviagem.ViagemActivity;
+import com.projetoboaviagem.dao.BoaViagemDAO;
 import com.projetoboaviagem.dao.DatabaseHelper;
 import com.projetoboaviagem.enumeradores.TipoViagem;
 import com.projetoboaviagem.util.Constantes;
@@ -44,6 +45,8 @@ public class ViagemListActivity extends ListActivity implements OnItemClickListe
     private DatabaseHelper helper;
 
     private Double valorLimite;
+
+    private BoaViagemDAO dao = new BoaViagemDAO(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,25 @@ public class ViagemListActivity extends ListActivity implements OnItemClickListe
         this.dialogConfirmacao = criaDialogConfirmacao();
     }
 
+/*    private List<Viagem> listarViagens() {
+        Cursor cursor = dao.getDb().query(DatabaseHelper.Viagem.TABELA, DatabaseHelper.Viagem.COLUNAS, null, null, null, null, null);
+
+        List<Viagem> viagens = new ArrayList<Viagem>();
+
+        while (cursor.moveToNext()) {
+            Viagem viagem = criarViagem(cursor);
+            viagens.add(viagem);
+        }
+
+        cursor.close();
+
+        return viagens;
+    }*/
+
+/*    private Viagem criarViagem(Cursor cursor) {
+        return null;
+    }*/
+    
     private List<Map<String, Object>> listarViagens() {
 
         SQLiteDatabase db = helper.getReadableDatabase();
