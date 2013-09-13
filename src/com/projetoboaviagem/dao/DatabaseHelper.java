@@ -13,7 +13,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, BANCO_DADOS, null, VERSAO);
     }
 
-    public static class Viagem {
+    public static class Table_Viagem {
         public static final String TABELA = "viagem";
         public static final String _ID = "_id";
         public static final String DESTINO = "destino";
@@ -25,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         public static final String[] COLUNAS = new String[]{ _ID, DESTINO, DATA_CHEGADA, DATA_SAIDA, TIPO_VIAGEM, ORCAMENTO, QUANTIDADE_PESSOAS };
     }
 
-    public static class Gasto {
+    public static class Table_Gasto {
         public static final String TABELA = "gasto";
         public static final String _ID = "_id";
         public static final String VIAGEM_ID = "viagem_id";

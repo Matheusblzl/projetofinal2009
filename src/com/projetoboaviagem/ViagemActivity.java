@@ -1,12 +1,8 @@
 package com.projetoboaviagem;
 
 import java.text.ParseException;
-import java.util.Date;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
@@ -18,7 +14,9 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.projetoboaviagem.components.DatePickerFragment;
+import com.projetoboaviagem.dao.BoaViagemDAO;
 import com.projetoboaviagem.dao.DatabaseHelper;
+import com.projetoboaviagem.domain.Viagem;
 import com.projetoboaviagem.enumeradores.TipoViagem;
 import com.projetoboaviagem.list.ViagemListActivity;
 import com.projetoboaviagem.util.Constantes;
@@ -26,133 +24,126 @@ import com.projetoboaviagem.util.GlobalUtil;
 
 public class ViagemActivity extends FragmentActivity {
 
-    private DatabaseHelper helper;
-    private Button buttonDataChegada;
-    private Button buttonDataSaida;
-    private EditText destino;
-    private RadioGroup tipoViagem;
-    private EditText orcamento;
-    private EditText quantidadePessoas;
+	private DatabaseHelper helper;
+	private Button buttonDataChegada;
+	private Button buttonDataSaida;
+	private EditText destino;
+	private RadioGroup tipoViagem;
+	private EditText orcamento;
+	private EditText quantidadePessoas;
 
-    private String id;
+	private String id;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_viagem);
+	private BoaViagemDAO dao = new BoaViagemDAO(this);
 
-        buttonDataChegada = (Button) findViewById(R.id.dataChegada);
-        buttonDataChegada.setText(R.string.labelSelecione);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_viagem);
 
-        buttonDataSaida = (Button) findViewById(R.id.dataSaida);
-        buttonDataSaida.setText(R.string.labelSelecione);
+		buttonDataChegada = (Button) findViewById(R.id.dataChegada);
+		buttonDataChegada.setText(R.string.labelSelecione);
 
-        destino = (EditText) findViewById(R.id.destino);
+		buttonDataSaida = (Button) findViewById(R.id.dataSaida);
+		buttonDataSaida.setText(R.string.labelSelecione);
 
-        orcamento = (EditText) findViewById(R.id.orcamento);
+		destino = (EditText) findViewById(R.id.destino);
 
-        quantidadePessoas = (EditText) findViewById(R.id.quantidadePessoas);
+		orcamento = (EditText) findViewById(R.id.orcamento);
 
-        tipoViagem = (RadioGroup) findViewById(R.id.tipoViagem);
+		quantidadePessoas = (EditText) findViewById(R.id.quantidadePessoas);
 
-        helper = new DatabaseHelper(this);
+		tipoViagem = (RadioGroup) findViewById(R.id.tipoViagem);
 
-        id = getIntent().getStringExtra(Constantes.VIAGEM_ID);
+		helper = new DatabaseHelper(this);
 
-        if (id != null) {
-            prepararEdicao();
-        }
+		id = getIntent().getStringExtra(Constantes.VIAGEM_ID);
 
-    }
+		if (id != null) {
+			prepararEdicao();
+		}
 
-    private void prepararEdicao() {
-        SQLiteDatabase db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT tipo_viagem, destino, data_chegada, data_saida, quantidade_pessoas, orcamento FROM viagem WHERE _id = ?",
-                new String[]{ id });
-        cursor.moveToFirst();
+	}
 
-        if (cursor.getInt(0) == TipoViagem.VIAGEM_LAZER.ordinal()) {
-            tipoViagem.check(R.id.lazer);
-        } else {
-            tipoViagem.check(R.id.negocios);
-        }
+	private void prepararEdicao() {
+		Viagem viagem = dao.buscarViagemPorId(Long.valueOf(id));
 
-        destino.setText(cursor.getString(1));
-        buttonDataChegada.setText(GlobalUtil.getInstance().formatarDataMedio(new Date(cursor.getLong(2))));
-        buttonDataSaida.setText(GlobalUtil.getInstance().formatarDataMedio(new Date(cursor.getLong(3))));
-        quantidadePessoas.setText(cursor.getString(4));
-        orcamento.setText(cursor.getString(5));
+		if (viagem.getTipoViagem() == TipoViagem.VIAGEM_LAZER.ordinal()) {
+			tipoViagem.check(R.id.lazer);
+		} else {
+			tipoViagem.check(R.id.negocios);
+		}
 
-        cursor.close();
-    }
+		destino.setText(viagem.getDestino());
+		buttonDataChegada.setText(GlobalUtil.getInstance().formatarDataMedio(viagem.getDataChegada()));
+		buttonDataSaida.setText(GlobalUtil.getInstance().formatarDataMedio(viagem.getDataSaida()));
+		quantidadePessoas.setText(viagem.getQuantidadePessoas().toString());
+		orcamento.setText(viagem.getOrcamento().toString());
+	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.viagem, menu);
-        return true;
-    }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.viagem, menu);
+		return true;
+	}
 
-    @Override
-    public boolean onMenuItemSelected(int featureId, MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.novo_gasto:
-                startActivity(new Intent(this, GastoActivity.class));
-                return true;
-            case R.id.remover:
-                return true;
-            default:
-                return super.onMenuItemSelected(featureId, item);
-        }
-    }
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.novo_gasto:
+				startActivity(new Intent(this, GastoActivity.class));
+				return true;
+			case R.id.remover:
+				return true;
+			default:
+				return super.onMenuItemSelected(featureId, item);
+		}
+	}
 
-    public void selecionarData(View view) {
-        DatePickerFragment newFragment = new DatePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "datePicker");
-        newFragment.setComponentId(view.getId());
-    }
+	public void selecionarData(View view) {
+		DatePickerFragment newFragment = new DatePickerFragment();
+		newFragment.show(getSupportFragmentManager(), "datePicker");
+		newFragment.setComponentId(view.getId());
+	}
 
-    // BANCO DE DADOS
-    public void salvarViagem(View view) throws ParseException {
-        SQLiteDatabase db = helper.getWritableDatabase();
+	// BANCO DE DADOS
+	public void salvarViagem(View view) throws ParseException {
 
-        ContentValues values = new ContentValues();
+		int tipo = 0;
 
-        values.put("destino", destino.getText().toString());
-        values.put("data_chegada", GlobalUtil.getInstance().parseStringInDateMedio(buttonDataChegada.getText().toString()).toString());
-        values.put("data_saida", GlobalUtil.getInstance().parseStringInDateMedio(buttonDataSaida.getText().toString()).toString());
-        values.put("orcamento", orcamento.getText().toString());
-        values.put("quantidade_pessoas", quantidadePessoas.getText().toString());
+		if (tipoViagem.getCheckedRadioButtonId() == R.id.lazer) {
+			tipo = TipoViagem.VIAGEM_LAZER.ordinal();
+		} else {
+			tipo = TipoViagem.VIAGEM_NEGOCIOS.ordinal();
+		}
 
-        int tipo = tipoViagem.getCheckedRadioButtonId();
+		Viagem viagem = dao.criarViagem(id != null ? Long.valueOf(id) : null,
+				destino.getText().toString(),
+				buttonDataChegada.getText().toString(),
+				buttonDataSaida.getText().toString(),
+				orcamento.getText().toString(),
+				Integer.valueOf(quantidadePessoas.getText().toString()),
+				tipo);
 
-        if (tipo == R.id.lazer) {
-            values.put("tipo_viagem", TipoViagem.VIAGEM_LAZER.ordinal());
-        } else {
-            values.put("tipo_viagem", TipoViagem.VIAGEM_NEGOCIOS.ordinal());
-        }
+		try {
+			if (id == null) {
+				dao.inserir(viagem);
+			} else {
+				dao.atualizar(viagem);
+			}
+			Toast.makeText(this, getString(R.string.registro_salvo), Toast.LENGTH_SHORT).show();
+		} catch (Exception e) {
+			Toast.makeText(this, getString(R.string.erro_salvar), Toast.LENGTH_SHORT).show();
+		}
 
-        long resultado = -1L;
-        
-        if (id == null) {
-            resultado = db.insert("viagem", null, values);
-        } else {
-            resultado = db.update("viagem", values, "_id = ?", new String[]{ id });
-        }
+		startActivity(new Intent(this, ViagemListActivity.class));
+		finish();
+	}
 
-        if (resultado != -1) {
-            Toast.makeText(this, getString(R.string.registro_salvo), Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, getString(R.string.erro_salvar), Toast.LENGTH_SHORT).show();
-        }
-
-        startActivity(new Intent(this, ViagemListActivity.class));
-        finish();
-    }
-
-    @Override
-    protected void onDestroy() {
-        helper.close();
-        super.onDestroy();
-    }
+	@Override
+	protected void onDestroy() {
+		helper.close();
+		super.onDestroy();
+	}
 
 }
