@@ -36,8 +36,13 @@ public class BoaViagemDAO {
 		db = null;
 	}
 
+	public Cursor obterCursorListaDeViagens() {
+        Cursor cursor = getDb().query(DatabaseHelper.Table_Viagem.TABELA, DatabaseHelper.Table_Viagem.COLUNAS, null, null, null, null, null);
+        return cursor;
+	}
+	
 	public List<Viagem> listarViagens() {
-		Cursor cursor = getDb().query(DatabaseHelper.Table_Viagem.TABELA, DatabaseHelper.Table_Viagem.COLUNAS, null, null, null, null, null);
+		Cursor cursor = obterCursorListaDeViagens();
 		List<Viagem> viagens = new ArrayList<Viagem>();
 		while (cursor.moveToNext()) {
 			Viagem viagem = criarViagem(cursor);
@@ -205,6 +210,20 @@ public class BoaViagemDAO {
 		cursor.getLong(cursor.getColumnIndex(DatabaseHelper.Table_Gasto.VIAGEM_ID)));
 		
 		return gasto;
+	}
+	
+	public Gasto criarGasto(Long id, Long idViagem, String categoria, Date data, String descricao, String local, Double valor) {
+	    Gasto gasto = new Gasto();
+	    
+	    gasto.setCategoria(categoria);
+	    gasto.setData(data);
+	    gasto.setDescricao(descricao);
+	    gasto.setId(id != null ? id : null);
+	    gasto.setLocal(local);
+	    gasto.setValor(valor);
+	    gasto.setViagemId(idViagem);
+	    
+	    return gasto;
 	}
 
 }
