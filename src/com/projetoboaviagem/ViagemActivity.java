@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.projetoboaviagem.components.DatePickerFragment;
 import com.projetoboaviagem.dao.BoaViagemDAO;
-import com.projetoboaviagem.dao.DatabaseHelper;
 import com.projetoboaviagem.domain.Viagem;
 import com.projetoboaviagem.enumeradores.TipoViagem;
 import com.projetoboaviagem.list.ViagemListActivity;
@@ -24,7 +23,6 @@ import com.projetoboaviagem.util.GlobalUtil;
 
 public class ViagemActivity extends FragmentActivity {
 
-	private DatabaseHelper helper;
 	private Button buttonDataChegada;
 	private Button buttonDataSaida;
 	private EditText destino;
@@ -54,8 +52,6 @@ public class ViagemActivity extends FragmentActivity {
 		quantidadePessoas = (EditText) findViewById(R.id.quantidadePessoas);
 
 		tipoViagem = (RadioGroup) findViewById(R.id.tipoViagem);
-
-		helper = new DatabaseHelper(this);
 
 		id = getIntent().getStringExtra(Constantes.VIAGEM_ID);
 
@@ -142,7 +138,7 @@ public class ViagemActivity extends FragmentActivity {
 
 	@Override
 	protected void onDestroy() {
-		helper.close();
+		dao.close();
 		super.onDestroy();
 	}
 

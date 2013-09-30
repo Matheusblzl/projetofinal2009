@@ -33,15 +33,19 @@ public class DashboardActivity extends Activity {
 		switch (view.getId()) {
 			case R.id.nova_viagem:
 				startActivity(new Intent(this, ViagemActivity.class));
+				overridePendingTransition(R.anim.zoom_enter, R.anim.fade);
 				break;
 			case R.id.novo_gasto:
 				startActivity(new Intent(this, GastoActivity.class));
+				overridePendingTransition(R.anim.zoom_enter, R.anim.fade);
 				break;
 			case R.id.minhas_viagens:
 				startActivity(new Intent(this, ViagemListActivity.class));
+				overridePendingTransition(R.anim.zoom_enter, R.anim.fade);
 				break;
 			case R.id.configuracoes:
 				startActivity(new Intent(this, ConfiguracoesActivity.class));
+				overridePendingTransition(R.anim.zoom_enter, R.anim.fade);
 				break;
 		}
 	}

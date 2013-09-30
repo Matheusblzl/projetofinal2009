@@ -73,7 +73,8 @@ public class LoginActivity extends Activity {
 	}
 	
 	private void activityDashboard() {
-	    startActivity(new Intent(this, DashboardActivity.class));
+	    startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+	    overridePendingTransition(R.anim.zoom_enter, R.anim.fade);
         finish();
 	}
 }
