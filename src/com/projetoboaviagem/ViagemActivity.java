@@ -58,10 +58,10 @@ public class ViagemActivity extends FragmentActivity {
 		if (id != null) {
 			prepararEdicao();
 		}
-
 	}
 
 	private void prepararEdicao() {
+		
 		Viagem viagem = dao.buscarViagemPorId(Long.valueOf(id));
 
 		if (viagem.getTipoViagem() == TipoViagem.VIAGEM_LAZER.ordinal()) {
@@ -130,6 +130,8 @@ public class ViagemActivity extends FragmentActivity {
 			Toast.makeText(this, getString(R.string.registro_salvo), Toast.LENGTH_SHORT).show();
 		} catch (Exception e) {
 			Toast.makeText(this, getString(R.string.erro_salvar), Toast.LENGTH_SHORT).show();
+		} finally {
+			dao.close();
 		}
 
 		startActivity(new Intent(this, ViagemListActivity.class));

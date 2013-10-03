@@ -49,13 +49,13 @@ public class ViagemListActivity extends ListActivity implements OnItemClickListe
 
 		SharedPreferences preferencias = PreferenceManager.getDefaultSharedPreferences(this);
 
-		String valor = preferencias.getString("valor_limite", "-1");
+		String valor = preferencias.getString("valor_limite", "80");
 
 		valorLimite = Double.valueOf(valor);
 
-		String[] de = { "imagem", "destino", "data", "total", "barraProgresso" };
+		String[] de = { "imagem", "destino", "data", "total", "maximo", "barraProgresso" };
 
-		int[] para = { R.id.tipoViagem, R.id.destino, R.id.data, R.id.valor, R.id.barraProgresso };
+		int[] para = { R.id.tipoViagem, R.id.destino, R.id.data, R.id.valor, R.id.valorMaximo, R.id.barraProgresso };
 
 		SimpleAdapter adapter = new SimpleAdapter(this, listarViagens(), R.layout.lista_viagem, de, para);
 
@@ -84,7 +84,7 @@ public class ViagemListActivity extends ListActivity implements OnItemClickListe
 			if (viagem.getTipoViagem() == TipoViagem.VIAGEM_LAZER.ordinal()) {
 				item.put("imagem", R.drawable.beachchairicon);
 			} else {
-				item.put("imagem", R.drawable.folderdownloadicon128px);
+				item.put("imagem", R.drawable.unemployedicon48x48);
 			}
 
 			item.put("destino", viagem.getDestino());
@@ -96,7 +96,9 @@ public class ViagemListActivity extends ListActivity implements OnItemClickListe
 
 			double totalGasto = dao.calcularTotalGasto(viagem);
 
-			item.put("total", "Gasto total R$ " + totalGasto);
+			item.put("total", "Gasto total " + GlobalUtil.getInstance().formatarValor(totalGasto));
+			
+			item.put("maximo", "Gasto máximo de " + GlobalUtil.getInstance().formatarValor(viagem.getOrcamento()));
 			
 			double alerta = viagem.getOrcamento() * valorLimite / 100;
 			Double[] valores = new Double[]{ viagem.getOrcamento(), alerta, totalGasto };

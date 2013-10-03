@@ -71,10 +71,18 @@
 
     <string name="registro_salvo">Registro salvo com sucesso</string>
     <string name="erro_salvar">Erro ao salvar registro</string>
+    <string name="erro_formato_numero">Erro ao formatar número</string>
+    <string name="erro_parse_date">Erro ao formatar data</string>
     
     
     <string name="alert_dialog_single_choice">Associar a uma viagem</string>
     <string name="alert_dialog_ok">Associar</string>
     <string name="alert_dialog_cancel">Cancelar</string>
+    
+    <string name="custom_dialog_activity_text">Por favor, crie pelo menos uma viagem para que o gasto seja associado.</string>
+    
+    <string name="dialog_title_text">Não há viagem cadastrada.</string>
+    <string name="dialog_criar_viagem">Criar Viagem</string>
+    <string name="dialog_cancelar">Cancelar</string>
     
 </resources>

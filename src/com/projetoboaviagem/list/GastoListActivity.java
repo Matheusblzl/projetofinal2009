@@ -21,16 +21,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.projetoboaviagem.R;
+import com.projetoboaviagem.dao.BoaViagemDAO;
+import com.projetoboaviagem.domain.Gasto;
+import com.projetoboaviagem.domain.Viagem;
+import com.projetoboaviagem.util.Constantes;
+import com.projetoboaviagem.util.GlobalUtil;
 
 public class GastoListActivity extends ListActivity implements OnItemClickListener {
 
 	private List<Map<String, Object>> gastos;
 	private String dataAnterior = "";
+	private String viagem_id = null;
+	
+	private BoaViagemDAO dao = new BoaViagemDAO(this);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		viagem_id = getIntent().getStringExtra(Constantes.VIAGEM_ID);
+		
 		String[] de = { "data", "descricao", "valor", "categoria" };
 		int[] para = { R.id.data, R.id.descricao, R.id.valor, R.id.categoria };
 		SimpleAdapter adapter = new SimpleAdapter(this, listarGastos(), R.layout.lista_gasto, de, para);
@@ -51,39 +61,38 @@ public class GastoListActivity extends ListActivity implements OnItemClickListen
 	}
 
 	private List<Map<String, Object>> listarGastos() {
+		
 		gastos = new ArrayList<Map<String, Object>>();
+		
+		List<Gasto> list = dao.listarGastos(new Viagem(Long.parseLong(viagem_id)));
 
-		Map<String, Object> item = new HashMap<String, Object>();
-		item.put("data", "04/02/2012");
-		item.put("descricao", "Diária Hotel");
-		item.put("valor", "R$ 260,00");
-		item.put("categoria", R.color.categoria_hospedagem);
-		gastos.add(item);
-
-		item = new HashMap<String, Object>();
-		item.put("data", "12/06/2012");
-		item.put("descricao", "Almoço");
-		item.put("valor", "R$ 70,00");
-		item.put("categoria", R.color.categoria_alimentacao);
-		gastos.add(item);
-
-		item = new HashMap<String, Object>();
-		item.put("data", "14/06/2012");
-		item.put("descricao", "taxi até aeroporto");
-		item.put("valor", "R$ 40,00");
-		item.put("categoria", R.color.categoria_transporte);
-		gastos.add(item);
-
-		item = new HashMap<String, Object>();
-		item.put("data", "14/06/2012");
-		item.put("descricao", "Lanche");
-		item.put("valor", "R$ 12,00");
-		item.put("categoria", R.color.categoria_alimentacao);
-		gastos.add(item);
-
+		for (Gasto gasto : list) {
+			Map<String, Object> item = new HashMap<String, Object>();
+			item.put("data", GlobalUtil.getInstance().formatarDataMedio(gasto.getData()));
+			item.put("descricao", gasto.getDescricao());
+			item.put("valor", GlobalUtil.getInstance().formatarValor(gasto.getValor()));
+			item.put("categoria", obterTipoGasto(gasto));
+			gastos.add(item);
+		}
+		
 		return gastos;
 	}
 
+	private int obterTipoGasto(Gasto gasto) {
+		if (gasto.getCategoria().equals(Constantes.ALIMENTACAO)) {
+			return R.color.categoria_alimentacao;
+		} else if (gasto.getCategoria().equals(Constantes.COMBUSTIVEL)) {
+			return R.color.categoria_outros;
+		} else if (gasto.getCategoria().equals(Constantes.TRANSPORTE)) {
+			return R.color.categoria_transporte;
+		} else if (gasto.getCategoria().equals(Constantes.HOSPEDAGEM)) {
+			return R.color.categoria_hospedagem;
+		} else if (gasto.getCategoria().equals(Constantes.OUTROS)) {
+			return R.color.categoria_outros;
+		}
+		return R.color.categoria_outros;
+	}
+	
 	private class GastoViewBinder implements ViewBinder {
 		@Override
 		public boolean setViewValue(View view, Object data, String textRepresentation) {

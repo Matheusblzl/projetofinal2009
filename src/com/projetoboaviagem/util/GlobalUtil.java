@@ -1,9 +1,12 @@
 package com.projetoboaviagem.util;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class GlobalUtil {
     
@@ -53,5 +56,12 @@ public class GlobalUtil {
     
     public Date converterEmDate(int dia, int mes, int ano) {
         return converterEmCalendar(dia, mes, ano).getTime();
+    }
+    
+    public String formatarValor(Double valor) {
+    	DecimalFormat formatoDois = new DecimalFormat("##,###,###,##0.00", new DecimalFormatSymbols (new Locale ("pt", "BR")));
+    	formatoDois.setMinimumFractionDigits(2); 
+    	formatoDois.setParseBigDecimal (true);
+    	return "R$ " +  formatoDois.format(valor);
     }
 }

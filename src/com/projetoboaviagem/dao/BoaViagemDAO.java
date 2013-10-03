@@ -10,6 +10,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.projetoboaviagem.dao.DatabaseHelper.Table_Viagem;
 import com.projetoboaviagem.domain.Gasto;
 import com.projetoboaviagem.domain.Viagem;
 import com.projetoboaviagem.util.GlobalUtil;
@@ -37,7 +38,7 @@ public class BoaViagemDAO {
 	}
 
 	public Cursor obterCursorListaDeViagens() {
-        Cursor cursor = getDb().query(DatabaseHelper.Table_Viagem.TABELA, DatabaseHelper.Table_Viagem.COLUNAS, null, null, null, null, null);
+        Cursor cursor = getDb().query(DatabaseHelper.Table_Viagem.TABELA, DatabaseHelper.Table_Viagem.COLUNAS, null, null, null, null, Table_Viagem.DESTINO);
         return cursor;
 	}
 	

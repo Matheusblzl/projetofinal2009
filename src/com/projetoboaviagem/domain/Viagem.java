@@ -19,7 +19,12 @@ public class Viagem implements Serializable {
 
     }
 
-    public Viagem(Long id, String destino, Integer tipoViagem, Date dataChegada, Date dataSaida, Double orcamento, Integer quantidadePessoas) {
+    public Viagem(Long id) {
+		super();
+		this.id = id;
+	}
+
+	public Viagem(Long id, String destino, Integer tipoViagem, Date dataChegada, Date dataSaida, Double orcamento, Integer quantidadePessoas) {
         super();
         this.id = id;
         this.destino = destino;
