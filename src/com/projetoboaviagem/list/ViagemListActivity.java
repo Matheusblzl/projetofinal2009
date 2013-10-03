@@ -277,28 +277,22 @@ public class ViagemListActivity extends ListActivity implements OnItemClickListe
 
 	@Override
 	public void onClick(DialogInterface dialog, int item) {
-		Intent intent;
-		String id = viagens.get(viagemSelecionada).get(Constantes.VIAGEM_ID).toString();
-
 		switch (item) {
 			case 0:
-				intent = new Intent(this, ViagemActivity.class);
-				intent.putExtra(Constantes.VIAGEM_ID, id);
-				startActivity(intent);
-				finish();
+				nextActivity(ViagemActivity.class);
 				break;
 			case 1:
-				startActivity(new Intent(this, GastoActivity.class));
+				nextActivity(GastoActivity.class);
 				break;
 			case 2:
-				startActivity(new Intent(this, GastoListActivity.class));
+				nextActivity(GastoListActivity.class);
 				break;
 			case 3:
 				dialogConfirmacao.show();
 				break;
 			case DialogInterface.BUTTON_POSITIVE:
 				viagens.remove(viagemSelecionada);
-				removerViagem(id);
+				removerViagem(viagens.get(viagemSelecionada).get(Constantes.VIAGEM_ID).toString());
 				getListView().invalidateViews();
 				break;
 			case DialogInterface.BUTTON_NEGATIVE:
@@ -307,6 +301,14 @@ public class ViagemListActivity extends ListActivity implements OnItemClickListe
 		}
 	}
 
+	private void nextActivity(Class<?> $class) {
+		Intent intent = new Intent(this, $class);
+		String id = viagens.get(viagemSelecionada).get(Constantes.VIAGEM_ID).toString();
+		intent.putExtra(Constantes.VIAGEM_ID, id);
+		startActivity(intent);
+		finish();
+	}
+	
 	private void removerViagem(String id) {
 		dao.removerGastosViagem(Long.valueOf(id));
 		dao.removerViagem(Long.valueOf(id));
