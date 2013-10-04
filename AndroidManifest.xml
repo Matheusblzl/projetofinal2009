@@ -13,6 +13,17 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/NewsReaderStyle" >
+        <provider
+            android:name=".provider.BoaViagemProvider"
+            android:authorities="br.com.casadocodigo.boaviagem.provider" >
+            <path-permission
+                android:path="viagem"
+                android:permission="br.com.casadocodigo.boaviagem.provider.permission.ALL" />
+            <path-permission
+                android:path="gasto"
+                android:permission="br.com.casadocodigo.boaviagem.provider.permission.ALL" />
+        </provider>
+
         <activity
             android:name="com.projetoboaviagem.LoginActivity"
             android:label="@string/title_activity_login" >
