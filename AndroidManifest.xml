@@ -53,6 +53,8 @@
             android:name="com.projetoboaviagem.ConfiguracoesActivity"
             android:label="@string/title_activity_configuracoes" >
         </activity>
+        <activity android:name="com.projetoboaviagem.fragments.AnotacaoActivity" >
+        </activity>
     </application>
 
 </manifest>

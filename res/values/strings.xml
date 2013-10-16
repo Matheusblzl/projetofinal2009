@@ -64,6 +64,7 @@
         <item>Outros</item>
     </string-array>
 
+    <string name="lbl_teste_fragm_01">Teste Fragmento 01</string>
     <string name="lbl_sair">Sair</string>
     <string name="lbl_menu_novo_gasto">Novo Gasto</string>
     <string name="lbl_remover_viagem">Remover Viagem</string>
