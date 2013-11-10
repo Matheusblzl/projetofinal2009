@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.projetoboaviagem.fragments.ViagemListFragment;
+import com.projetoboaviagem.fragments.AnotacaoActivity;
 import com.projetoboaviagem.list.ViagemListActivity;
 
 public class DashboardActivity extends Activity {
@@ -28,7 +28,7 @@ public class DashboardActivity extends Activity {
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.action_teste_frag_01:
-				startActivity(new Intent(this, ViagemListFragment.class));
+				startActivity(new Intent(this, AnotacaoActivity.class));
 				break;
 			case R.id.action_settings_dash_board:
 				finish();

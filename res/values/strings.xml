@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="nova_anotacao">Nova Anotação</string>
     <string name="app_name">Projeto Boa Viagem</string>
     <string name="title_activity_login">Boa Viagem</string>
     <string name="action_settings">Settings</string>
