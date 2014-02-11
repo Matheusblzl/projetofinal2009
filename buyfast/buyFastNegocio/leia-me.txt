@@ -1,6 +1,0 @@
-Executando o maven:
-
-mvn eclipse:eclipse
-
-Para que esse projeto funcione corretamente, é necessário 
-adicionar o projeto "buyFastModelo" ao classpath da aplicação.
