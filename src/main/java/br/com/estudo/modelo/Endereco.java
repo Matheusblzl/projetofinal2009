@@ -1,25 +1,38 @@
 package br.com.estudo.modelo;
 
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Endereco {
+@Entity
+public class Endereco implements Serializable {
 
+    private static final long serialVersionUID = 5424431470941241438L;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String endereco;
-    private int numero;
+    private Integer numero;
     private String cidade;
     private String estado;
+    private String cep;
 
     public Endereco() {
         super();
     }
 
-    public Endereco(String endereco, int numero, String cidade, String estado) {
-        super();
-        this.endereco = endereco;
-        this.numero = numero;
-        this.cidade = cidade;
-        this.estado = estado;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getEndereco() {
@@ -30,11 +43,11 @@ public class Endereco {
         this.endereco = endereco;
     }
 
-    public int getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 
@@ -54,7 +67,12 @@ public class Endereco {
         this.estado = estado;
     }
 
-    public String enderecoCompleto() {
-        return endereco + ", " + numero + ".";
+    public String getCep() {
+        return cep;
     }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
 }

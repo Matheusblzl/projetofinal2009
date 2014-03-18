@@ -50,6 +50,9 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>br.com.estudo.modelo.Usuario</value>
+				<value>br.com.estudo.modelo.Endereco</value>
+				<value>br.com.estudo.modelo.Pesquisa</value>
+				<value>br.com.estudo.modelo.Ponto</value>
 			</list>
 		</property>
 	</bean>

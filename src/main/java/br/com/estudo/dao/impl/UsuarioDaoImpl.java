@@ -10,7 +10,7 @@ import br.com.estudo.modelo.Usuario;
 public class UsuarioDaoImpl extends GenericDaoImpl<Usuario, Long> implements UsuarioDao {
 
 	/**
-	 * Apresenta o log na aplicação.
+	 * Apresenta o log na aplicaÃ§Ã£o.
 	 */
 	private static final Log logger = LogFactory.getLog("UsuarioDaoImpl");
 	

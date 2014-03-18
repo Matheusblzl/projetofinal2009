@@ -1,5 +1,8 @@
 package br.com.estudo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -10,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.stereotype.Component;
 
 import br.com.estudo.lang.FacadeException;
-import br.com.estudo.modelo.Pesquisa;
+import br.com.estudo.modelo.Ponto;
 import br.com.estudo.modelo.ReturnMessage;
 import br.com.estudo.modelo.Usuario;
 
@@ -32,16 +35,9 @@ public class ServiceResource {
     @Path("/login/{login}/{senha}")
     @Produces({MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public ReturnMessage checkLogin(@PathParam("login") String login, @PathParam("senha") String senha) {
-		Usuario usuario = new Usuario("Daniel", "admin@pinngo.com", "admin", "");
-		try {
-			facade.salvarUsuario(usuario);
-		} catch (FacadeException e1) {
-			e1.printStackTrace();
-		}
-		
 		ReturnMessage returnMessage = null;
 		
-		usuario = null;
+		Usuario usuario = null;
 		
 		try {
 			usuario = facade.getUsuarioByLogin(login);
@@ -60,10 +56,14 @@ public class ServiceResource {
     }
 	
 	@GET()
-    @Path("/pesquisas/{login}/{token}")
+    @Path("/pontos/{login}/{token}")
     @Produces({MediaType.APPLICATION_JSON + ";charset=utf-8"})
-    public Pesquisa getPesquisaUsusario(@PathParam("login") String login, @PathParam("token") String token) {
-	    Pesquisa pesquisa = new Pesquisa();
-	    return pesquisa;
+    public List<Ponto> getPontosUsusario(@PathParam("login") String login, @PathParam("token") String token) {
+	    try {
+            return facade.getPontosUsuario(login, token);
+        } catch (FacadeException e) {
+            e.printStackTrace();
+            return new ArrayList<Ponto>();
+        }
     }
 }
