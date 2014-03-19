@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -29,7 +30,7 @@ public class Ponto implements Serializable {
     private Usuario usuario;
     private String nome;
     private Float latitude;
-    private Float longtude;
+    private Float longitude;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Endereco endereco;
     @Enumerated(EnumType.ORDINAL)
@@ -40,6 +41,11 @@ public class Ponto implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataAtualizacao;
 
+    @Transient
+    private Boolean statusEnvio = Boolean.TRUE;
+    @Transient
+    private String msgEnvio;
+
     public Ponto() {
         super();
     }
@@ -47,7 +53,7 @@ public class Ponto implements Serializable {
     public Ponto(Usuario usuario,
             String nome,
             Float latitude,
-            Float longtude,
+            Float longitude,
             Endereco endereco,
             StatusPesquisa statusPesquisa,
             String mensagemApresentacao,
@@ -57,7 +63,7 @@ public class Ponto implements Serializable {
         this.usuario = usuario;
         this.nome = nome;
         this.latitude = latitude;
-        this.longtude = longtude;
+        this.longitude = longitude;
         this.endereco = endereco;
         this.statusPesquisa = statusPesquisa;
         this.mensagemApresentacao = mensagemApresentacao;
@@ -97,12 +103,12 @@ public class Ponto implements Serializable {
         this.latitude = latitude;
     }
 
-    public Float getLongtude() {
-        return longtude;
+    public Float getLongitude() {
+        return longitude;
     }
 
-    public void setLongtude(Float longtude) {
-        this.longtude = longtude;
+    public void setLongitude(Float longtude) {
+        this.longitude = longtude;
     }
 
     public Endereco getEndereco() {
@@ -143,6 +149,22 @@ public class Ponto implements Serializable {
 
     public void setDataAtualizacao(Date dataAtualizacao) {
         this.dataAtualizacao = dataAtualizacao;
+    }
+
+    public Boolean getStatusEnvio() {
+        return statusEnvio;
+    }
+
+    public void setStatusEnvio(Boolean statusEnvio) {
+        this.statusEnvio = statusEnvio;
+    }
+
+    public String getMsgEnvio() {
+        return msgEnvio;
+    }
+
+    public void setMsgEnvio(String msgEnvio) {
+        this.msgEnvio = msgEnvio;
     }
 
 }

@@ -19,7 +19,7 @@ import br.com.estudo.lang.DaoException;
 public class GenericDaoImpl<T, ID extends Serializable> extends HibernateDaoSupport implements GenericDao<T, ID> {
 
 	/**
-	 * Apresenta o log na aplicação.
+	 * Apresenta o log na aplicaÃ§Ã£o.
 	 */
 	private static final Log logger = LogFactory.getLog("GenericDaoImpl");
 
@@ -224,7 +224,7 @@ public class GenericDaoImpl<T, ID extends Serializable> extends HibernateDaoSupp
 		try {
 			getSessionFactory().getCurrentSession().flush();
 		} catch (Exception e) {
-			String messageError = "Erro ao atualizar da sessão.";
+			String messageError = "Erro ao atualizar da sessï¿½o.";
 			logger.error(messageError, e);
 			throw new DaoException(messageError, e);
 		}

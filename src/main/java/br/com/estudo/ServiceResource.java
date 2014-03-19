@@ -1,5 +1,6 @@
 package br.com.estudo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,16 +11,24 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 
 import br.com.estudo.lang.FacadeException;
+import br.com.estudo.lang.ValidatedLoginSenhaException;
+import br.com.estudo.lang.ValidatedTokenException;
 import br.com.estudo.modelo.Ponto;
 import br.com.estudo.modelo.ReturnMessage;
 import br.com.estudo.modelo.Usuario;
 
 @Component
 @Path("service")
-public class ServiceResource {
+public class ServiceResource implements Serializable {
+    
+    private static final long serialVersionUID = -6759058635753438873L;
+
+    private static final Log logger = LogFactory.getLog("ServiceResource");
 
 	@Inject
     private Facade facade;
@@ -28,6 +37,7 @@ public class ServiceResource {
 	@Path("/teste")
 	@Produces({MediaType.APPLICATION_JSON + ";charset=utf-8"})
 	public String sayHello() {
+	    logger.info("Teste serviço!");
 	    return "Hello World!";
 	}
 	
@@ -35,6 +45,7 @@ public class ServiceResource {
     @Path("/login/{login}/{senha}")
     @Produces({MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public ReturnMessage checkLogin(@PathParam("login") String login, @PathParam("senha") String senha) {
+	    logger.info("Check de login e senha.");
 		ReturnMessage returnMessage = null;
 		
 		Usuario usuario = null;
@@ -59,11 +70,29 @@ public class ServiceResource {
     @Path("/pontos/{login}/{token}")
     @Produces({MediaType.APPLICATION_JSON + ";charset=utf-8"})
     public List<Ponto> getPontosUsusario(@PathParam("login") String login, @PathParam("token") String token) {
+	    logger.info("Obtendo pontos do usuário.");
+	    List<Ponto> erroList = new ArrayList<Ponto>();
+	    Ponto pontoErro = new Ponto();
+	    pontoErro.setStatusEnvio(Boolean.FALSE);
+	    
 	    try {
             return facade.getPontosUsuario(login, token);
         } catch (FacadeException e) {
             e.printStackTrace();
-            return new ArrayList<Ponto>();
+            logger.error(e);
+            pontoErro.setMsgEnvio(e.getMessage());
+        } catch (ValidatedLoginSenhaException e) {
+            logger.error(e);
+            e.printStackTrace();
+            pontoErro.setMsgEnvio(e.getMessage());
+        } catch (ValidatedTokenException e) {
+            logger.error(e);
+            e.printStackTrace();
+            pontoErro.setMsgEnvio(e.getMessage());
         }
+	    
+	    erroList.add(pontoErro);
+	    
+	    return erroList;
     }
 }

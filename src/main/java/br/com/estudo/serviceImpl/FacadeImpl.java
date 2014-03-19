@@ -2,6 +2,8 @@ package br.com.estudo.serviceImpl;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,8 @@ import br.com.estudo.dao.PontoDao;
 import br.com.estudo.dao.UsuarioDao;
 import br.com.estudo.lang.DaoException;
 import br.com.estudo.lang.FacadeException;
+import br.com.estudo.lang.ValidatedLoginSenhaException;
+import br.com.estudo.lang.ValidatedTokenException;
 import br.com.estudo.modelo.Ponto;
 import br.com.estudo.modelo.Usuario;
 
@@ -18,6 +22,8 @@ import br.com.estudo.modelo.Usuario;
 public class FacadeImpl implements Facade {
 
     private static final long serialVersionUID = 1L;
+    
+    private static final Log logger = LogFactory.getLog("FacadeImpl");
 
     @Autowired
     private UsuarioDao usuarioDao;
@@ -31,6 +37,7 @@ public class FacadeImpl implements Facade {
 			return usuarioDao.searchById(id);
 		} catch (DaoException e) {
 			e.printStackTrace();
+			logger.error(e);
 			throw new FacadeException(e);
 		}
     }
@@ -41,6 +48,7 @@ public class FacadeImpl implements Facade {
 			usuarioDao.save(usuario);
 		} catch (DaoException e) {
 			e.printStackTrace();
+			logger.error(e);
 			throw new FacadeException(e);
 		}
     }
@@ -51,6 +59,7 @@ public class FacadeImpl implements Facade {
 			return usuarioDao.searchByLogin(login);
 		} catch (DaoException e) {
 			e.printStackTrace();
+			logger.error(e);
 			throw new FacadeException(e);
 		}
     }
@@ -58,6 +67,7 @@ public class FacadeImpl implements Facade {
     @Override
 	public String gerarToken(String... values) {
         if (values == null || values.length == 0) {
+            logger.error("Parametros não podem ser nulos ou vazios!");
             throw new IllegalArgumentException("Parametros não podem ser nulos ou vazios!");
         }
         String keySource = null;
@@ -74,14 +84,20 @@ public class FacadeImpl implements Facade {
     }
 
     @Override
-    public List<Ponto> getPontosUsuario(String login, String token) throws FacadeException {
+    public List<Ponto> getPontosUsuario(String login, String token) throws FacadeException, ValidatedLoginSenhaException, ValidatedTokenException {
         // Validar token e obter usuário
         Usuario usuario = null;
         try {
             usuario = getUsuarioByLogin(login);
+            if (usuario == null) {
+                throw new ValidatedLoginSenhaException("Login ou senha inválidos!");
+            } else if (!usuario.getToken().equals(token)) {
+                throw new ValidatedTokenException("Token inválidos!");
+            }
             return getPontosUsuario(usuario);
         } catch (FacadeException e) {
             e.printStackTrace();
+            logger.error(e);
             throw new FacadeException(e);
         }
     }
