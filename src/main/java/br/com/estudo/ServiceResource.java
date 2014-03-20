@@ -2,6 +2,7 @@ package br.com.estudo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -67,9 +68,10 @@ public class ServiceResource implements Serializable {
     }
 	
 	@GET()
-    @Path("/pontos/{login}/{token}")
+    @Path("/pontos/{login}/{token}/{data}")
     @Produces({MediaType.APPLICATION_JSON + ";charset=utf-8"})
-    public List<Ponto> getPontosUsusario(@PathParam("login") String login, @PathParam("token") String token) {
+    public List<Ponto> getPontosUsusario(@PathParam("login") String login, @PathParam("token") String token, @PathParam("data") Date data) {
+	    logger.info("Parametros de busca de pontos: " + login + ", " + token + ", " + data);
 	    logger.info("Obtendo pontos do usuário.");
 	    List<Ponto> erroList = new ArrayList<Ponto>();
 	    Ponto pontoErro = new Ponto();
@@ -94,5 +96,36 @@ public class ServiceResource implements Serializable {
 	    erroList.add(pontoErro);
 	    
 	    return erroList;
+    }
+	
+	@GET()
+    @Path("/pontos/{login}/{token}")
+    @Produces({MediaType.APPLICATION_JSON + ";charset=utf-8"})
+    public List<Ponto> getPontosUsusarioSemData(@PathParam("login") String login, @PathParam("token") String token) {
+        logger.info("Parametros de busca de pontos: " + login + ", " + token);
+        logger.info("Obtendo pontos do usuário.");
+        List<Ponto> erroList = new ArrayList<Ponto>();
+        Ponto pontoErro = new Ponto();
+        pontoErro.setStatusEnvio(Boolean.FALSE);
+        
+        try {
+            return facade.getPontosUsuario(login, token);
+        } catch (FacadeException e) {
+            e.printStackTrace();
+            logger.error(e);
+            pontoErro.setMsgEnvio(e.getMessage());
+        } catch (ValidatedLoginSenhaException e) {
+            logger.error(e);
+            e.printStackTrace();
+            pontoErro.setMsgEnvio(e.getMessage());
+        } catch (ValidatedTokenException e) {
+            logger.error(e);
+            e.printStackTrace();
+            pontoErro.setMsgEnvio(e.getMessage());
+        }
+        
+        erroList.add(pontoErro);
+        
+        return erroList;
     }
 }
