@@ -78,7 +78,11 @@ public class ServiceResource implements Serializable {
 	    pontoErro.setStatusEnvio(Boolean.FALSE);
 	    
 	    try {
-            return facade.getPontosUsuario(login, token);
+	        erroList = facade.getPontosUsuario(login, token);
+	        for(Ponto ponto : erroList) {
+	            logger.info("Ponto: " + ponto);
+	        }
+            return erroList;
         } catch (FacadeException e) {
             e.printStackTrace();
             logger.error(e);

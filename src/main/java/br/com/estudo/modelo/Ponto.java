@@ -167,4 +167,9 @@ public class Ponto implements Serializable {
         this.msgEnvio = msgEnvio;
     }
 
+    @Override
+    public String toString() {
+        return "Ponto [id=" + id + ", nome=" + nome + ", statusPesquisa=" + statusPesquisa + ", dataAtualizacao=" + dataAtualizacao + "]";
+    }
+
 }
