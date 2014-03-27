@@ -89,7 +89,7 @@
 		</dependency>
 		<dependency>
 			<groupId>javax.inject</groupId>
-  <artifactId>javax.inject</artifactId>
+			<artifactId>javax.inject</artifactId>
 			<version>${javax.inject}</version>
 		</dependency>
 		<!-- Spring 3 -->
