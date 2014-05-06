@@ -2,23 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:pretty="http://ocpsoft.com/prettyfaces">
 <h:head>
 	<title>Home</title>
-	<style>
-body {
-	margin: 0px;
-	padding: 0;
-	color: #616161;
-	font-size: 80%;
-}
-
-.center {
-	margin: auto;
-	width: 55%;
-	border-style: solid;
-	border-width: 1px;
-	height: 200px;
-	border-color: gray;
-}
-</style>
+    <h:outputStylesheet library="css" name="style.css"  />
 </h:head>
 <h:body>
 
@@ -26,17 +10,17 @@ body {
 		<p:messages id="messages"></p:messages>
 
 		<h2 style="margin: auto; width: 55%; margin-top: 20px;">Cadastro de Produtos</h2>
-		<div class="center">
+		<div id="divCenter" class="center">
 			<p:menubar id="menuApp">
 				<p:submenu id="submenuCategoria" label="Categoria">
-					<p:menuitem id="menuitemCategoriaNova" value="Nova" />
-					<p:menuitem id="menuitemCategoriaListar" value="Lista de Categorias" url="#" />
+					<p:menuitem id="menuitemCategoriaNova" value="Nova" url="/categoria/new" />
+					<p:menuitem id="menuitemCategoriaListar" value="Lista de Categorias" url="/categorias" />
 				</p:submenu>
 
 
 				<p:submenu id="submenuProduto" label="Produto">
-					<p:menuitem id="menuitemProdutoNovo" value="Novo" url="#" />
-					<p:menuitem id="menuitemProdutoListar" value="Lista de Itens" url="#" />
+					<p:menuitem id="menuitemProdutoNovo" value="Novo" url="/produto/new" />
+					<p:menuitem id="menuitemProdutoListar" value="Lista de Itens" url="/produtos" />
 				</p:submenu>
 			</p:menubar>
 
@@ -73,7 +57,7 @@ body {
 
 		<br />
 
-		<p:commandButton title="Buscar" value="Buscar" action="pretty:viewProduto" ajax="true">
+		<p:commandButton title="Buscar" value="Buscar" action="pretty:viewItem" ajax="true">
 			<f:param name="iid" value="#{homeBean.itemId}" />
 		</p:commandButton>
 

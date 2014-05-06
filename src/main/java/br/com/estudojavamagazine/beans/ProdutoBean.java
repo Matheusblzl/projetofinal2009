@@ -6,7 +6,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-import br.com.estudojavamagazine.domain.Categoria;
+import br.com.estudojavamagazine.domain.Produto;
 
 @ManagedBean
 @RequestScoped
@@ -17,8 +17,8 @@ public class ProdutoBean extends BaseBean {
     public ProdutoBean() {
     }
     
-    public List<Categoria> listar() {
-        return new ArrayList<Categoria>();
+    public List<Produto> listar() {
+        return new ArrayList<Produto>();
     }
 
 }

@@ -9,17 +9,32 @@
 
 	<url-mapping id="url-index">
 		<pattern value="/"></pattern>
-		<view-id value="/pages/home.xhtml" />
+		<view-id value="/pages/home.jsf" />
 	</url-mapping>
 
 	<url-mapping id="url-home">
 		<pattern value="/home"></pattern>
-		<view-id value="/pages/home.xhtml" />
+		<view-id value="/pages/home.jsf" />
 	</url-mapping>
 
-	<url-mapping id="url-home">
-		<pattern value="/home"></pattern>
-		<view-id value="/pages/home.xhtml" />
+	<url-mapping id="url-lista-categorias">
+		<pattern value="/categorias"></pattern>
+		<view-id value="/pages/listarCategorias.jsf" />
+	</url-mapping>
+
+	<url-mapping id="url-lista-produtos">
+		<pattern value="/produtos"></pattern>
+		<view-id value="/pages/listarProdutos.jsf" />
+	</url-mapping>
+
+	<url-mapping id="url-new-categoria">
+		<pattern value="/categoria/new"></pattern>
+		<view-id value="/pages/categoria.jsf" />
+	</url-mapping>
+	
+	<url-mapping id="url-new-produto">
+		<pattern value="/produto/new"></pattern>
+		<view-id value="/pages/produto.jsf" />
 	</url-mapping>
 
 

@@ -1,0 +1,25 @@
+body {
+	margin: 0px;
+	padding: 0;
+	color: #616161;
+	font-size: 80%;
+}
+
+.center {
+	margin: auto;
+	width: 55%;
+	border-style: solid;
+	border-width: 1px;
+	height: 200px;
+	border-color: gray;
+}
+
+.buttonAreaCenter {
+	margin: auto;
+	width: 55%;
+}
+
+.formCadastro {
+	margin: auto;
+	width: 55%;
+}

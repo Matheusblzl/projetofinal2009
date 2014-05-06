@@ -2,30 +2,41 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:pretty="http://ocpsoft.com/prettyfaces">
 <h:head>
 	<title>Produto</title>
-	<style>
-.center {
-	margin: auto;
-	width: 55%;
-	border-style: solid;
-	border-width: 1px;
-	height: 200px;
-	border-color: gray;
-}
-</style>
+	<h:outputStylesheet library="css" name="style.css" />
 </h:head>
 <h:body>
 
-	<h3>Simple Panel</h3>
-	<p:panel header="F.C. Barcelona" footer="Visca el Barca!">
-		<h:outputText
-			value="FC Barcelona is one of only three clubs never to have been relegated from La Liga and is the most successful club in Spanish football along with Real Madrid,
-        having won twenty La Liga titles, a record twenty-five Spanish Cups, eight Spanish Super Cups, four Eva Duarte Cups and two League Cups.
-        They are also one of the most successful clubs  in European football having won fourteen official major trophies in total,
-        including ten UEFA competitions. They have won three UEFA Champions League titles, a record four UEFA Cup Winners' Cups,
-        a record three InterCities Fairs Cups (the forerunner to the UEFA Europa League), three UEFA Super Cups and one FIFA Club World Cup.
-        The club is also the only European side to have played continental football in every season since its inception in 1955." />
-	</p:panel>
+	<h:form prependId="false">
+		<p:messages id="messages"></p:messages>
 
+		<h2 style="margin: auto; width: 55%; margin-top: 20px;">Lista de produtos</h2>
+		
+		<div id="divCenter" class="center">
+		
+				<p:dataTable id="tableprodutos" var="produto" value="#{produtoBean.listar()}" emptyMessage="Não há produtos cadastrados.">
+					<p:column headerText="Código">
+						<h:outputText value="#{produto.codigo}" />
+					</p:column>
+
+					<p:column headerText="Nome">
+						<h:outputText value="#{produto.nome}" />
+					</p:column>
+
+					<p:column headerText="Descrição">
+						<h:outputText value="#{produto.descricao}" />
+					</p:column>
+					
+					<p:column headerText="Valor">
+						<h:outputText value="#{produto.valor}" />
+					</p:column>
+				</p:dataTable>
+
+		</div>
+		
+		<div id="buttonArea" class="buttonAreaCenter">
+		    <p:commandButton id="btVoltar" title="Voltar" value="Voltar" action="pretty:url-home" ajax="true" />
+		</div>
+	</h:form>
+	
 </h:body>
-
 </html>
