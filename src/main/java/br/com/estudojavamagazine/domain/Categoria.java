@@ -7,11 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries(value = {@NamedQuery(name = Categoria.FIND_ALL_CATEGORIAS, query = "Select cat from Categoria cat order by cat.nome")})
 public class Categoria implements Serializable {
 
 	private static final long serialVersionUID = 2996804009178324875L;
+	
+	public static final String FIND_ALL_CATEGORIAS = "findAllCategorias";
 	
 	@Id
 	@Column(name = "codigo")
@@ -23,6 +28,11 @@ public class Categoria implements Serializable {
     private String descricao;
     
     public Categoria() {
+		super();
+	}
+
+	public Categoria(long codigo) {
+    	this.codigo = codigo;
     }
 
     public Long getCodigo() {

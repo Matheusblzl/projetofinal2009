@@ -13,11 +13,11 @@
 
 			<p:panel id="panelCategoria" header="Categoria">
 			    <h:panelGrid columns="2" cellpadding="3">
-				    <p:outputLabel id="nomeLabel" value="Nome:" for="nomeInput" />
+				    <p:outputLabel id="nomeLabel" value="Nome:" for="nomeInput" styleClass="labelForm" />
 				    <p:inputText id="nomeInput" label="nome" value="#{categoriaBean.categoria.nome}" required="true"
 				                 style="width: 400px" disabled="#{categoriaBean.modoTela == 'Exibir'}" />
 
-				    <p:outputLabel id="descricaoLabel" value="Descrição:" for="descricaoInput" />
+				    <p:outputLabel id="descricaoLabel" value="Descrição:" for="descricaoInput" styleClass="labelForm" />
 				    <p:inputTextarea id="descricaoInput" label="descrição" value="#{categoriaBean.categoria.descricao}"
 				                     style="width: 400px;" disabled="#{categoriaBean.modoTela == 'Exibir'}" />
 			    </h:panelGrid>
@@ -32,7 +32,9 @@
 			                 ajax="true" update="messages,panelCategoria"
 			                 rendered="#{categoriaBean.modoTela != 'Exibir'}"/>
 			<p:commandButton id="btCancelar" title="Cancelar" value="Cancelar" immediate="true" action="pretty:url-exibir-categoria"
-			                 rendered="#{categoriaBean.modoTela != 'Exibir'}" />
+			                 rendered="#{categoriaBean.modoTela == 'Editar'}" />
+			<p:commandButton id="btCancelarNew" title="Cancelar" value="Cancelar" immediate="true" action="pretty:url-home"
+			                 rendered="#{categoriaBean.modoTela == 'Inserir'}" />
 			
 			<p:commandButton id="btEditar" title="Editar" value="Editar" action="pretty:url-editar-categoria"
 			                 ajax="true" update="messages,panelCategoria"

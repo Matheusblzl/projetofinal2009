@@ -17,6 +17,8 @@
 		<view-id value="/pages/home.jsf" />
 	</url-mapping>
 
+
+    <!-- CATEGORIAS -->
 	<url-mapping id="url-lista-categorias">
 		<pattern value="/categorias"></pattern>
 		<view-id value="/pages/listarCategorias.jsf" />
@@ -39,6 +41,14 @@
 		<action onPostback="false">#{categoriaBean.loadInstance()}</action>
 	</url-mapping>
 	
+	<url-mapping id="url-excluir-categoria">
+		<pattern value="/categoria/excluir/#{codigo : categoriaBean.codigo}"></pattern>
+		<view-id value="/pages/listarCategorias.jsf" />
+		<action onPostback="false">#{categoriaBean.excluirInstance()}</action>
+	</url-mapping>
+	
+	
+	<!-- PRODUTOS -->
 	<url-mapping id="url-editar-categoria">
 		<pattern value="/categoria/editar/#{codigo : categoriaBean.codigo}"></pattern>
 		<view-id value="/pages/categoria.jsf" />

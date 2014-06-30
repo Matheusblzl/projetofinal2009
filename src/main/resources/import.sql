@@ -1,0 +1,5 @@
+insert into categoria (codigo, nome, descricao) values (default, 'Livros e Galeria de Arte', 'Itens como Livros, Livros Importados, Livros Digitais (e-books), Galeria de Arte e Papelaria.');
+insert into categoria (codigo, nome, descricao) values (default, 'Câmeras e Filmadoras', 'Itens como Câmeras Digitais, Cartões de Memória, Acessórios para Câmeras, Porta retrato Digital, Revelação Digital e Filmadoras.');
+insert into categoria (codigo, nome, descricao) values (default, 'Notebooks e Computadores', 'Itens como Informática, Notebook, Ultrabook, Tablets e iPad, Computadores, Mochilas para Notebooks, Monitores LCD, HDs externos, Acessórios de Informática, Multifuncionais e Impressoras, Apple.');
+insert into categoria (codigo, nome, descricao) values (default, 'Eletrodomésticos', 'Itens como Eletrodomésticos, Ar Condicionado e Aquecedores, Lavadora de Roupas, Secadora de Roupas, Geladeiras, Fogões, Coifas, Micro-ondas, Lava-louça, Adegas, Lavadoras de Pressão.');
+insert into categoria (codigo, nome, descricao) values (default, 'TVs, Audio e Eletrônicos', 'Itens como TVs, Home Theater, Blu-ray player, Audio, Fones de Ouvido, Automotivo e GPS.');

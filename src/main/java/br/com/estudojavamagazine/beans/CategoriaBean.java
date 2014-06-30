@@ -1,6 +1,5 @@
 package br.com.estudojavamagazine.beans;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -35,7 +34,7 @@ public class CategoriaBean extends BaseBean {
     }
 
     public List<Categoria> listar() {
-    	return new ArrayList<Categoria>();
+    	return categoriaService.findAllCategorias();
     }
     
     public void createInstance() {
@@ -55,6 +54,20 @@ public class CategoriaBean extends BaseBean {
     public void editInstance() {
     	loadInstance();
     	setModoTela(ModoTela.Editar);
+    }
+    
+    public void excluirInstance() {
+    	if (ObjectUtil.isNotNull(codigo)) {
+    		try {
+				categoriaService.removerCategoria(Long.parseLong(codigo));
+				messageInfo("Categoria removida com sucesso!");
+			} catch (NumberFormatException e) {
+				messageErro("Erro ao obter código -- " + this.codigo);
+			} catch (CategoriaException e) {
+				messageErro(e.getMessage());
+			}
+    	}
+    	setModoTela(ModoTela.Excluir);
     }
     
     public String persist() throws CategoriaException {

@@ -27,5 +27,15 @@ body {
 .formCadastro {
 	margin: auto;
 	width: 55%;
-	margin-top: 20px;
+	margin-top: 40px;
+}
+
+.titlePanel {
+	margin: auto;
+	width: 55%;
+	margin-top: 40px;
+}
+
+.labelForm {
+	font-weight: bold;
 }

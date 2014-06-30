@@ -7,27 +7,43 @@
 <h:body>
 
 	<h:form prependId="false">
-		<p:messages id="messages"></p:messages>
+		<p:messages id="messages" showDetail="false" showSummary="true"></p:messages>
 
-		<h2 style="margin: auto; width: 55%; margin-top: 20px;">Lista de Categorias</h2>
+		<h2 class="titlePanel">Lista de Categorias</h2>
 		
-		<div id="divCenter" class="center">
+		<div id="divCenter" class="centerNotBorder">
 
-				<p:dataTable id="tableCategorias" var="categoria" value="#{categoriaBean.listar()}" emptyMessage="Não há produtos cadastrados.">
-					<p:column headerText="Código">
+				<p:dataTable id="tableCategorias" var="categoria" value="#{categoriaBean.listar()}"
+				             emptyMessage="Não há produtos cadastrados." paginator="true" paginatorPosition="bottom" rows="15">
+					
+					<p:column headerText="Código" width="10%" style="text-align: center;">
 						<h:outputText value="#{categoria.codigo}" />
 					</p:column>
 
 					<p:column headerText="Nome">
-						<h:outputText value="#{categoria.nome}" />
+						<h:outputText value="#{categoria.nome}" width="20%" />
 					</p:column>
-
+					
 					<p:column headerText="Descrição">
 						<h:outputText value="#{categoria.descricao}" />
 					</p:column>
+					
+					<p:column headerText="Opções" style="width: 65px;text-align: center;">
+				        <p:commandButton id="editarCategoria" action="pretty:url-editar-categoria" icon="ui-icon-pencil"
+				                         title="Editar" update="tableCategorias">
+				            <f:setPropertyActionListener target="#{categoriaBean.codigo}" value="#{categoria.codigo}" />
+				        </p:commandButton>
+				        <p:commandButton id="excluirCategoria" action="pretty:url-excluir-categoria" icon="ui-icon-closethick"
+				                         title="Editar" update="tableCategorias">
+				            <f:setPropertyActionListener target="#{categoriaBean.codigo}" value="#{categoria.codigo}" />
+				        </p:commandButton>
+					</p:column>
+					
 				</p:dataTable>
 
 		</div>
+		
+		<p:spacer height="10px" />
 		
 		<div id="buttonArea" class="buttonAreaCenter">
 		    <p:commandButton id="btVoltar" title="Voltar" value="Voltar" action="pretty:url-home" ajax="true" />

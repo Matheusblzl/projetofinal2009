@@ -112,4 +112,9 @@
 		<exception-type>java.lang.Throwable</exception-type>
 		<location>/pages/error.jsf</location>
 	</error-page>
+	
+	<context-param>  
+	    <param-name>primefaces.THEME</param-name>  
+	    <param-value>afterwork</param-value>  
+	</context-param>
 </web-app>
