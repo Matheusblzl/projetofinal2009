@@ -23,7 +23,7 @@
 		<jstl.version>1.2</jstl.version>
 		<jsp.api.version>2.1</jsp.api.version>
 
-		<prettyfaces.version>2.0.11.Final</prettyfaces.version>
+		<prettyfaces.version>2.0.12.Final</prettyfaces.version>
 
 		<!-- Hibernate -->
 		<hibernate.version>4.1.9.Final</hibernate.version>

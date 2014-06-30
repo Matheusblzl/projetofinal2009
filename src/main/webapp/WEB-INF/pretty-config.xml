@@ -30,18 +30,32 @@
 	<url-mapping id="url-new-categoria">
 		<pattern value="/categoria/new"></pattern>
 		<view-id value="/pages/categoria.jsf" />
+		<action onPostback="false">#{categoriaBean.createInstance()}</action>
+	</url-mapping>
+	
+	<url-mapping id="url-exibir-categoria">
+		<pattern value="/categoria/exibir/#{codigo : categoriaBean.codigo}"></pattern>
+		<view-id value="/pages/categoria.jsf" />
+		<action onPostback="false">#{categoriaBean.loadInstance()}</action>
+	</url-mapping>
+	
+	<url-mapping id="url-editar-categoria">
+		<pattern value="/categoria/editar/#{codigo : categoriaBean.codigo}"></pattern>
+		<view-id value="/pages/categoria.jsf" />
+		<action onPostback="false">#{categoriaBean.editInstance()}</action>
 	</url-mapping>
 	
 	<url-mapping id="url-new-produto">
 		<pattern value="/produto/new"></pattern>
 		<view-id value="/pages/produto.jsf" />
 	</url-mapping>
+	
 
 
 
 
 	<url-mapping parentId="url-home" id="ELinjectedPathParameters">
-		<pattern value="/#{homeBean.param}"></pattern>
+		<pattern value="/metodo/#{par : homeBean.param}"></pattern>
 		<view-id value="/pages/home.xhtml" />
 		<action onPostback="false">#{homeBean.metodo()}</action>
 	</url-mapping>

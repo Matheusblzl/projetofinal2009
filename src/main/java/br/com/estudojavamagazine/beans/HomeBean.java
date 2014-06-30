@@ -3,12 +3,17 @@ package br.com.estudojavamagazine.beans;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+
 import com.ocpsoft.pretty.faces.annotation.URLAction;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
 
 @ManagedBean
 @RequestScoped
+@Controller("homeBean")
+@Component
 @URLMappings(mappings = {
         @URLMapping(id="annotationUrlHome", pattern="/homeAnnotation", viewId="/pages/home.jsf"),
         @URLMapping(id="annotationViewItem", pattern="/storeAnnotation/item/#{iid : homeBean.itemId}", viewId="/pages/itens.xhtml", onPostback=false)

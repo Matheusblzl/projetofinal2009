@@ -7,24 +7,38 @@
 <h:body>
 
 	<h:form prependId="false">
-		<p:messages id="messages"></p:messages>
+		<p:messages id="messages" showDetail="false" showSummary="true"></p:messages>
 
 		<div id="divCenter" class="formCadastro">
 
-			<p:panel header="Categoria">
-				<h:outputText
-					value="FC Barcelona is one of only three clubs never to have been relegated from La Liga and is the most successful club in Spanish football along with Real Madrid,
-        having won twenty La Liga titles, a record twenty-five Spanish Cups, eight Spanish Super Cups, four Eva Duarte Cups and two League Cups.
-        They are also one of the most successful clubs  in European football having won fourteen official major trophies in total,
-        including ten UEFA competitions. They have won three UEFA Champions League titles, a record four UEFA Cup Winners' Cups,
-        a record three InterCities Fairs Cups (the forerunner to the UEFA Europa League), three UEFA Super Cups and one FIFA Club World Cup.
-        The club is also the only European side to have played continental football in every season since its inception in 1955." />
+			<p:panel id="panelCategoria" header="Categoria">
+			    <h:panelGrid columns="2" cellpadding="3">
+				    <p:outputLabel id="nomeLabel" value="Nome:" for="nomeInput" />
+				    <p:inputText id="nomeInput" label="nome" value="#{categoriaBean.categoria.nome}" required="true"
+				                 style="width: 400px" disabled="#{categoriaBean.modoTela == 'Exibir'}" />
+
+				    <p:outputLabel id="descricaoLabel" value="Descrição:" for="descricaoInput" />
+				    <p:inputTextarea id="descricaoInput" label="descrição" value="#{categoriaBean.categoria.descricao}"
+				                     style="width: 400px;" disabled="#{categoriaBean.modoTela == 'Exibir'}" />
+			    </h:panelGrid>
 			</p:panel>
 
 		</div>
 
+        <p:spacer height="10px" />
+
 		<div id="buttonArea" class="buttonAreaCenter">
-			<p:commandButton id="btVoltar" title="Voltar" value="Voltar" action="pretty:url-home" ajax="true" />
+			<p:commandButton id="btSalvar" title="Salvar" value="Salvar" action="#{categoriaBean.persist()}"
+			                 ajax="true" update="messages,panelCategoria"
+			                 rendered="#{categoriaBean.modoTela != 'Exibir'}"/>
+			<p:commandButton id="btCancelar" title="Cancelar" value="Cancelar" immediate="true" action="pretty:url-exibir-categoria"
+			                 rendered="#{categoriaBean.modoTela != 'Exibir'}" />
+			
+			<p:commandButton id="btEditar" title="Editar" value="Editar" action="pretty:url-editar-categoria"
+			                 ajax="true" update="messages,panelCategoria"
+			                 rendered="#{categoriaBean.modoTela == 'Exibir'}"/>
+			<p:commandButton id="btVoltar" title="Voltar" value="Voltar" immediate="true" action="pretty:url-home"
+			                 rendered="#{categoriaBean.modoTela == 'Exibir'}" />
 		</div>
 	</h:form>
 </h:body>
