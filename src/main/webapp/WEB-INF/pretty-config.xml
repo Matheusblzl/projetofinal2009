@@ -47,17 +47,41 @@
 		<action onPostback="false">#{categoriaBean.excluirInstance()}</action>
 	</url-mapping>
 	
-	
-	<!-- PRODUTOS -->
 	<url-mapping id="url-editar-categoria">
 		<pattern value="/categoria/editar/#{codigo : categoriaBean.codigo}"></pattern>
 		<view-id value="/pages/categoria.jsf" />
 		<action onPostback="false">#{categoriaBean.editInstance()}</action>
 	</url-mapping>
 	
+	
+	<!-- PRODUTOS -->
+	<url-mapping id="url-lista-produtos">
+		<pattern value="/produtos"></pattern>
+		<view-id value="/pages/listarProdutos.jsf" />
+	</url-mapping>
+
 	<url-mapping id="url-new-produto">
 		<pattern value="/produto/new"></pattern>
 		<view-id value="/pages/produto.jsf" />
+		<action onPostback="false">#{produtoBean.createInstance()}</action>
+	</url-mapping>
+	
+	<url-mapping id="url-exibir-produto">
+		<pattern value="/produto/exibir/#{codigo : produtoBean.codigo}"></pattern>
+		<view-id value="/pages/produto.jsf" />
+		<action onPostback="false">#{produtoBean.loadInstance()}</action>
+	</url-mapping>
+	
+	<url-mapping id="url-excluir-produto">
+		<pattern value="/produto/excluir/#{codigo : produtoBean.codigo}"></pattern>
+		<view-id value="/pages/listarProduto.jsf" />
+		<action onPostback="false">#{produtoBean.excluirInstance()}</action>
+	</url-mapping>
+	
+	<url-mapping id="url-editar-produto">
+		<pattern value="/produto/editar/#{codigo : produtoBean.codigo}"></pattern>
+		<view-id value="/pages/produto.jsf" />
+		<action onPostback="false">#{produtoBean.editInstance()}</action>
 	</url-mapping>
 	
 

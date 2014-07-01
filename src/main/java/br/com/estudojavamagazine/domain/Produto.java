@@ -1,45 +1,143 @@
 package br.com.estudojavamagazine.domain;
 
-public class Produto {
+import java.io.Serializable;
 
-    private Long codigo;
-    private String nome;
-    private String descricao;
-    private double valor;
-    
-    public Produto() {
-    }
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
-    public Long getCodigo() {
-        return codigo;
-    }
+@Entity
+@NamedQueries(value = { @NamedQuery(
+		name = Produto.FIND_ALL_PRODUTO,
+		query = "Select prod from Produto prod order by prod.nome") })
+public class Produto implements Serializable {
 
-    public void setCodigo(Long codigo) {
-        this.codigo = codigo;
-    }
+	private static final long serialVersionUID = 4254771097647384430L;
 
-    public String getNome() {
-        return nome;
-    }
+	public static final String FIND_ALL_PRODUTO = "find_all_produto";
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	@Id
+	@Column(name = "codigo", nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long codigo;
+	@Column(name = "nome", nullable = false, length = 200)
+	private String nome;
+	@Column(name = "descricao")
+	private String descricao;
+	@Column(name = "valor", nullable = false, precision = 2)
+	private double valor;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "categoria_codigo", nullable = false)
+	private Categoria categoria;
 
-    public String getDescricao() {
-        return descricao;
-    }
+	public Produto() {
+	}
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+	public Long getCodigo() {
+		return codigo;
+	}
 
-    public double getValor() {
-        return valor;
-    }
+	public void setCodigo(final Long codigo) {
+		this.codigo = codigo;
+	}
 
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(final String nome) {
+		this.nome = nome;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(final String descricao) {
+		this.descricao = descricao;
+	}
+
+	public double getValor() {
+		return valor;
+	}
+
+	public void setValor(final double valor) {
+		this.valor = valor;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		result = prime * result
+				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(valor);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Produto other = (Produto) obj;
+		if (codigo == null) {
+			if (other.codigo != null) {
+				return false;
+			}
+		} else if (!codigo.equals(other.codigo)) {
+			return false;
+		}
+		if (descricao == null) {
+			if (other.descricao != null) {
+				return false;
+			}
+		} else if (!descricao.equals(other.descricao)) {
+			return false;
+		}
+		if (nome == null) {
+			if (other.nome != null) {
+				return false;
+			}
+		} else if (!nome.equals(other.nome)) {
+			return false;
+		}
+		if (Double.doubleToLongBits(valor) != Double
+				.doubleToLongBits(other.valor)) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Produto [codigo=" + codigo + ", nome=" + nome + ", descricao="
+				+ descricao + ", valor=" + valor + "]";
+	}
 
 }

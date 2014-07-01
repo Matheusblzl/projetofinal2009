@@ -74,5 +74,17 @@ public class CategoriaServiceImpl implements Serializable, CategoriaService {
 			}
 		}
 	}
+
+	@Override
+	public Categoria findByName(String nome) {
+		List<Categoria> list = entityManager.createNamedQuery(Categoria.FIND_CATEGORIA_BY_NAME, Categoria.class)
+				.setParameter("nome", nome)
+				.getResultList();
+		if (ObjectUtil.isNotNull(list)) {
+			return list.get(0);
+		} else {
+			return null;
+		}
+	}
 	
 }

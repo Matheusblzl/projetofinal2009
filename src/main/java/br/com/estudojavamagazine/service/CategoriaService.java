@@ -16,6 +16,8 @@ public interface CategoriaService extends Serializable {
 
 	public abstract void removerCategoria(Long codigo) throws CategoriaException;
 
-	public void removerCategoria(Categoria categoria) throws CategoriaException;
+	public abstract void removerCategoria(Categoria categoria) throws CategoriaException;
+
+	public abstract Object findByName(String value);
 
 }

@@ -1,22 +1,67 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:pretty="http://ocpsoft.com/prettyfaces">
 <h:head>
-	<title>Produto</title>
-	<h:outputStylesheet library="css" name="style.css"  />
+	<title>Cadastro de Produto</title>
+	<h:outputStylesheet library="css" name="style.css" />
 </h:head>
 <h:body>
 
-	<h3>Simple Panel</h3>
-	<p:panel header="F.C. Barcelona" footer="Visca el Barca!">
-		<h:outputText
-			value="FC Barcelona is one of only three clubs never to have been relegated from La Liga and is the most successful club in Spanish football along with Real Madrid,
-        having won twenty La Liga titles, a record twenty-five Spanish Cups, eight Spanish Super Cups, four Eva Duarte Cups and two League Cups.
-        They are also one of the most successful clubs  in European football having won fourteen official major trophies in total,
-        including ten UEFA competitions. They have won three UEFA Champions League titles, a record four UEFA Cup Winners' Cups,
-        a record three InterCities Fairs Cups (the forerunner to the UEFA Europa League), three UEFA Super Cups and one FIFA Club World Cup.
-        The club is also the only European side to have played continental football in every season since its inception in 1955." />
-	</p:panel>
+	<h:form prependId="false">
+		<p:messages id="messages" showDetail="false" showSummary="true"></p:messages>
 
+		<div id="divCenter" class="formCadastro">
+
+			<p:panel id="panelProduto" header="Produto">
+			    <h:panelGrid columns="2" cellpadding="3">
+				    <h:outputLabel id="nomeLabel" value="Nome:" for="nomeInput" styleClass="labelForm" />
+				    <p:inputText id="nomeInput" label="Nome" value="#{produtoBean.produto.nome}" required="true"
+				                 style="width: 400px" disabled="#{produtoBean.modoTela == 'Exibir'}" />
+
+				    <h:outputLabel id="descricaoLabel" value="Descrição:" for="descricaoInput" styleClass="labelForm" />
+				    <p:inputTextarea id="descricaoInput" label="descrição" value="#{produtoBean.produto.descricao}"
+				                     style="width: 400px;" disabled="#{produtoBean.modoTela == 'Exibir'}" />
+				                     
+				    <h:outputLabel id="categoriaLabel" value="Categoria:" for="categoriaInput" styleClass="labelForm" />
+				    <p:inputText id="categoriaInputExibir" value="#{produtoBean.produto.categoria.nome}" disabled="true" rendered="#{produtoBean.modoTela == 'Exibir'}"
+				                 style="width:400px" />
+				    <p:selectOneMenu id="categoriaInput" value="#{produtoBean.produto.categoria}" panelStyle="width:400px"
+				                     rendered="#{produtoBean.modoTela != 'Exibir'}" label="Categoria" required="true"
+			                         effect="fade" var="t" style="width:407px" filter="true" filterMatchMode="startsWith">
+			            
+			            <f:selectItem value="#{null}" itemLabel="Selecione..." />
+			            <f:selectItems value="#{produtoBean.allCategorias()}" var="cat" itemLabel="#{cat.nome}" itemValue="#{cat}" />
+			            <f:converter binding="#{categoriaConverter}"/>
+			            <p:column>
+			                <h:outputText value="#{t.nome}" />
+			            </p:column>
+			        </p:selectOneMenu>
+				                     
+				    <h:outputLabel id="valorLabel" value="Valor:" for="valorInput" styleClass="labelForm" />
+				    <p:inputText id="valorInput" label="Valor" value="#{produtoBean.produto.valor}" required="true"
+				                 style="width: 100px" disabled="#{produtoBean.modoTela == 'Exibir'}" dir="rtl"/>
+			    </h:panelGrid>
+			</p:panel>
+
+		</div>
+
+        <p:spacer height="10px" />
+
+		<div id="buttonArea" class="buttonAreaCenter">
+			<p:commandButton id="btSalvar" title="Salvar" value="Salvar" action="#{produtoBean.persist()}"
+			                 ajax="true" update="messages,panelProduto"
+			                 rendered="#{produtoBean.modoTela != 'Exibir'}"/>
+			<p:commandButton id="btCancelar" title="Cancelar" value="Cancelar" immediate="true" action="pretty:url-exibir-produto"
+			                 rendered="#{produtoBean.modoTela == 'Editar'}" />
+			<p:commandButton id="btCancelarNew" title="Cancelar" value="Cancelar" immediate="true" action="pretty:url-home"
+			                 rendered="#{produtoBean.modoTela == 'Inserir'}" />
+			
+			<p:commandButton id="btEditar" title="Editar" value="Editar" action="pretty:url-editar-produto"
+			                 ajax="true" update="messages,panelProduto"
+			                 rendered="#{produtoBean.modoTela == 'Exibir'}"/>
+			<p:commandButton id="btVoltar" title="Voltar" value="Voltar" immediate="true" action="pretty:url-home"
+			                 rendered="#{produtoBean.modoTela == 'Exibir'}" />
+		</div>
+	</h:form>
 </h:body>
 
 </html>

@@ -21,10 +21,6 @@ public class CategoriaBean extends BaseBean {
 
     private static final long serialVersionUID = 1L;
 
-    private String codigo;
-    
-    private ModoTela modoTela = ModoTela.Exibir;
-    
     private Categoria categoria = new Categoria();
     
     @Autowired
@@ -44,10 +40,10 @@ public class CategoriaBean extends BaseBean {
     
     public void loadInstance() {
     	setModoTela(ModoTela.Exibir);
-    	if (ObjectUtil.isNotNull(codigo)) {
-    		this.categoria = categoriaService.findCategoria(Long.parseLong(codigo));
+    	if (ObjectUtil.isNotNull(getCodigo())) {
+    		this.categoria = categoriaService.findCategoria(Long.parseLong(getCodigo()));
     	} else if (ObjectUtil.isNotNull(this.categoria) && ObjectUtil.isNotNull(this.categoria.getCodigo())) {
-    		this.categoria = categoriaService.findCategoria(Long.parseLong(codigo));
+    		this.categoria = categoriaService.findCategoria(Long.parseLong(getCodigo()));
     	}
     }
     
@@ -57,12 +53,12 @@ public class CategoriaBean extends BaseBean {
     }
     
     public void excluirInstance() {
-    	if (ObjectUtil.isNotNull(codigo)) {
+    	if (ObjectUtil.isNotNull(getCodigo())) {
     		try {
-				categoriaService.removerCategoria(Long.parseLong(codigo));
+				categoriaService.removerCategoria(Long.parseLong(getCodigo()));
 				messageInfo("Categoria removida com sucesso!");
 			} catch (NumberFormatException e) {
-				messageErro("Erro ao obter código -- " + this.codigo);
+				messageErro("Erro ao obter código -- " + this.getCodigo());
 			} catch (CategoriaException e) {
 				messageErro(e.getMessage());
 			}
@@ -73,29 +69,12 @@ public class CategoriaBean extends BaseBean {
     public String persist() throws CategoriaException {
     	categoria = categoriaService.saveOrUpdate(categoria);
     	messageInfo("Categoria salva com sucesso!");
-    	this.codigo = categoria.getCodigo().toString();
+    	setCodigo(categoria.getCodigo().toString());
     	setModoTela(ModoTela.Exibir);
     	return "pretty:url-exibir-categoria";
     }
     
     // ==== GETTERS AND SETTERS ====
-    
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-
-	public ModoTela getModoTela() {
-		return modoTela;
-	}
-
-	public void setModoTela(ModoTela modoTela) {
-		this.modoTela = modoTela;
-	}
-
 	public Categoria getCategoria() {
 		return categoria;
 	}
