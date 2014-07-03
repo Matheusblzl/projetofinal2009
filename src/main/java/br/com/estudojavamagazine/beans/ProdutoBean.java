@@ -31,6 +31,8 @@ public class ProdutoBean extends BaseBean {
     
     private Produto produto;
     
+    private Long codigoCategoria;
+    
     public ProdutoBean() {
     }
     
@@ -39,6 +41,7 @@ public class ProdutoBean extends BaseBean {
     }
     
     public void createInstance() {
+        this.codigoCategoria = null;
     	setModoTela(ModoTela.Inserir);
     	this.produto = new Produto();
     }
@@ -49,6 +52,9 @@ public class ProdutoBean extends BaseBean {
     		this.produto = produtoService.findProduto(Long.parseLong(getCodigo()));
     	} else if (ObjectUtil.isNotNull(this.produto) && ObjectUtil.isNotNull(this.produto.getCodigo())) {
     		this.produto = produtoService.findProduto(Long.parseLong(getCodigo()));
+    	}
+    	if (ObjectUtil.isNotNull(this.produto.getCategoria())) {
+    	    this.codigoCategoria = this.produto.getCategoria().getCodigo();
     	}
     }
     
@@ -69,13 +75,21 @@ public class ProdutoBean extends BaseBean {
 			}
     	}
     	setModoTela(ModoTela.Excluir);
+    	this.codigoCategoria = null;
     }
     
-    public String persist() throws ProdutoException {
-    	produto = produtoService.saveOrUpdate(produto);
+    public String persist() {
+        try {
+            produto.setCategoria(categoriaService.findCategoria(codigoCategoria));
+            produto = produtoService.saveOrUpdate(produto);
+        } catch (ProdutoException e) {
+            e.printStackTrace();
+            messageErro(e.getMessage());
+            return null;
+        }
+        setCodigo(produto.getCodigo().toString());
+        setModoTela(ModoTela.Exibir);
     	messageInfo("produto salva com sucesso!");
-    	setCodigo(produto.getCodigo().toString());
-    	setModoTela(ModoTela.Exibir);
     	return "pretty:url-exibir-produto";
     }
 
@@ -91,5 +105,13 @@ public class ProdutoBean extends BaseBean {
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
+
+    public Long getCodigoCategoria() {
+        return codigoCategoria;
+    }
+
+    public void setCodigoCategoria(Long codigoCategoria) {
+        this.codigoCategoria = codigoCategoria;
+    }
 
 }

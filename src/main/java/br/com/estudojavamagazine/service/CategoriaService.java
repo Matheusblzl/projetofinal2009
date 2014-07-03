@@ -18,6 +18,6 @@ public interface CategoriaService extends Serializable {
 
 	public abstract void removerCategoria(Categoria categoria) throws CategoriaException;
 
-	public abstract Object findByName(String value);
+	public abstract Categoria findByName(String nome);
 
 }

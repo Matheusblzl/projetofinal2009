@@ -1,44 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:pretty="http://ocpsoft.com/prettyfaces">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:pretty="http://ocpsoft.com/prettyfaces"
+	  xmlns:pe="http://primefaces.org/ui/extensions">
+	  
 <h:head>
 	<title>Cadastro de Produto</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<h:outputStylesheet library="css" name="style.css" />
 </h:head>
+
 <h:body>
 
-	<h:form prependId="false">
+	<h:form prependId="false" acceptcharset="UTF-8">
+	
 		<p:messages id="messages" showDetail="false" showSummary="true"></p:messages>
 
 		<div id="divCenter" class="formCadastro">
 
 			<p:panel id="panelProduto" header="Produto">
 			    <h:panelGrid columns="2" cellpadding="3">
+			    
+			    
 				    <h:outputLabel id="nomeLabel" value="Nome:" for="nomeInput" styleClass="labelForm" />
 				    <p:inputText id="nomeInput" label="Nome" value="#{produtoBean.produto.nome}" required="true"
 				                 style="width: 400px" disabled="#{produtoBean.modoTela == 'Exibir'}" />
+
 
 				    <h:outputLabel id="descricaoLabel" value="Descrição:" for="descricaoInput" styleClass="labelForm" />
 				    <p:inputTextarea id="descricaoInput" label="descrição" value="#{produtoBean.produto.descricao}"
 				                     style="width: 400px;" disabled="#{produtoBean.modoTela == 'Exibir'}" />
 				                     
+				                     
 				    <h:outputLabel id="categoriaLabel" value="Categoria:" for="categoriaInput" styleClass="labelForm" />
 				    <p:inputText id="categoriaInputExibir" value="#{produtoBean.produto.categoria.nome}" disabled="true" rendered="#{produtoBean.modoTela == 'Exibir'}"
 				                 style="width:400px" />
-				    <p:selectOneMenu id="categoriaInput" value="#{produtoBean.produto.categoria}" panelStyle="width:400px"
-				                     rendered="#{produtoBean.modoTela != 'Exibir'}" label="Categoria" required="true"
-			                         effect="fade" var="t" style="width:407px" filter="true" filterMatchMode="startsWith">
-			            
+				    <p:selectOneMenu id="categoriaInput" value="#{produtoBean.produto.categoria}">
 			            <f:selectItem value="#{null}" itemLabel="Selecione..." />
-			            <f:selectItems value="#{produtoBean.allCategorias()}" var="cat" itemLabel="#{cat.nome}" itemValue="#{cat}" />
+			            <f:selectItems value="#{produtoBean.allCategorias()}" var="cat" itemLabel="#{cat.nome}" itemValue="#{cat.nome}" />
 			            <f:converter binding="#{categoriaConverter}"/>
-			            <p:column>
-			                <h:outputText value="#{t.nome}" />
-			            </p:column>
 			        </p:selectOneMenu>
-				                     
+			        
+			        <ui:remove>
+					    <p:selectOneMenu id="categoriaInput2" value="#{produtoBean.codigoCategoria}" panelStyle="width:400px"
+					                     rendered="#{produtoBean.modoTela != 'Exibir'}" label="Categoria" required="true"
+				                         effect="fade" var="t" style="width:407px" filter="true" filterMatchMode="startsWith">
+				            <f:selectItem value="#{null}" itemLabel="Selecione..." />
+				            <f:selectItems value="#{produtoBean.allCategorias()}" var="cat" itemLabel="#{cat.nome}" itemValue="#{cat.codigo}" />
+				            <f:converter binding="#{categoriaConverter}"/>
+				            <p:column>
+				                <h:outputText value="#{t.nome}" />
+				            </p:column>
+				        </p:selectOneMenu>
+			        </ui:remove>
+			        
+			        
 				    <h:outputLabel id="valorLabel" value="Valor:" for="valorInput" styleClass="labelForm" />
-				    <p:inputText id="valorInput" label="Valor" value="#{produtoBean.produto.valor}" required="true"
-				                 style="width: 100px" disabled="#{produtoBean.modoTela == 'Exibir'}" dir="rtl"/>
+				    <pe:inputNumber id="valorInput" label="Valor" value="#{produtoBean.produto.valor}"
+                                    symbol="R$ " decimalSeparator="," thousandSeparator="." disabled="#{produtoBean.modoTela == 'Exibir'}"
+                                    required="true"/>  
 			    </h:panelGrid>
 			</p:panel>
 
@@ -48,7 +72,7 @@
 
 		<div id="buttonArea" class="buttonAreaCenter">
 			<p:commandButton id="btSalvar" title="Salvar" value="Salvar" action="#{produtoBean.persist()}"
-			                 ajax="true" update="messages,panelProduto"
+			                 ajax="false" update="messages,panelProduto"
 			                 rendered="#{produtoBean.modoTela != 'Exibir'}"/>
 			<p:commandButton id="btCancelar" title="Cancelar" value="Cancelar" immediate="true" action="pretty:url-exibir-produto"
 			                 rendered="#{produtoBean.modoTela == 'Editar'}" />

@@ -8,33 +8,32 @@ import javax.faces.convert.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.estudojavamagazine.domain.Categoria;
 import br.com.estudojavamagazine.service.CategoriaService;
+import br.com.estudojavamagazine.service.util.ObjectUtil;
 
-//@FacesConverter("categoriaConverter")
+// @FacesConverter("categoriaConverter")
 @Component
 @RequestScoped
 public class CategoriaConverter implements Converter {
 
-	@Autowired
+    @Autowired
     private CategoriaService categoriaService;
-	
-	@Override
-	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		if(value != null && value.trim().length() > 0) {
-            return categoriaService.findByName(value);
-        } else {
-            return null;
-        }
-	}
 
-	@Override
-	public String getAsString(FacesContext context, UIComponent component, Object object) {
-		if(object != null) {
-            return String.valueOf(((Categoria) object).getNome());
+    @Override
+    public Object getAsObject(FacesContext context, UIComponent component, String value) {
+        if (value != null && value.trim().length() > 0) {
+            return value;
         } else {
             return null;
         }
-	}
+    }
+
+    @Override
+    public String getAsString(FacesContext context, UIComponent component, Object object) {
+        if (ObjectUtil.isNotNull(object)) {
+            return String.valueOf(object);
+        }
+        return null;
+    }
 
 }

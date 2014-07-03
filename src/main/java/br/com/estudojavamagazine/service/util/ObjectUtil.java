@@ -32,6 +32,13 @@ public abstract class ObjectUtil {
 		return Boolean.TRUE;
 	}
 	
+	public static final boolean isNotNullAndNotEmpty(Collection<?> collection) {
+        if (isNull(collection) || collection.isEmpty()) {
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
+    }
+	
 	public static final boolean isNotNull(Collection<?> collection) {
 		if (collection == null) {
 			return Boolean.FALSE;

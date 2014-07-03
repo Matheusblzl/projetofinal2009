@@ -16,6 +16,7 @@ import br.com.estudojavamagazine.service.lang.CategoriaException;
 import br.com.estudojavamagazine.service.util.ObjectUtil;
 
 @Service("categoriaService")
+@Transactional(propagation = Propagation.REQUIRED)
 public class CategoriaServiceImpl implements Serializable, CategoriaService {
 
 	private static final long serialVersionUID = 1L;
@@ -24,7 +25,6 @@ public class CategoriaServiceImpl implements Serializable, CategoriaService {
 	private EntityManager entityManager;
 	
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
 	public Categoria saveOrUpdate(Categoria categoria) throws CategoriaException {
 		try {
 			if (ObjectUtil.isNotNull(categoria)) {
@@ -39,7 +39,6 @@ public class CategoriaServiceImpl implements Serializable, CategoriaService {
 	}
 	
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
 	public Categoria findCategoria(Long codigo) {
 		if (ObjectUtil.isNotNull(codigo)) {
 			return entityManager.find(Categoria.class, codigo);
@@ -49,13 +48,11 @@ public class CategoriaServiceImpl implements Serializable, CategoriaService {
 	}
 
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Categoria> findAllCategorias() {
 		return entityManager.createNamedQuery(Categoria.FIND_ALL_CATEGORIAS, Categoria.class).getResultList();
 	}
 
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
 	public void removerCategoria(Categoria categoria) throws CategoriaException {
 		if (ObjectUtil.isNotNull(categoria) && ObjectUtil.isNotNull(categoria.getCodigo())) {
 			removerCategoria(categoria.getCodigo());
@@ -63,7 +60,6 @@ public class CategoriaServiceImpl implements Serializable, CategoriaService {
 	}
 	
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
 	public void removerCategoria(Long codigo) throws CategoriaException {
 		if (ObjectUtil.isNotNull(codigo)) {
 			Categoria categoria = entityManager.find(Categoria.class, codigo);
@@ -80,7 +76,7 @@ public class CategoriaServiceImpl implements Serializable, CategoriaService {
 		List<Categoria> list = entityManager.createNamedQuery(Categoria.FIND_CATEGORIA_BY_NAME, Categoria.class)
 				.setParameter("nome", nome)
 				.getResultList();
-		if (ObjectUtil.isNotNull(list)) {
+		if (ObjectUtil.isNotNullAndNotEmpty(list)) {
 			return list.get(0);
 		} else {
 			return null;

@@ -18,6 +18,7 @@
 
         <!-- PRIMEFACES -->
 		<prime.faces.version>5.0</prime.faces.version>
+		<prime.faces.extensions>2.0.0</prime.faces.extensions>
 		<prime.faces.theme>1.0.10</prime.faces.theme>
 
 		<jsf.version>2.2.2</jsf.version>
@@ -105,7 +106,12 @@
 		    <groupId>org.primefaces.themes</groupId>  
 		    <artifactId>all-themes</artifactId>  
 		    <version>${prime.faces.theme}</version>  
-		</dependency> 
+		</dependency>
+		<dependency>
+	        <groupId>org.primefaces.extensions</groupId>
+	        <artifactId>primefaces-extensions</artifactId>
+	        <version>${prime.faces.extensions}</version>
+	    </dependency>
 
 
 		<!-- PRETTY -->

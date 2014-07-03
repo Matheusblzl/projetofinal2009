@@ -16,116 +16,114 @@ import javax.persistence.OneToMany;
 
 @Entity
 @NamedQueries(value = { @NamedQuery(name = Categoria.FIND_ALL_CATEGORIAS, query = "Select cat from Categoria cat order by cat.nome"),
-		@NamedQuery(name = Categoria.FIND_CATEGORIA_BY_NAME, query = "Select cat from Categoria cat where cat.nome like :nome order by cat.nome")})
+        @NamedQuery(name = Categoria.FIND_CATEGORIA_BY_NAME, query = "Select cat from Categoria cat where cat.nome like :nome order by cat.nome") })
 public class Categoria implements Serializable {
 
-	private static final long serialVersionUID = 2996804009178324875L;
+    private static final long serialVersionUID = 2996804009178324875L;
 
-	public static final String FIND_ALL_CATEGORIAS = "findAllCategorias";
-	public static final String FIND_CATEGORIA_BY_NAME = "findCategoriaByName";
+    public static final String FIND_ALL_CATEGORIAS = "findAllCategorias";
+    public static final String FIND_CATEGORIA_BY_NAME = "findCategoriaByName";
 
-	@Id
-	@Column(name = "codigo", nullable = false)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
-	@Column(name = "nome", nullable = false, length = 200)
-	private String nome;
-	@Column(name = "descricao", nullable = true)
-	private String descricao;
+    @Id
+    @Column(name = "codigo", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long codigo;
+    @Column(name = "nome", nullable = false, length = 200)
+    private String nome;
+    @Column(name = "descricao", nullable = true)
+    private String descricao;
     @OneToMany(fetch = FetchType.LAZY)
-	private Set<Produto> produtos = new TreeSet<Produto>();
-	
-	public Categoria() {
-		super();
-	}
+    private Set<Produto> produtos = new TreeSet<Produto>();
 
-	public Categoria(final long codigo) {
-		this.codigo = codigo;
-	}
+    public Categoria() {
+        super();
+    }
 
-	public Long getCodigo() {
-		return codigo;
-	}
+    public Categoria(Long codigo) {
+        this.codigo = codigo;
+    }
 
-	public void setCodigo(final Long codigo) {
-		this.codigo = codigo;
-	}
+    public Long getCodigo() {
+        return codigo;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
+    }
 
-	public void setNome(final String nome) {
-		this.nome = nome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public void setDescricao(final String descricao) {
-		this.descricao = descricao;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
-	public Set<Produto> getProdutos() {
-		return produtos;
-	}
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-	public void setProdutos(Set<Produto> produtos) {
-		this.produtos = produtos;
-	}
+    public Set<Produto> getProdutos() {
+        return produtos;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		return result;
-	}
+    public void setProdutos(Set<Produto> produtos) {
+        this.produtos = produtos;
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		Categoria other = (Categoria) obj;
-		if (codigo == null) {
-			if (other.codigo != null) {
-				return false;
-			}
-		} else if (!codigo.equals(other.codigo)) {
-			return false;
-		}
-		if (descricao == null) {
-			if (other.descricao != null) {
-				return false;
-			}
-		} else if (!descricao.equals(other.descricao)) {
-			return false;
-		}
-		if (nome == null) {
-			if (other.nome != null) {
-				return false;
-			}
-		} else if (!nome.equals(other.nome)) {
-			return false;
-		}
-		return true;
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+        result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+        result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+        return result;
+    }
 
-	@Override
-	public String toString() {
-		return "Categoria [codigo=" + codigo + ", nome=" + nome
-				+ ", descricao=" + descricao + "]";
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Categoria other = (Categoria) obj;
+        if (codigo == null) {
+            if (other.codigo != null) {
+                return false;
+            }
+        } else if (!codigo.equals(other.codigo)) {
+            return false;
+        }
+        if (descricao == null) {
+            if (other.descricao != null) {
+                return false;
+            }
+        } else if (!descricao.equals(other.descricao)) {
+            return false;
+        }
+        if (nome == null) {
+            if (other.nome != null) {
+                return false;
+            }
+        } else if (!nome.equals(other.nome)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Categoria [codigo=" + codigo + ", nome=" + nome + ", descricao=" + descricao + "]";
+    }
 
 }

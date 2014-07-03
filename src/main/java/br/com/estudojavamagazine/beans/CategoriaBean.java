@@ -66,8 +66,13 @@ public class CategoriaBean extends BaseBean {
     	setModoTela(ModoTela.Excluir);
     }
     
-    public String persist() throws CategoriaException {
-    	categoria = categoriaService.saveOrUpdate(categoria);
+    public String persist() {
+    	try {
+            categoria = categoriaService.saveOrUpdate(categoria);
+        } catch (CategoriaException e) {
+            e.printStackTrace();
+            messageErro(e.getMessage());
+        }
     	messageInfo("Categoria salva com sucesso!");
     	setCodigo(categoria.getCodigo().toString());
     	setModoTela(ModoTela.Exibir);
