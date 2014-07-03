@@ -89,7 +89,7 @@ public class ProdutoBean extends BaseBean {
         }
         setCodigo(produto.getCodigo().toString());
         setModoTela(ModoTela.Exibir);
-    	messageInfo("produto salva com sucesso!");
+    	messageInfo("Produto salva com sucesso!");
     	return "pretty:url-exibir-produto";
     }
 
