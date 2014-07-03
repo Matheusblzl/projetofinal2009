@@ -79,7 +79,7 @@
 	
 	<url-mapping id="url-excluir-produto" parentId="url-produto">
 		<pattern value="/excluir/#{codigo : produtoBean.codigo}"></pattern>
-		<view-id value="/pages/listarProduto.jsf" />
+		<view-id value="/pages/listarProdutos.jsf" />
 		<action onPostback="false">#{produtoBean.excluirInstance()}</action>
 	</url-mapping>
 	

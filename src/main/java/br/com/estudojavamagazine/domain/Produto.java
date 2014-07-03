@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Transient;
 
 @Entity
 @NamedQueries(value = { @NamedQuery(name = Produto.FIND_ALL_PRODUTO, query = "Select prod from Produto prod order by prod.nome") })
@@ -58,6 +59,16 @@ public class Produto implements Serializable {
         return descricao;
     }
 
+    @Transient
+    public String getDescricaoResumida() {
+        if (descricao != null) {
+            if (descricao.length() > 30) {
+                return descricao.substring(0, 30) + " ...";
+            }
+        }
+        return descricao;
+    }
+    
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }

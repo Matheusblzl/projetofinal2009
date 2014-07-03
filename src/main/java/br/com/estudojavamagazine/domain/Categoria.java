@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity
 @NamedQueries(value = { @NamedQuery(name = Categoria.FIND_ALL_CATEGORIAS, query = "Select cat from Categoria cat order by cat.nome"),
@@ -63,6 +64,16 @@ public class Categoria implements Serializable {
         return descricao;
     }
 
+    @Transient
+    public String getDescricaoResumida() {
+        if (descricao != null) {
+            if (descricao.length() > 50) {
+                return descricao.substring(0, 50) + " ...";
+            }
+        }
+        return descricao;
+    }
+    
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }

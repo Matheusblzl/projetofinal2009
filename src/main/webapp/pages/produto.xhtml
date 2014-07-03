@@ -17,14 +17,14 @@
 <h:body>
 
 	<h:form prependId="false" acceptcharset="UTF-8">
-	
-		<p:messages id="messages" showDetail="false" showSummary="true"></p:messages>
+	    <div id="divMessages" style="position: fixed; width: 99%; margin-top: -50px; margin-left: 10px; margin-right: 10px">
+		    <p:messages id="messages" showDetail="false" showSummary="true"></p:messages>
+	    </div>
 
 		<div id="divCenter" class="formCadastro">
 
 			<p:panel id="panelProduto" header="Produto">
 			    <h:panelGrid columns="2" cellpadding="3">
-			    
 			    
 				    <h:outputLabel id="nomeLabel" value="Nome:" for="nomeInput" styleClass="labelForm" />
 				    <p:inputText id="nomeInput" label="Nome" value="#{produtoBean.produto.nome}" required="true"
@@ -33,30 +33,22 @@
 
 				    <h:outputLabel id="descricaoLabel" value="Descrição:" for="descricaoInput" styleClass="labelForm" />
 				    <p:inputTextarea id="descricaoInput" label="descrição" value="#{produtoBean.produto.descricao}"
-				                     style="width: 400px;" disabled="#{produtoBean.modoTela == 'Exibir'}" />
+				                     style="width: 400px;" disabled="#{produtoBean.modoTela == 'Exibir'}"
+				                     maxlength="255"/>
 				                     
 				                     
 				    <h:outputLabel id="categoriaLabel" value="Categoria:" for="categoriaInput" styleClass="labelForm" />
-				    <p:inputText id="categoriaInputExibir" value="#{produtoBean.produto.categoria.nome}" disabled="true" rendered="#{produtoBean.modoTela == 'Exibir'}"
+				    <p:inputText id="categoriaInputExibir" value="#{produtoBean.produto.categoria.nome}" disabled="true"
+				                 rendered="#{produtoBean.modoTela == 'Exibir'}"
 				                 style="width:400px" />
-				    <p:selectOneMenu id="categoriaInput" value="#{produtoBean.produto.categoria}">
-			            <f:selectItem value="#{null}" itemLabel="Selecione..." />
-			            <f:selectItems value="#{produtoBean.allCategorias()}" var="cat" itemLabel="#{cat.nome}" itemValue="#{cat.nome}" />
-			            <f:converter binding="#{categoriaConverter}"/>
+				    <p:selectOneMenu id="categoriaInput" value="#{produtoBean.codigoCategoria}" panelStyle="width:400px"
+				                     rendered="#{produtoBean.modoTela != 'Exibir'}" label="Categoria" required="true"
+			                         style="width:407px" filter="true" filterMatchMode="startsWith">
+			            <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+			            <f:selectItems value="#{produtoBean.allCategorias()}" var="cat"
+			                           itemValue="#{cat.codigo}" itemLabel="#{cat.nome}"
+			                           itemDescription="#{cat.descricao}"/>
 			        </p:selectOneMenu>
-			        
-			        <ui:remove>
-					    <p:selectOneMenu id="categoriaInput2" value="#{produtoBean.codigoCategoria}" panelStyle="width:400px"
-					                     rendered="#{produtoBean.modoTela != 'Exibir'}" label="Categoria" required="true"
-				                         effect="fade" var="t" style="width:407px" filter="true" filterMatchMode="startsWith">
-				            <f:selectItem value="#{null}" itemLabel="Selecione..." />
-				            <f:selectItems value="#{produtoBean.allCategorias()}" var="cat" itemLabel="#{cat.nome}" itemValue="#{cat.codigo}" />
-				            <f:converter binding="#{categoriaConverter}"/>
-				            <p:column>
-				                <h:outputText value="#{t.nome}" />
-				            </p:column>
-				        </p:selectOneMenu>
-			        </ui:remove>
 			        
 			        
 				    <h:outputLabel id="valorLabel" value="Valor:" for="valorInput" styleClass="labelForm" />
