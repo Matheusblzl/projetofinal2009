@@ -22,12 +22,13 @@ public abstract class BaseBean implements Serializable {
     }
     
     public void message(String msg, Severity severity) {
-        FacesContext fc = FacesContext.getCurrentInstance();
-        FacesMessage msgFaces = new FacesMessage(msg);
-        msgFaces.setSeverity(severity);
-        fc.addMessage("", msgFaces);
-        fc.getExternalContext().getFlash().setKeepMessages(true);
-        fc.renderResponse();
+    	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, msg, null));
+//        FacesContext fc = FacesContext.getCurrentInstance();
+//        FacesMessage msgFaces = new FacesMessage(msg);
+//        msgFaces.setSeverity(severity);
+//        fc.addMessage("", msgFaces);
+//        fc.getExternalContext().getFlash().setKeepMessages(true);
+//        fc.renderResponse();
     }
     
     public void messageErro(String msg) {

@@ -1,7 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:pretty="http://ocpsoft.com/prettyfaces">
 <h:head>
-	<title>Home</title>
+	<title>#{msg.titlePageHome}</title>
     <h:outputStylesheet library="css" name="style.css"  />
 </h:head>
 <h:body>
@@ -9,66 +10,24 @@
 	<h:form prependId="false">
 		<p:messages id="messages" showDetail="false" showSummary="false"></p:messages>
 
-		<h2 class="titlePanel">Cadastro de Produtos</h2>
+		<h2 class="titlePanel">#{msg.titlePanelHome}</h2>
 		<div id="divCenter" class="center">
 			<p:menubar id="menuApp">
-				<p:submenu id="submenuCategoria" label="Categoria">
-					<p:menuitem id="menuitemCategoriaNova" value="Nova" url="/categoria/new" />
-					<p:menuitem id="menuitemCategoriaListar" value="Lista de Categorias" url="/categorias" />
+				<p:submenu id="submenuCategoria" label="#{msg.subMenuCategoria}">
+					<p:menuitem id="menuitemCategoriaNova" value="#{msg.menuItemNovo}" url="/categoria/new" />
+					<p:menuitem id="menuitemCategoriaListar" value="#{msg.menuItemListar}" url="/categorias" />
 				</p:submenu>
 
 
-				<p:submenu id="submenuProduto" label="Produto">
-					<p:menuitem id="menuitemProdutoNovo" value="Novo" url="/produto/new" />
-					<p:menuitem id="menuitemProdutoListar" value="Lista de Itens" url="/produtos" />
+				<p:submenu id="submenuProduto" label="#{msg.subMenuProduto}">
+					<p:menuitem id="menuitemProdutoNovo" value="#{msg.menuItemNovo}" url="/produto/new" />
+					<p:menuitem id="menuitemProdutoListar" value="#{msg.menuItemListar}" url="/produtos" />
 				</p:submenu>
 			</p:menubar>
 
 			<div style="margin: auto; width: 55%; margin-top: 20px;">Exemplo de cadastro de produtos.</div>
 
 		</div>
-
-
-
-
-
-
-
-
-		<br />
-		<br />
-		<br />
-		<br />
-
-		<h1>Testes</h1>
-		<h:panelGrid columns="1" cellpadding="5">
-			<p:commandButton id="btwork" value="work" onclick="PF('dlg1').show();" type="button" />
-		</h:panelGrid>
-
-		<p:dialog id="basicDialog" header="Basic Dialog" widgetVar="dlg1">
-			<h:outputText value="PrimeFaces Work!" />
-		</p:dialog>
-
-		<h:outputText value="#{homeBean.param}" />
-
-		<br />
-
-		<p:inputText value="#{homeBean.itemId}">Id Produto: </p:inputText>
-
-		<br />
-
-		<p:commandButton title="Buscar" value="Buscar" action="pretty:viewItem" ajax="true">
-			<f:param name="iid" value="#{homeBean.itemId}" />
-		</p:commandButton>
-
-
-		<br />
-		<br />
-
-		<h:commandLink action="pretty:"> Refresh this page. </h:commandLink>
-
-		<br />
-		<br />
 
 	</h:form>
 

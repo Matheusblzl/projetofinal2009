@@ -8,55 +8,49 @@
 	  xmlns:pretty="http://ocpsoft.com/prettyfaces"
 	  xmlns:pe="http://primefaces.org/ui/extensions">
 	  
-<h:head>
-	<title>Cadastro de Categoria</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<h:outputStylesheet library="css" name="style.css" />
-</h:head>
-
-<h:body>
-
-	<h:form prependId="false">
-		<div id="divMessages" style="position: fixed; width: 99%; margin-top: -50px; margin-left: 10px; margin-right: 10px">
-		    <p:messages id="messages" showDetail="false" showSummary="true"></p:messages>
-	    </div>
-
-		<div id="divCenter" class="formCadastro">
-
-			<p:panel id="panelCategoria" header="Categoria">
-			    <h:panelGrid columns="2" cellpadding="3">
-				    <h:outputLabel id="nomeLabel" value="Nome:" for="nomeInput" styleClass="labelForm" />
-				    <p:inputText id="nomeInput" label="nome" value="#{categoriaBean.categoria.nome}" required="true"
-				                 style="width: 400px" disabled="#{categoriaBean.modoTela == 'Exibir'}" />
-
-
-				    <h:outputLabel id="descricaoLabel" value="Descrição:" for="descricaoInput" styleClass="labelForm" />
-				    <p:inputTextarea id="descricaoInput" label="descrição" value="#{categoriaBean.categoria.descricao}"
-				                     style="width: 400px;" disabled="#{categoriaBean.modoTela == 'Exibir'}"
-				                     maxlength="255" />
-			    </h:panelGrid>
-			</p:panel>
-
-		</div>
-
-        <p:spacer height="10px" />
-
-		<div id="buttonArea" class="buttonAreaCenter">
-			<p:commandButton id="btSalvar" title="Salvar" value="Salvar" action="#{categoriaBean.persist()}"
+<ui:composition template="/resources/template/common/template_cadastro.xhtml">
+	
+	    <ui:define name="titlePage">#{msg.titlePageCategoria}</ui:define>
+	
+	
+	    <ui:define name="body">
+	    
+	           <p:panel id="panelCategoria" header="#{msg.titlePanelCategoria}">
+	           
+				    <h:panelGrid columns="2" cellpadding="3">
+					    <h:outputLabel id="nomeLabel" value="#{msg.form_label_nome}:" for="nomeInput" styleClass="labelForm" />
+					    <p:inputText id="nomeInput" label="#{msg.form_label_nome}" value="#{categoriaBean.categoria.nome}" required="true"
+					                 style="width: 400px" disabled="#{categoriaBean.modoTela == 'Exibir'}" />
+	
+	
+					    <h:outputLabel id="descricaoLabel" value="#{msg.form_label_descricao}:" for="descricaoInput" styleClass="labelForm" />
+					    <p:inputTextarea id="descricaoInput" label="#{msg.form_label_descricao}" value="#{categoriaBean.categoria.descricao}"
+					                     style="width: 400px;" disabled="#{categoriaBean.modoTela == 'Exibir'}"
+					                     maxlength="255" />
+				    </h:panelGrid>
+				    
+				</p:panel>
+			
+	    </ui:define>
+	    
+	    <ui:define name="buttonArea">
+	    
+	        <p:commandButton id="btSalvar" title="#{msg.button_salvar_title}" value="#{msg.button_salvar}" action="#{categoriaBean.persist()}"
 			                 ajax="true" update="messages,panelCategoria"
 			                 rendered="#{categoriaBean.modoTela != 'Exibir'}"/>
 			<p:commandButton id="btCancelar" title="Cancelar" value="Cancelar" immediate="true" action="pretty:url-exibir-categoria"
 			                 rendered="#{categoriaBean.modoTela == 'Editar'}" />
-			<p:commandButton id="btCancelarNew" title="Cancelar" value="Cancelar" immediate="true" action="pretty:url-home"
+			<p:commandButton id="btCancelarNew" title="#{msg.button_cancelar_title}" value="#{msg.button_cancelar}" immediate="true" action="pretty:url-home"
 			                 rendered="#{categoriaBean.modoTela == 'Inserir'}" />
 			
-			<p:commandButton id="btEditar" title="Editar" value="Editar" action="pretty:url-editar-categoria"
+			<p:commandButton id="btEditar" title="#{msg.button_editar_title}" value="#{msg.button_editar}" action="pretty:url-editar-categoria"
 			                 ajax="true" update="messages,panelCategoria"
 			                 rendered="#{categoriaBean.modoTela == 'Exibir'}"/>
-			<p:commandButton id="btVoltar" title="Voltar" value="Voltar" immediate="true" action="pretty:url-home"
+			<p:commandButton id="btVoltar" title="#{msg.button_salvar_title}" value="#{msg.button_voltar}" immediate="true" action="pretty:url-home"
 			                 rendered="#{categoriaBean.modoTela == 'Exibir'}" />
-		</div>
-	</h:form>
-</h:body>
+				                 
+	    </ui:define>
+	    
+	</ui:composition>
 
 </html>

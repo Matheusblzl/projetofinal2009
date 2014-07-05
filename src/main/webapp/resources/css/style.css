@@ -27,15 +27,23 @@ body {
 .formCadastro {
 	margin: auto;
 	width: 55%;
-	margin-top: 40px;
+	margin-top: 44px;
 }
 
 .titlePanel {
 	margin: auto;
 	width: 55%;
-	margin-top: 40px;
+	margin-top: 44px;
 }
 
 .labelForm {
 	font-weight: bold;
+}
+
+.messagePages {
+	position: fixed;
+	width: 99%;
+	margin-top: -50px;
+	margin-left: 10px;
+	margin-right: 10px
 }

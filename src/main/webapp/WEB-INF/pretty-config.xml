@@ -1,7 +1,6 @@
 <pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
                       http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
 
-
 	<url-mapping id="url-seo">
 		<pattern value="/url-padra-seo.xhtml" />
 		<view-id value="/index.jsp" />
@@ -42,13 +41,13 @@
 	</url-mapping>
 	
 	<url-mapping id="url-excluir-categoria" parentId="url-categoria">
-		<pattern value="excluir/#{codigo : categoriaBean.codigo}"></pattern>
+		<pattern value="/excluir/#{codigo : categoriaBean.codigo}"></pattern>
 		<view-id value="/pages/listarCategorias.jsf" />
 		<action onPostback="false">#{categoriaBean.excluirInstance()}</action>
 	</url-mapping>
 	
 	<url-mapping id="url-editar-categoria" parentId="url-categoria">
-		<pattern value="editar/#{codigo : categoriaBean.codigo}"></pattern>
+		<pattern value="/editar/#{codigo : categoriaBean.codigo}"></pattern>
 		<view-id value="/pages/categoria.jsf" />
 		<action onPostback="false">#{categoriaBean.editInstance()}</action>
 	</url-mapping>
@@ -89,6 +88,11 @@
 		<action onPostback="false">#{produtoBean.editInstance()}</action>
 	</url-mapping>
 	
+	<url-mapping id="url-listar-categoria-produto">
+		<pattern value="/listar/#{nomeCategoria : produtoBean.nomeCategoria}/#{nomeProduto : produtoBean.nomeProduto}"></pattern>
+		<view-id value="/pages/listarProdutos.jsf" />
+	</url-mapping>
+	
 
 <!-- ============================================================================== -->
 
@@ -107,7 +111,7 @@
 	<url-mapping id="store">
 		<pattern value="/home" />
 		<view-id value="/pages/home.xhtml" />
-		<query-param name="param">#{homeBean.param}</query-param>
+		<!-- <query-param name="param">#{homeBean.param}</query-param> -->
 	</url-mapping>
 
 </pretty-config>

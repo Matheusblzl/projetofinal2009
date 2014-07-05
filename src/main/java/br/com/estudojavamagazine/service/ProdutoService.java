@@ -17,5 +17,7 @@ public interface ProdutoService extends Serializable {
 	public abstract void removerProduto(Long codigo) throws ProdutoException;
 
 	public void removerProduto(Produto produto) throws ProdutoException;
+
+	public abstract List<Produto> findProdutoByNomeCategoriaAndNomeProduto(String nomeCategoria, String nomeProduto);
 	
 }

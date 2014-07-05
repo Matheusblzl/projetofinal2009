@@ -1,5 +1,6 @@
 package br.com.estudojavamagazine.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -33,11 +34,24 @@ public class ProdutoBean extends BaseBean {
     
     private Long codigoCategoria;
     
+    private List<Produto> listarProduto = new ArrayList<Produto>();
+    
+    private String nomeCategoria;
+    private String nomeProduto;
+    
     public ProdutoBean() {
     }
     
     public List<Produto> listar() {
-    	return produtoService.findAllProdutos();
+    	listarProduto = new ArrayList<Produto>();
+    	if (ObjectUtil.isNotNull(nomeProduto) && ObjectUtil.isNotNull(nomeCategoria)) {
+    		listarProduto = produtoService.findProdutoByNomeCategoriaAndNomeProduto(nomeCategoria, nomeProduto);
+    		nomeCategoria = null;
+    		nomeProduto = null;
+    	} else {
+    		listarProduto = produtoService.findAllProdutos();
+    	}
+    	return listarProduto;
     }
     
     public void createInstance() {
@@ -113,5 +127,29 @@ public class ProdutoBean extends BaseBean {
     public void setCodigoCategoria(Long codigoCategoria) {
         this.codigoCategoria = codigoCategoria;
     }
+
+	public List<Produto> getListarProduto() {
+		return listarProduto;
+	}
+
+	public void setListarProduto(List<Produto> listarProduto) {
+		this.listarProduto = listarProduto;
+	}
+
+	public String getNomeCategoria() {
+		return nomeCategoria;
+	}
+
+	public void setNomeCategoria(String nomeCategoria) {
+		this.nomeCategoria = nomeCategoria;
+	}
+
+	public String getNomeProduto() {
+		return nomeProduto;
+	}
+
+	public void setNomeProduto(String nomeProduto) {
+		this.nomeProduto = nomeProduto;
+	}
 
 }

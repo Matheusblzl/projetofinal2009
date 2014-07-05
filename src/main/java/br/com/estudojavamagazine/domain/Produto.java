@@ -15,12 +15,15 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
 
 @Entity
-@NamedQueries(value = { @NamedQuery(name = Produto.FIND_ALL_PRODUTO, query = "Select prod from Produto prod order by prod.nome") })
+@NamedQueries(value = { 
+		@NamedQuery(name = Produto.FIND_ALL_PRODUTO, query = "Select prod from Produto prod order by prod.nome"),
+		@NamedQuery(name = Produto.FIND_PRODUTO_BY_CATEGORIA_PRODUTO, query = "Select prod from Produto prod inner join prod.categoria categ where lower(categ.nome) = lower(:nomeCat) and lower(prod.nome) = lower(:nomeProd) order by prod.nome")})
 public class Produto implements Serializable {
 
     private static final long serialVersionUID = 4254771097647384430L;
 
     public static final String FIND_ALL_PRODUTO = "find_all_produto";
+    public static final String FIND_PRODUTO_BY_CATEGORIA_PRODUTO = "findProdutoByCategriaAndProdutoName";
 
     @Id
     @Column(name = "codigo", nullable = false)

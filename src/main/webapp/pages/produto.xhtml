@@ -7,77 +7,71 @@
 	  xmlns:p="http://primefaces.org/ui"
 	  xmlns:pretty="http://ocpsoft.com/prettyfaces"
 	  xmlns:pe="http://primefaces.org/ui/extensions">
-	  
-<h:head>
-	<title>Cadastro de Produto</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<h:outputStylesheet library="css" name="style.css" />
-</h:head>
 
 <h:body>
-
-	<h:form prependId="false" acceptcharset="UTF-8">
-	    <div id="divMessages" style="position: fixed; width: 99%; margin-top: -50px; margin-left: 10px; margin-right: 10px">
-		    <p:messages id="messages" showDetail="false" showSummary="true"></p:messages>
-	    </div>
-
-		<div id="divCenter" class="formCadastro">
-
-			<p:panel id="panelProduto" header="Produto">
+	<ui:composition template="/resources/template/common/template_cadastro.xhtml">
+	
+	    <ui:define name="titlePage">#{msg.titlePageProduto}</ui:define>
+	
+	
+	    <ui:define name="body">
+	    
+	           <p:panel id="panelProduto" header="#{msg.titlePanelProduto}">
 			    <h:panelGrid columns="2" cellpadding="3">
 			    
-				    <h:outputLabel id="nomeLabel" value="Nome:" for="nomeInput" styleClass="labelForm" />
-				    <p:inputText id="nomeInput" label="Nome" value="#{produtoBean.produto.nome}" required="true"
+				    <h:outputLabel id="nomeLabel" value="#{msg.form_label_nome}:" for="nomeInput" styleClass="labelForm" />
+				    <p:inputText id="nomeInput" label="#{msg.form_label_nome}" value="#{produtoBean.produto.nome}" required="true"
 				                 style="width: 400px" disabled="#{produtoBean.modoTela == 'Exibir'}" />
-
-
-				    <h:outputLabel id="descricaoLabel" value="Descrição:" for="descricaoInput" styleClass="labelForm" />
-				    <p:inputTextarea id="descricaoInput" label="descrição" value="#{produtoBean.produto.descricao}"
+	
+	
+				    <h:outputLabel id="descricaoLabel" value="#{msg.form_label_descricao}:" for="descricaoInput" styleClass="labelForm" />
+				    <p:inputTextarea id="descricaoInput" label="#{msg.form_label_descricao}" value="#{produtoBean.produto.descricao}"
 				                     style="width: 400px;" disabled="#{produtoBean.modoTela == 'Exibir'}"
 				                     maxlength="255"/>
 				                     
 				                     
-				    <h:outputLabel id="categoriaLabel" value="Categoria:" for="categoriaInput" styleClass="labelForm" />
+				    <h:outputLabel id="categoriaLabel" value="#{msg.form_label_categoria}:" for="categoriaInput" styleClass="labelForm" />
 				    <p:inputText id="categoriaInputExibir" value="#{produtoBean.produto.categoria.nome}" disabled="true"
-				                 rendered="#{produtoBean.modoTela == 'Exibir'}"
+				                 rendered="#{produtoBean.modoTela == 'Exibir'}" label="#{msg.form_label_categoria}"
 				                 style="width:400px" />
 				    <p:selectOneMenu id="categoriaInput" value="#{produtoBean.codigoCategoria}" panelStyle="width:400px"
-				                     rendered="#{produtoBean.modoTela != 'Exibir'}" label="Categoria" required="true"
+				                     rendered="#{produtoBean.modoTela != 'Exibir'}" label="#{msg.form_label_categoria}" required="true"
 			                         style="width:407px" filter="true" filterMatchMode="startsWith">
-			            <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+			            <f:selectItem itemLabel="#{msg.form_label_selecione}" itemValue="#{null}" />
 			            <f:selectItems value="#{produtoBean.allCategorias()}" var="cat"
 			                           itemValue="#{cat.codigo}" itemLabel="#{cat.nome}"
 			                           itemDescription="#{cat.descricao}"/>
 			        </p:selectOneMenu>
 			        
 			        
-				    <h:outputLabel id="valorLabel" value="Valor:" for="valorInput" styleClass="labelForm" />
-				    <pe:inputNumber id="valorInput" label="Valor" value="#{produtoBean.produto.valor}"
-                                    symbol="R$ " decimalSeparator="," thousandSeparator="." disabled="#{produtoBean.modoTela == 'Exibir'}"
-                                    required="true"/>  
+				    <h:outputLabel id="valorLabel" value="#{msg.form_label_valor}:" for="valorInput" styleClass="labelForm" />
+				    <pe:inputNumber id="valorInput" label="#{msg.form_label_valor}" value="#{produtoBean.produto.valor}"
+	                                   symbol="#{msg.form_label_symbol} " decimalSeparator="," thousandSeparator="." disabled="#{produtoBean.modoTela == 'Exibir'}"
+	                                   required="true"/>  
 			    </h:panelGrid>
 			</p:panel>
-
-		</div>
-
-        <p:spacer height="10px" />
-
-		<div id="buttonArea" class="buttonAreaCenter">
-			<p:commandButton id="btSalvar" title="Salvar" value="Salvar" action="#{produtoBean.persist()}"
+			
+	    </ui:define>
+	    
+	    <ui:define name="buttonArea">
+	    
+	        <p:commandButton id="btSalvar" title="#{msg.button_salvar_title}" value="#{msg.button_salvar}" action="#{produtoBean.persist()}"
 			                 ajax="false" update="messages,panelProduto"
 			                 rendered="#{produtoBean.modoTela != 'Exibir'}"/>
-			<p:commandButton id="btCancelar" title="Cancelar" value="Cancelar" immediate="true" action="pretty:url-exibir-produto"
+			<p:commandButton id="btCancelar" title="#{msg.button_cancelar_title}" value="#{msg.button_cancelar}" immediate="true" action="pretty:url-exibir-produto"
 			                 rendered="#{produtoBean.modoTela == 'Editar'}" />
-			<p:commandButton id="btCancelarNew" title="Cancelar" value="Cancelar" immediate="true" action="pretty:url-home"
+			<p:commandButton id="btCancelarNew" title="#{msg.button_cancelar_title}" value="#{msg.button_cancelar}" immediate="true" action="pretty:url-home"
 			                 rendered="#{produtoBean.modoTela == 'Inserir'}" />
 			
-			<p:commandButton id="btEditar" title="Editar" value="Editar" action="pretty:url-editar-produto"
+			<p:commandButton id="btEditar" title="#{msg.button_editar_title}" value="#{msg.button_editar}" action="pretty:url-editar-produto"
 			                 ajax="true" update="messages,panelProduto"
 			                 rendered="#{produtoBean.modoTela == 'Exibir'}"/>
-			<p:commandButton id="btVoltar" title="Voltar" value="Voltar" immediate="true" action="pretty:url-home"
+			<p:commandButton id="btVoltar" title="#{msg.button_voltar_title}" value="#{msg.button_voltar}" immediate="true" action="pretty:url-home"
 			                 rendered="#{produtoBean.modoTela == 'Exibir'}" />
-		</div>
-	</h:form>
+				                 
+	    </ui:define>
+	    
+	</ui:composition>
 </h:body>
-
+	  
 </html>

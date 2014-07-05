@@ -1,55 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:pretty="http://ocpsoft.com/prettyfaces">
-<h:head>
-	<title>Categoria</title>
-	<h:outputStylesheet library="css" name="style.css" />
-</h:head>
 <h:body>
 
-	<h:form prependId="false">
-		<p:messages id="messages" showDetail="false" showSummary="true"></p:messages>
+    <ui:composition template="/resources/template/common/template_lista.xhtml">
+    
+	    <ui:define name="titlePage">#{msg.titlePageListarCategorias}</ui:define>
+	    
+	    <ui:define name="titlePanel">#{msg.titlePanelListarcategorias}</ui:define>
+	    
+	    <ui:define name="body">
+	    
+	        <p:dataTable id="tableCategorias" var="categoria" value="#{categoriaBean.listar()}"
+			             emptyMessage="#{msg.tableMessageEmptyCategorias}" paginator="true" paginatorPosition="bottom" rows="8">
+				
+				<p:column headerText="#{msg.label_codigo}" width="10%" style="text-align: center;">
+					<h:outputText value="#{categoria.codigo}" />
+				</p:column>
 
-		<h2 class="titlePanel">Lista de Categorias</h2>
-		
-		<div id="divCenter" class="centerNotBorder">
+				<p:column headerText="#{msg.label_nome}" width="25%">
+					<h:outputText value="#{categoria.nome}" />
+				</p:column>
+			
+				<p:column headerText="#{msg.label_descricao}">
+					<h:outputText value="#{categoria.descricao}" />
+				</p:column>
+				
+				<p:column headerText="#{msg.label_opcoes}" style="width: 80px;text-align: center;">
+			        <p:commandButton id="editarCategoria" action="pretty:url-editar-categoria" icon="ui-icon-pencil"
+			                         title="#{msg.label_editar_title}" update="tableCategorias">
+			            <f:setPropertyActionListener target="#{categoriaBean.codigo}" value="#{categoria.codigo}" />
+			        </p:commandButton>
+			        <p:commandButton id="excluirCategoria" action="pretty:url-excluir-categoria" icon="ui-icon-closethick"
+			                         title="#{msg.label_excluir_title}" update="tableCategorias">
+			            <f:setPropertyActionListener target="#{categoriaBean.codigo}" value="#{categoria.codigo}" />
+			        </p:commandButton>
+				</p:column>
+				
+			</p:dataTable>
+			
+	    </ui:define>
+	    
+	    <ui:define name="buttonArea">
+	        <p:commandButton id="btVoltar" title="#{msg.button_voltar_title}" value="#{msg.button_voltar}" action="pretty:url-home" ajax="true" />
+	    </ui:define>
 
-				<p:dataTable id="tableCategorias" var="categoria" value="#{categoriaBean.listar()}"
-				             emptyMessage="Não há produtos cadastrados." paginator="true" paginatorPosition="bottom" rows="15">
-					
-					<p:column headerText="Código" width="10%" style="text-align: center;">
-						<h:outputText value="#{categoria.codigo}" />
-					</p:column>
-
-					<p:column headerText="Nome">
-						<h:outputText value="#{categoria.nome}" width="20%" />
-					</p:column>
-					
-					<p:column headerText="Descrição">
-						<h:outputText value="#{categoria.descricao}" />
-					</p:column>
-					
-					<p:column headerText="Opções" style="width: 65px;text-align: center;">
-				        <p:commandButton id="editarCategoria" action="pretty:url-editar-categoria" icon="ui-icon-pencil"
-				                         title="Editar" update="tableCategorias">
-				            <f:setPropertyActionListener target="#{categoriaBean.codigo}" value="#{categoria.codigo}" />
-				        </p:commandButton>
-				        <p:commandButton id="excluirCategoria" action="pretty:url-excluir-categoria" icon="ui-icon-closethick"
-				                         title="Editar" update="tableCategorias">
-				            <f:setPropertyActionListener target="#{categoriaBean.codigo}" value="#{categoria.codigo}" />
-				        </p:commandButton>
-					</p:column>
-					
-				</p:dataTable>
-
-		</div>
-		
-		<p:spacer height="10px" />
-		
-		<div id="buttonArea" class="buttonAreaCenter">
-		    <p:commandButton id="btVoltar" title="Voltar" value="Voltar" action="pretty:url-home" ajax="true" />
-		</div>
-	</h:form>
-
+    </ui:composition>
 </h:body>
 
 </html>
