@@ -17,9 +17,22 @@ import br.com.estudojavamagazine.service.ProdutoService;
 import br.com.estudojavamagazine.service.lang.ProdutoException;
 import br.com.estudojavamagazine.service.util.ObjectUtil;
 
+import com.ocpsoft.pretty.faces.annotation.URLAction;
+import com.ocpsoft.pretty.faces.annotation.URLMapping;
+import com.ocpsoft.pretty.faces.annotation.URLMappings;
+
 @ManagedBean
 @RequestScoped
 @Controller
+@URLMappings(mappings = {
+        @URLMapping(id = "url-produto", pattern = "/produto", viewId = "/pages/listarProdutos.jsf"),
+        @URLMapping(id = "url-lista-produtos", pattern = "/produtos", viewId = "/pages/listarProdutos.jsf"),
+        @URLMapping(id = "url-new-produto", parentId = "url-produto", pattern = "/new", viewId = "/pages/produto.jsf", onPostback = false),
+        @URLMapping(id = "url-exibir-produto", parentId = "url-produto", pattern = "/exibir/#{codigo : produtoBean.codigo}", viewId = "/pages/produto.jsf", onPostback = false),
+        @URLMapping(id = "url-excluir-produto", parentId = "url-produto", pattern = "/excluir/#{codigo : produtoBean.codigo}", viewId = "/pages/listarProdutos.jsf", onPostback = false),
+        @URLMapping(id = "url-editar-produto", parentId = "url-produto", pattern = "/editar/#{codigo : produtoBean.codigo}", viewId = "/pages/produto.jsf", onPostback = false),
+        @URLMapping(id = "url-listar-categoria-produto", pattern = "/listar/#{nomeCategoria : produtoBean.nomeCategoria}/#{nomeProduto : produtoBean.nomeProduto}", viewId = "/pages/listarProdutos.jsf")
+        })
 public class ProdutoBean extends BaseBean {
 
     private static final long serialVersionUID = 1L;
@@ -54,12 +67,14 @@ public class ProdutoBean extends BaseBean {
     	return listarProduto;
     }
     
+    @URLAction(mappingId = "url-new-produto")
     public void createInstance() {
         this.codigoCategoria = null;
     	setModoTela(ModoTela.Inserir);
     	this.produto = new Produto();
     }
     
+    @URLAction(mappingId = "url-exibir-produto")
     public void loadInstance() {
     	setModoTela(ModoTela.Exibir);
     	if (ObjectUtil.isNotNull(getCodigo())) {
@@ -72,11 +87,13 @@ public class ProdutoBean extends BaseBean {
     	}
     }
     
+    @URLAction(mappingId = "url-editar-produto")
     public void editInstance() {
     	loadInstance();
     	setModoTela(ModoTela.Editar);
     }
     
+    @URLAction(mappingId = "url-excluir-produto")
     public void excluirInstance() {
     	if (ObjectUtil.isNotNull(getCodigo())) {
     		try {

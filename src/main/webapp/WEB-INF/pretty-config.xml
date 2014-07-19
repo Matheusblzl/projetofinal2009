@@ -1,5 +1,7 @@
-<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
-                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+       http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
 
 	<url-mapping id="url-seo">
 		<pattern value="/url-padra-seo.xhtml" />
@@ -54,7 +56,8 @@
 	
 	
 	<!-- PRODUTOS -->
-	<url-mapping id="url-produto">
+	<!-- PRODUTOS ESTÁ USANDO ANOTAÇÃO -->
+	<!-- <url-mapping id="url-produto">
 		<pattern value="/produto"></pattern>
 		<view-id value="/pages/listarProdutos.jsf" />
 	</url-mapping>
@@ -91,27 +94,6 @@
 	<url-mapping id="url-listar-categoria-produto">
 		<pattern value="/listar/#{nomeCategoria : produtoBean.nomeCategoria}/#{nomeProduto : produtoBean.nomeProduto}"></pattern>
 		<view-id value="/pages/listarProdutos.jsf" />
-	</url-mapping>
+	</url-mapping> -->
 	
-
-<!-- ============================================================================== -->
-
-	<url-mapping parentId="url-home" id="ELinjectedPathParameters">
-		<pattern value="/metodo/#{par : homeBean.param}"></pattern>
-		<view-id value="/pages/home.xhtml" />
-		<action onPostback="false">#{homeBean.metodo()}</action>
-	</url-mapping>
-
-	<url-mapping id="viewItem" onPostback="false">
-		<pattern value="/store/item/#{iid : homeBean.itemId}" />
-		<view-id value="/pages/itens.xhtml" />
-		<action>#{homeBean.loadItem}</action>
-	</url-mapping>
-
-	<url-mapping id="store">
-		<pattern value="/home" />
-		<view-id value="/pages/home.xhtml" />
-		<!-- <query-param name="param">#{homeBean.param}</query-param> -->
-	</url-mapping>
-
 </pretty-config>
