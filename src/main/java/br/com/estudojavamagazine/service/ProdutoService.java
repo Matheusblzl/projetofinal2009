@@ -20,4 +20,6 @@ public interface ProdutoService extends Serializable {
 
 	public abstract List<Produto> findProdutoByNomeCategoriaAndNomeProduto(String nomeCategoria, String nomeProduto);
 	
+	public abstract List<Produto> findProdutoByNomeCategoria(String nomeCategoria);
+	
 }

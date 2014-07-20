@@ -1,8 +1,8 @@
-insert into categoria (codigo, nome, descricao) values (1, 'Livros e Galeria de Arte', 'Itens como Livros, Livros Importados, Livros Digitais (e-books), Galeria de Arte e Papelaria.');
+insert into categoria (codigo, nome, descricao) values (1, 'Livros', 'Itens como Livros, Livros Importados, Livros Digitais (e-books), Galeria de Arte e Papelaria.');
 insert into categoria (codigo, nome, descricao) values (2, 'Câmeras e Filmadoras', 'Itens como Câmeras Digitais, Cartões de Memória, Acessórios para Câmeras, Porta retrato Digital, Revelação Digital e Filmadoras.');
 insert into categoria (codigo, nome, descricao) values (3, 'Notebooks e Computadores', 'Itens como Informática, Notebook, Ultrabook, Tablets e iPad, Computadores, Mochilas para Notebooks, Monitores LCD, HDs externos, Acessórios de Informática, Multifuncionais e Impressoras, Apple.');
 insert into categoria (codigo, nome, descricao) values (4, 'Eletrodomésticos', 'Itens como Eletrodomésticos, Ar Condicionado e Aquecedores, Lavadora de Roupas, Secadora de Roupas, Geladeiras, Fogões, Coifas, Micro-ondas, Lava-louça, Adegas, Lavadoras de Pressão.');
-insert into categoria (codigo, nome, descricao) values (5, 'TVs, Audio e Eletrônicos', 'Itens como TVs, Home Theater, Blu-ray player, Audio, Fones de Ouvido, Automotivo e GPS.');
+insert into categoria (codigo, nome, descricao) values (5, 'Eletrônicos', 'Itens como TVs, Home Theater, Blu-ray player, Audio, Fones de Ouvido, Automotivo e GPS.');
 
 insert into produto (codigo, categoria_codigo, descricao, nome, valor) values (default, 1, 'A saga que atravessou o espaço e inúmeras gerações de fãs retorna ao público brasileiro em grande estilo.', 'Livro - Star Wars: A Trilogia - Special Edition', 50.31);
 insert into produto (codigo, categoria_codigo, descricao, nome, valor) values (default, 1, 'O clássico filme criado por Steven Spielberg, Os Goonies, volta direto dos anos 1980 em um livro inesquecível, criado durante o processo de produção e filmagens.', 'Livro - Os Goonies: Special Edition', 60.89);

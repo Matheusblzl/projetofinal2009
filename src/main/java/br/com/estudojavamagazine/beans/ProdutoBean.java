@@ -59,11 +59,15 @@ public class ProdutoBean extends BaseBean {
     	listarProduto = new ArrayList<Produto>();
     	if (ObjectUtil.isNotNull(nomeProduto) && ObjectUtil.isNotNull(nomeCategoria)) {
     		listarProduto = produtoService.findProdutoByNomeCategoriaAndNomeProduto(nomeCategoria, nomeProduto);
-    		nomeCategoria = null;
-    		nomeProduto = null;
+    	} else if (ObjectUtil.isNotNull(nomeCategoria)) {
+    		listarProduto = produtoService.findProdutoByNomeCategoria(nomeCategoria);
     	} else {
     		listarProduto = produtoService.findAllProdutos();
     	}
+    	
+    	nomeCategoria = null;
+		nomeProduto = null;
+		
     	return listarProduto;
     }
     

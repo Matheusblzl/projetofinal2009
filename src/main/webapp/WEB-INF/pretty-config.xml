@@ -96,4 +96,9 @@
 		<view-id value="/pages/listarProdutos.jsf" />
 	</url-mapping> -->
 	
+	<url-mapping id="url-listar-produtos-categoria">
+		<pattern value="/listar/#{nomeCategoria : produtoBean.nomeCategoria}/"></pattern>
+		<view-id value="/pages/listarProdutos.jsf" />
+	</url-mapping>
+	
 </pretty-config>

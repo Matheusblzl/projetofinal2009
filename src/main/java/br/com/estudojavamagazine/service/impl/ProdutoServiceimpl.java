@@ -84,4 +84,15 @@ public class ProdutoServiceimpl implements ProdutoService {
 		return new ArrayList<Produto>();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Produto> findProdutoByNomeCategoria(String nomeCategoria) {
+		if (ObjectUtil.isNotNull(nomeCategoria)) {
+			Query query = entityManager.createNamedQuery(Produto.FIND_PRODUTO_BY_CATEGORIA, Produto.class)
+					.setParameter("nomeCat", nomeCategoria);
+			return query.getResultList();
+		}
+		return new ArrayList<Produto>();
+	}
+
 }
