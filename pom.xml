@@ -261,4 +261,6 @@
 		</plugins>
 	</build>
 
+	<description>Projeto para a Revista Java Magazine.
+Autor: Daniel da Silva.</description>
 </project>
