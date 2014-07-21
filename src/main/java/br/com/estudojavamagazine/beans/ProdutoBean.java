@@ -35,72 +35,79 @@ import com.ocpsoft.pretty.faces.annotation.URLMappings;
         })
 public class ProdutoBean extends BaseBean {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Autowired
-    private ProdutoService produtoService;
-    
-    @Autowired
-    private CategoriaService categoriaService;
-    
-    private Produto produto;
-    
-    private Long codigoCategoria;
-    
-    private List<Produto> listarProduto = new ArrayList<Produto>();
-    
-    private String nomeCategoria;
-    private String nomeProduto;
-    
-    public ProdutoBean() {
-    }
-    
-    public List<Produto> listar() {
-    	listarProduto = new ArrayList<Produto>();
-    	if (ObjectUtil.isNotNull(nomeProduto) && ObjectUtil.isNotNull(nomeCategoria)) {
-    		listarProduto = produtoService.findProdutoByNomeCategoriaAndNomeProduto(nomeCategoria, nomeProduto);
-    	} else if (ObjectUtil.isNotNull(nomeCategoria)) {
-    		listarProduto = produtoService.findProdutoByNomeCategoria(nomeCategoria);
-    	} else {
-    		listarProduto = produtoService.findAllProdutos();
-    	}
-    	
-    	nomeCategoria = null;
+	@Autowired
+	private ProdutoService produtoService;
+
+	@Autowired
+	private CategoriaService categoriaService;
+
+	private Produto produto;
+
+	private Long codigoCategoria;
+
+	private List<Produto> listarProduto = new ArrayList<Produto>();
+
+	private String nomeCategoria;
+	private String nomeProduto;
+
+	public ProdutoBean() {
+	}
+
+	public List<Produto> listar() {
+		listarProduto = new ArrayList<Produto>();
+		if (ObjectUtil.isNotNull(nomeProduto)
+				&& ObjectUtil.isNotNull(nomeCategoria)) {
+			listarProduto = produtoService
+					.findProdutoByNomeCategoriaAndNomeProduto(nomeCategoria,
+							nomeProduto);
+		} else if (ObjectUtil.isNotNull(nomeCategoria)) {
+			listarProduto = produtoService
+					.findProdutoByNomeCategoria(nomeCategoria);
+		} else {
+			listarProduto = produtoService.findAllProdutos();
+		}
+
+		nomeCategoria = null;
 		nomeProduto = null;
-		
-    	return listarProduto;
-    }
-    
-    @URLAction(mappingId = "url-new-produto")
-    public void createInstance() {
-        this.codigoCategoria = null;
-    	setModoTela(ModoTela.Inserir);
-    	this.produto = new Produto();
-    }
-    
-    @URLAction(mappingId = "url-exibir-produto")
-    public void loadInstance() {
-    	setModoTela(ModoTela.Exibir);
-    	if (ObjectUtil.isNotNull(getCodigo())) {
-    		this.produto = produtoService.findProduto(Long.parseLong(getCodigo()));
-    	} else if (ObjectUtil.isNotNull(this.produto) && ObjectUtil.isNotNull(this.produto.getCodigo())) {
-    		this.produto = produtoService.findProduto(Long.parseLong(getCodigo()));
-    	}
-    	if (ObjectUtil.isNotNull(this.produto.getCategoria())) {
-    	    this.codigoCategoria = this.produto.getCategoria().getCodigo();
-    	}
-    }
-    
-    @URLAction(mappingId = "url-editar-produto")
-    public void editInstance() {
-    	loadInstance();
-    	setModoTela(ModoTela.Editar);
-    }
-    
-    @URLAction(mappingId = "url-excluir-produto")
-    public void excluirInstance() {
-    	if (ObjectUtil.isNotNull(getCodigo())) {
-    		try {
+
+		return listarProduto;
+	}
+
+	@URLAction(mappingId = "url-new-produto")
+	public void createInstance() {
+		this.codigoCategoria = null;
+		setModoTela(ModoTela.Inserir);
+		this.produto = new Produto();
+	}
+
+	@URLAction(mappingId = "url-exibir-produto")
+	public void loadInstance() {
+		setModoTela(ModoTela.Exibir);
+		if (ObjectUtil.isNotNull(getCodigo())) {
+			this.produto = produtoService.findProduto(Long
+					.parseLong(getCodigo()));
+		} else if (ObjectUtil.isNotNull(this.produto)
+				&& ObjectUtil.isNotNull(this.produto.getCodigo())) {
+			this.produto = produtoService.findProduto(Long
+					.parseLong(getCodigo()));
+		}
+		if (ObjectUtil.isNotNull(this.produto.getCategoria())) {
+			this.codigoCategoria = this.produto.getCategoria().getCodigo();
+		}
+	}
+
+	@URLAction(mappingId = "url-editar-produto")
+	public void editInstance() {
+		loadInstance();
+		setModoTela(ModoTela.Editar);
+	}
+
+	@URLAction(mappingId = "url-excluir-produto")
+	public void excluirInstance() {
+		if (ObjectUtil.isNotNull(getCodigo())) {
+			try {
 				produtoService.removerProduto(Long.parseLong(getCodigo()));
 				messageInfo("produto removida com sucesso!");
 			} catch (NumberFormatException e) {
@@ -108,31 +115,32 @@ public class ProdutoBean extends BaseBean {
 			} catch (ProdutoException e) {
 				messageErro(e.getMessage());
 			}
-    	}
-    	setModoTela(ModoTela.Excluir);
-    	this.codigoCategoria = null;
-    }
-    
-    public String persist() {
-        try {
-            produto.setCategoria(categoriaService.findCategoria(codigoCategoria));
-            produto = produtoService.saveOrUpdate(produto);
-        } catch (ProdutoException e) {
-            e.printStackTrace();
-            messageErro(e.getMessage());
-            return null;
-        }
-        setCodigo(produto.getCodigo().toString());
-        setModoTela(ModoTela.Exibir);
-    	messageInfo("Produto salva com sucesso!");
-    	return "pretty:url-exibir-produto";
-    }
+		}
+		setModoTela(ModoTela.Excluir);
+		this.codigoCategoria = null;
+	}
 
-    public List<Categoria> allCategorias() {
-        return categoriaService.findAllCategorias();
-    }
-    
-    // ==== GETTERS AND SETTERS ====
+	public String persist() {
+		try {
+			produto.setCategoria(categoriaService
+					.findCategoria(codigoCategoria));
+			produto = produtoService.saveOrUpdate(produto);
+		} catch (ProdutoException e) {
+			e.printStackTrace();
+			messageErro(e.getMessage());
+			return null;
+		}
+		setCodigo(produto.getCodigo().toString());
+		setModoTela(ModoTela.Exibir);
+		messageInfo("Produto salva com sucesso!");
+		return "pretty:url-exibir-produto";
+	}
+
+	public List<Categoria> allCategorias() {
+		return categoriaService.findAllCategorias();
+	}
+
+	// ==== GETTERS AND SETTERS ====
 	public Produto getProduto() {
 		return produto;
 	}
@@ -141,13 +149,13 @@ public class ProdutoBean extends BaseBean {
 		this.produto = produto;
 	}
 
-    public Long getCodigoCategoria() {
-        return codigoCategoria;
-    }
+	public Long getCodigoCategoria() {
+		return codigoCategoria;
+	}
 
-    public void setCodigoCategoria(Long codigoCategoria) {
-        this.codigoCategoria = codigoCategoria;
-    }
+	public void setCodigoCategoria(Long codigoCategoria) {
+		this.codigoCategoria = codigoCategoria;
+	}
 
 	public List<Produto> getListarProduto() {
 		return listarProduto;

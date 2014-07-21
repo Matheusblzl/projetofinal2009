@@ -97,7 +97,7 @@
 	</url-mapping> -->
 	
 	<url-mapping id="url-listar-produtos-categoria">
-		<pattern value="/listar/#{nomeCategoria : produtoBean.nomeCategoria}/"></pattern>
+		<pattern value="/listar/#{nomeCategoria : produtoBean.nomeCategoria}/"/>
 		<view-id value="/pages/listarProdutos.jsf" />
 	</url-mapping>
 	

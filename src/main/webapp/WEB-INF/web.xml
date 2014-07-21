@@ -5,6 +5,11 @@
 	<display-name>Archetype Created Web Application</display-name>
 
     <!-- PRETTY -->
+    <context-param>
+	   <param-name>com.ocpsoft.pretty.BASE_PACKAGES</param-name>
+	   <param-value>br.com.estudojavamagazine.beans</param-value>
+	</context-param>
+
 	<context-param>
 		<param-name>com.ocpsoft.pretty.DEVELOPMENT</param-name>
 		<param-value>true</param-value>
